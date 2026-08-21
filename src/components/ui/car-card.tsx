@@ -1,6 +1,4 @@
 "use client"
-
-import { useState } from "react"
 import Link from "next/link"
 import {
   Fuel,
@@ -20,6 +18,7 @@ import { VideoCard } from "./video-card"
 import { Badge } from "./badge"
 import { cn } from "@/lib/utils"
 import { useCompare } from "@/lib/compare-context"
+import { useFavorites } from "@/lib/favorites-context"
 
 interface CarCardProps {
   id: string
@@ -83,8 +82,9 @@ export function CarCard({
   className,
 }: CarCardProps) {
   const { addToCompare, removeFromCompare, isInCompare } = useCompare()
+  const { toggleFavorite, isFavorite } = useFavorites()
   const inCompare = isInCompare(id)
-  const [isFavorited, setIsFavorited] = useState(false)
+  const isFavorited = isFavorite(id)
 
   const formatPrice = (amount: number) => {
     if (currency === "IDR") {
@@ -200,7 +200,12 @@ export function CarCard({
               onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
-                setIsFavorited(!isFavorited)
+                toggleFavorite({
+                  id, slug, title, make, model, year,
+                  condition, price, city: city || "",
+                  coverImage: coverImage || "",
+                  videoUrl,
+                })
               }}
               className={cn(
                 "w-9 h-9 rounded-full backdrop-blur-sm flex items-center justify-center transition-all duration-200",

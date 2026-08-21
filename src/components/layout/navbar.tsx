@@ -167,6 +167,13 @@ export function Navbar() {
             </Link>
           ))}
           <div className="border-t border-neutral-800 pt-3 mt-3 space-y-2">
+            <Link
+              href="/favorites"
+              className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-neutral-800 text-white text-sm font-medium"
+            >
+              <Heart className="h-4 w-4" />
+              My Favorites
+            </Link>
             <a
               href="https://wa.me/6281234567890"
               target="_blank"

@@ -98,7 +98,7 @@ export function CarCard({
 
   const conditionConfig = {
     NEW: { label: "New", variant: "default" as const, color: "bg-emerald-500" },
-    USED: { label: "Used", variant: "outline" as const, color: "bg-amber-500" },
+    USED: { label: "Used", variant: "outline" as const, color: "bg-gold" },
     CERTIFIED_PRE_OWNED: { label: "CPO", variant: "default" as const, color: "bg-red-500" },
   }
 
@@ -132,8 +132,8 @@ export function CarCard({
     <Link href={`/cars/${slug}`} className={cn("block group", className)}>
       <article
         className={cn(
-          "relative bg-slate-900 rounded-2xl overflow-hidden transition-all duration-300",
-          "border border-slate-800 hover:border-gold/30",
+          "relative bg-neutral-900 rounded-2xl overflow-hidden transition-all duration-300",
+          "border border-neutral-800 hover:border-gold/30",
           "hover:shadow-[0_20px_40px_rgba(0,0,0,0.3),0_0_30px_rgba(59,130,246,0.1)]",
           "hover:-translate-y-1"
         )}
@@ -151,7 +151,7 @@ export function CarCard({
               showControls
             />
           ) : (
-            <div className="aspect-video relative overflow-hidden bg-slate-800">
+            <div className="aspect-video relative overflow-hidden bg-neutral-800">
               {coverImage ? (
                 <img
                   src={coverImage}
@@ -160,8 +160,8 @@ export function CarCard({
                   loading="lazy"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
-                  <Car className="h-16 w-16 text-slate-600" />
+                <div className="w-full h-full flex items-center justify-center  from-slate-800 to-slate-900">
+                  <Car className="h-16 w-16 text-gray-600" />
                 </div>
               )}
               {/* Hover gradient */}
@@ -239,44 +239,44 @@ export function CarCard({
               {year} {make} {model}
             </h3>
             {dealerName && (
-              <p className="text-sm text-slate-400 mt-1">{dealerName}</p>
+              <p className="text-sm text-gray-400 mt-1">{dealerName}</p>
             )}
             <div className="flex items-baseline gap-3 mt-2">
               <span className="text-2xl font-bold text-gold font-heading">
                 {formatPrice(price)}
               </span>
               {negotiable && (
-                <span className="text-xs text-emerald-400 font-medium">Negotiable</span>
+                <span className="text-xs text-gold font-medium">Negotiable</span>
               )}
             </div>
           </div>
 
           {/* Specs Grid */}
           <div className="grid grid-cols-2 gap-3">
-            <div className="flex items-center gap-2 text-sm text-slate-300">
+            <div className="flex items-center gap-2 text-sm text-gray-300">
               <Gauge className="h-4 w-4 text-gold" />
               <span>{mileage ? `${mileage.toLocaleString()} km` : "N/A"}</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-slate-300">
-              <Fuel className="h-4 w-4 text-emerald-500" />
+            <div className="flex items-center gap-2 text-sm text-gray-300">
+              <Fuel className="h-4 w-4 text-gold" />
               <span>{fuelType}</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-slate-300">
-              <Zap className="h-4 w-4 text-amber-500" />
+            <div className="flex items-center gap-2 text-sm text-gray-300">
+              <Zap className="h-4 w-4 text-gold" />
               <span>{transmission}</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-slate-300">
+            <div className="flex items-center gap-2 text-sm text-gray-300">
               <Calendar className="h-4 w-4 text-purple-500" />
               <span>{year}</span>
             </div>
           </div>
 
           {/* Color & HP */}
-          <div className="flex items-center gap-4 text-sm text-slate-400">
+          <div className="flex items-center gap-4 text-sm text-gray-400">
             {exteriorColor && (
               <div className="flex items-center gap-1.5">
                 <div
-                  className="w-3 h-3 rounded-full border border-slate-600"
+                  className="w-3 h-3 rounded-full border border-neutral-600"
                   style={{ backgroundColor: exteriorColor }}
                 />
                 <span>{exteriorColor}</span>
@@ -292,7 +292,7 @@ export function CarCard({
 
           {/* Location */}
           {(city || province) && (
-            <div className="flex items-center gap-1.5 text-sm text-slate-400">
+            <div className="flex items-center gap-1.5 text-sm text-gray-400">
               <MapPin className="h-4 w-4" />
               <span>
                 {city}
@@ -308,13 +308,13 @@ export function CarCard({
               {features.slice(0, 3).map((feature, i) => (
                 <span
                   key={i}
-                  className="px-2 py-0.5 rounded-full bg-slate-800 text-xs text-slate-400 border border-slate-700"
+                  className="px-2 py-0.5 rounded-full bg-neutral-800 text-xs text-gray-400 border border-neutral-700"
                 >
                   {feature}
                 </span>
               ))}
               {features.length > 3 && (
-                <span className="px-2 py-0.5 rounded-full bg-slate-800 text-xs text-slate-500">
+                <span className="px-2 py-0.5 rounded-full bg-neutral-800 text-xs text-gray-500">
                   +{features.length - 3} more
                 </span>
               )}
@@ -322,14 +322,14 @@ export function CarCard({
           )}
 
           {/* Divider */}
-          <div className="border-t border-slate-800" />
+          <div className="border-t border-neutral-800" />
 
           {/* Actions */}
           <div className="flex items-center gap-2">
             {dealerWhatsapp && (
               <button
                 onClick={handleWhatsApp}
-                className="flex-1 flex items-center justify-center gap-2 h-10 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium transition-colors"
+                className="flex-1 flex items-center justify-center gap-2 h-10 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-medium transition-colors"
                 aria-label={`Contact via WhatsApp for ${year} ${make} ${model}`}
               >
                 <MessageCircle className="h-4 w-4" />

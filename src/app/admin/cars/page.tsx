@@ -207,7 +207,7 @@ export default function AdminCarsPage() {
           <h1 className="text-2xl font-bold text-white font-heading tracking-wide">
             MANAGE CARS
           </h1>
-          <p className="text-slate-400 mt-1">
+          <p className="text-gray-400 mt-1">
             {filteredCars.length} listings found
           </p>
         </div>
@@ -222,13 +222,13 @@ export default function AdminCarsPage() {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <div className="relative flex-1 max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search cars..."
-            className="w-full h-10 pl-10 pr-4 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
+            className="w-full h-10 pl-10 pr-4 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
             aria-label="Search cars"
           />
         </div>
@@ -236,7 +236,7 @@ export default function AdminCarsPage() {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+          className="h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
           aria-label="Filter by status"
         >
           <option value="all">All Status</option>
@@ -249,7 +249,7 @@ export default function AdminCarsPage() {
         <select
           value={conditionFilter}
           onChange={(e) => setConditionFilter(e.target.value)}
-          className="h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+          className="h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
           aria-label="Filter by condition"
         >
           <option value="all">All Conditions</option>
@@ -265,7 +265,7 @@ export default function AdminCarsPage() {
           <span className="text-sm text-gold">
             {selectedCars.length} selected
           </span>
-          <button className="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-medium">
+          <button className="px-3 py-1.5 rounded-lg bg-red-600 text-white text-xs font-medium">
             Mark Available
           </button>
           <button className="px-3 py-1.5 rounded-lg bg-amber-600 text-white text-xs font-medium">
@@ -278,15 +278,15 @@ export default function AdminCarsPage() {
       )}
 
       {/* Cars Table */}
-      <div className="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden">
+      <div className="bg-neutral-900 rounded-xl border border-neutral-800 overflow-hidden">
         {/* Table Header */}
-        <div className="hidden lg:grid lg:grid-cols-12 gap-4 p-4 border-b border-slate-800 text-sm text-slate-400 font-medium">
+        <div className="hidden lg:grid lg:grid-cols-12 gap-4 p-4 border-b border-neutral-800 text-sm text-gray-400 font-medium">
           <div className="col-span-1">
             <input
               type="checkbox"
               checked={selectedCars.length === filteredCars.length && filteredCars.length > 0}
               onChange={toggleSelectAll}
-              className="w-4 h-4 rounded bg-slate-800 border-slate-700 text-gold focus:ring-gold"
+              className="w-4 h-4 rounded bg-neutral-800 border-neutral-700 text-gold focus:ring-gold"
               aria-label="Select all"
             />
           </div>
@@ -313,7 +313,7 @@ export default function AdminCarsPage() {
                   type="checkbox"
                   checked={selectedCars.includes(car.id)}
                   onChange={() => toggleSelect(car.id)}
-                  className="w-4 h-4 rounded bg-slate-800 border-slate-700 text-gold focus:ring-gold"
+                  className="w-4 h-4 rounded bg-neutral-800 border-neutral-700 text-gold focus:ring-gold"
                   aria-label={`Select ${car.title}`}
                 />
               </div>
@@ -331,11 +331,11 @@ export default function AdminCarsPage() {
                       {car.title}
                     </p>
                     {car.isFeatured && (
-                      <Star className="h-3.5 w-3.5 text-amber-400 flex-shrink-0" fill="currentColor" />
+                      <Star className="h-3.5 w-3.5 text-gold flex-shrink-0" fill="currentColor" />
                     )}
                   </div>
-                  <div className="flex items-center gap-2 mt-1 text-xs text-slate-400">
-                    <span className="px-1.5 py-0.5 rounded bg-slate-800">
+                  <div className="flex items-center gap-2 mt-1 text-xs text-gray-400">
+                    <span className="px-1.5 py-0.5 rounded bg-neutral-800">
                       {car.condition}
                     </span>
                     <span className="flex items-center gap-1">
@@ -359,10 +359,10 @@ export default function AdminCarsPage() {
                   className={cn(
                     "px-2 py-1 rounded-full text-xs font-medium transition-colors",
                     car.status === "AVAILABLE"
-                      ? "bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30"
+                      ? "bg-emerald-500/20 text-gold hover:bg-red-500/30"
                       : car.status === "SOLD"
                         ? "bg-red-500/20 text-red-400 hover:bg-red-500/30"
-                        : "bg-amber-500/20 text-amber-400 hover:bg-amber-500/30"
+                        : "bg-gold/20 text-gold hover:bg-gold/30"
                   )}
                 >
                   {car.status}
@@ -371,7 +371,7 @@ export default function AdminCarsPage() {
 
               {/* Views */}
               <div className="lg:col-span-1">
-                <p className="text-sm text-slate-400 flex items-center gap-1">
+                <p className="text-sm text-gray-400 flex items-center gap-1">
                   <Eye className="h-3.5 w-3.5" /> {car.views.toLocaleString()}
                 </p>
               </div>
@@ -383,8 +383,8 @@ export default function AdminCarsPage() {
                   className={cn(
                     "p-2 rounded-lg transition-colors",
                     car.isFeatured
-                      ? "text-amber-400 hover:bg-amber-500/10"
-                      : "text-slate-500 hover:bg-slate-800 hover:text-white"
+                      ? "text-gold hover:bg-gold/10"
+                      : "text-gray-500 hover:bg-neutral-800 hover:text-white"
                   )}
                   aria-label={car.isFeatured ? "Remove from featured" : "Mark as featured"}
                 >
@@ -396,21 +396,21 @@ export default function AdminCarsPage() {
                 <Link
                   href={`/cars/${car.slug}`}
                   target="_blank"
-                  className="p-2 rounded-lg text-slate-500 hover:bg-slate-800 hover:text-white transition-colors"
+                  className="p-2 rounded-lg text-gray-500 hover:bg-neutral-800 hover:text-white transition-colors"
                   aria-label="View listing"
                 >
                   <ExternalLink className="h-4 w-4" />
                 </Link>
                 <button
                   onClick={() => setEditCar(car)}
-                  className="p-2 rounded-lg text-slate-500 hover:bg-slate-800 hover:text-white transition-colors"
+                  className="p-2 rounded-lg text-gray-500 hover:bg-neutral-800 hover:text-white transition-colors"
                   aria-label="Edit car"
                 >
                   <Edit className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => setDeleteCar(car)}
-                  className="p-2 rounded-lg text-slate-500 hover:bg-red-500/10 hover:text-red-400 transition-colors"
+                  className="p-2 rounded-lg text-gray-500 hover:bg-red-500/10 hover:text-red-400 transition-colors"
                   aria-label="Delete car"
                 >
                   <Trash2 className="h-4 w-4" />
@@ -422,8 +422,8 @@ export default function AdminCarsPage() {
 
         {filteredCars.length === 0 && (
           <div className="p-12 text-center">
-            <Car className="h-12 w-12 text-slate-600 mx-auto mb-3" />
-            <p className="text-slate-400">No cars found</p>
+            <Car className="h-12 w-12 text-gray-600 mx-auto mb-3" />
+            <p className="text-gray-400">No cars found</p>
           </div>
         )}
       </div>

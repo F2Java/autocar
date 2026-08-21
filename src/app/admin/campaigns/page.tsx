@@ -132,16 +132,16 @@ export default function CampaignsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-black">
       {/* Header */}
-      <div className="bg-slate-900 border-b border-slate-800">
+      <div className="bg-neutral-900 border-b border-neutral-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-white font-heading tracking-wide">
                 EMAIL CAMPAIGNS
               </h1>
-              <p className="text-slate-400 mt-1">
+              <p className="text-gray-400 mt-1">
                 Manage bulk email promotions and track delivery
               </p>
             </div>
@@ -160,16 +160,16 @@ export default function CampaignsPage() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {[
             { label: "Total Sent", value: stats.totalSent, icon: Send, color: "text-gold" },
-            { label: "Opened", value: stats.totalOpened, icon: Eye, color: "text-emerald-400" },
+            { label: "Opened", value: stats.totalOpened, icon: Eye, color: "text-gold" },
             { label: "Clicked", value: stats.totalClicked, icon: MousePointerClick, color: "text-purple-400" },
             { label: "Failed", value: stats.totalFailed, icon: XCircle, color: "text-red-400" },
           ].map((stat) => (
-            <div key={stat.label} className="bg-slate-900 rounded-xl p-4 border border-slate-800">
+            <div key={stat.label} className="bg-neutral-900 rounded-xl p-4 border border-neutral-800">
               <div className="flex items-center gap-3">
                 <stat.icon className={cn("h-5 w-5", stat.color)} />
                 <div>
                   <p className="text-2xl font-bold text-white">{stat.value.toLocaleString()}</p>
-                  <p className="text-xs text-slate-400">{stat.label}</p>
+                  <p className="text-xs text-gray-400">{stat.label}</p>
                 </div>
               </div>
             </div>
@@ -178,7 +178,7 @@ export default function CampaignsPage() {
 
         {/* Create Campaign Form */}
         {showCreate && (
-          <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6 mb-8">
+          <div className="bg-neutral-900 rounded-2xl border border-neutral-800 p-6 mb-8">
             <h2 className="text-lg font-bold text-white font-heading tracking-wide mb-6">
               CREATE CAMPAIGN
             </h2>
@@ -193,7 +193,7 @@ export default function CampaignsPage() {
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="e.g., New Year Car Sale"
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                   />
                 </div>
 
@@ -208,7 +208,7 @@ export default function CampaignsPage() {
                           "flex-1 h-10 rounded-lg text-sm font-medium capitalize transition-all",
                           form.channel === ch
                             ? "bg-red-600 text-white"
-                            : "bg-slate-800 text-slate-300 border border-slate-700"
+                            : "bg-neutral-800 text-gray-300 border border-neutral-700"
                         )}
                       >
                         {ch}
@@ -224,7 +224,7 @@ export default function CampaignsPage() {
                     value={form.subject}
                     onChange={(e) => setForm({ ...form, subject: e.target.value })}
                     placeholder="e.g., Special Deal: 2024 Toyota Supra"
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                   />
                 </div>
 
@@ -235,7 +235,7 @@ export default function CampaignsPage() {
                     value={form.headline}
                     onChange={(e) => setForm({ ...form, headline: e.target.value })}
                     placeholder="e.g., Don't Miss Out!"
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                   />
                 </div>
 
@@ -246,7 +246,7 @@ export default function CampaignsPage() {
                     onChange={(e) => setForm({ ...form, body: e.target.value })}
                     placeholder="Write your promotional message here..."
                     rows={6}
-                    className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold resize-none font-mono"
+                    className="w-full px-3 py-2 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold resize-none font-mono"
                   />
                 </div>
               </div>
@@ -262,9 +262,9 @@ export default function CampaignsPage() {
                     onChange={(e) => setForm({ ...form, recipients: e.target.value })}
                     placeholder="buyer1@email.com, John Doe&#10;buyer2@email.com, Jane Smith"
                     rows={8}
-                    className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold resize-none font-mono"
+                    className="w-full px-3 py-2 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold resize-none font-mono"
                   />
-                  <p className="text-xs text-slate-500 mt-1">
+                  <p className="text-xs text-gray-500 mt-1">
                     One recipient per line: email,name
                   </p>
                 </div>
@@ -277,7 +277,7 @@ export default function CampaignsPage() {
                       value={form.carTitle}
                       onChange={(e) => setForm({ ...form, carTitle: e.target.value })}
                       placeholder="2024 Toyota Supra"
-                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                      className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                     />
                   </div>
                   <div>
@@ -287,7 +287,7 @@ export default function CampaignsPage() {
                       value={form.carPrice}
                       onChange={(e) => setForm({ ...form, carPrice: e.target.value })}
                       placeholder="Rp 1.250.000.000"
-                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                      className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                     />
                   </div>
                 </div>
@@ -299,7 +299,7 @@ export default function CampaignsPage() {
                       type="text"
                       value={form.ctaText}
                       onChange={(e) => setForm({ ...form, ctaText: e.target.value })}
-                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                      className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                     />
                   </div>
                   <div>
@@ -308,18 +308,18 @@ export default function CampaignsPage() {
                       type="url"
                       value={form.ctaUrl}
                       onChange={(e) => setForm({ ...form, ctaUrl: e.target.value })}
-                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                      className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                     />
                   </div>
                 </div>
 
                 {/* Preview */}
-                <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700">
-                  <p className="text-xs text-slate-400 mb-2 uppercase tracking-wider">Preview</p>
-                  <div className="bg-slate-900 rounded-lg p-4">
+                <div className="p-4 rounded-xl bg-neutral-800/50 border border-neutral-700">
+                  <p className="text-xs text-gray-400 mb-2 uppercase tracking-wider">Preview</p>
+                  <div className="bg-neutral-900 rounded-lg p-4">
                     <p className="text-xs text-gold mb-1">From: AutoCar &lt;noreply@autocar.id&gt;</p>
                     <p className="text-sm text-white font-medium mb-1">{form.subject || "Email Subject"}</p>
-                    <p className="text-xs text-slate-400 line-clamp-3">
+                    <p className="text-xs text-gray-400 line-clamp-3">
                       {form.body || "Email body preview..."}
                     </p>
                   </div>
@@ -328,10 +328,10 @@ export default function CampaignsPage() {
             </div>
 
             {/* Actions */}
-            <div className="flex items-center justify-end gap-3 mt-6 pt-6 border-t border-slate-800">
+            <div className="flex items-center justify-end gap-3 mt-6 pt-6 border-t border-neutral-800">
               <button
                 onClick={() => setShowCreate(false)}
-                className="px-4 py-2.5 rounded-xl border border-slate-700 text-white text-sm hover:bg-slate-800 transition-colors"
+                className="px-4 py-2.5 rounded-xl border border-neutral-700 text-white text-sm hover:bg-neutral-800 transition-colors"
               >
                 Cancel
               </button>
@@ -352,8 +352,8 @@ export default function CampaignsPage() {
         )}
 
         {/* Campaign List */}
-        <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden">
-          <div className="p-6 border-b border-slate-800">
+        <div className="bg-neutral-900 rounded-2xl border border-neutral-800 overflow-hidden">
+          <div className="p-6 border-b border-neutral-800">
             <h2 className="text-lg font-bold text-white font-heading tracking-wide">
               CAMPAIGN HISTORY
             </h2>
@@ -361,7 +361,7 @@ export default function CampaignsPage() {
 
           <div className="divide-y divide-slate-800">
             {campaigns.map((campaign) => (
-              <div key={campaign.id} className="p-6 hover:bg-slate-800/30 transition-colors">
+              <div key={campaign.id} className="p-6 hover:bg-neutral-800/30 transition-colors">
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
@@ -370,10 +370,10 @@ export default function CampaignsPage() {
                         className={cn(
                           "px-2 py-0.5 rounded-full text-xs font-medium",
                           campaign.status === "SENT"
-                            ? "bg-emerald-500/20 text-emerald-400"
+                            ? "bg-emerald-500/20 text-gold"
                             : campaign.status === "SCHEDULED"
-                              ? "bg-amber-500/20 text-amber-400"
-                              : "bg-slate-500/20 text-slate-400"
+                              ? "bg-gold/20 text-gold"
+                              : "bg-slate-500/20 text-gray-400"
                         )}
                       >
                         {campaign.status}
@@ -382,8 +382,8 @@ export default function CampaignsPage() {
                         {campaign.channel}
                       </span>
                     </div>
-                    <p className="text-sm text-slate-400">{campaign.subject}</p>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-sm text-gray-400">{campaign.subject}</p>
+                    <p className="text-xs text-gray-500">
                       Created {new Date(campaign.createdAt).toLocaleDateString()}
                     </p>
                   </div>
@@ -392,19 +392,19 @@ export default function CampaignsPage() {
                   <div className="flex items-center gap-6 text-sm">
                     <div className="text-center">
                       <p className="text-white font-bold">{campaign.totalSent.toLocaleString()}</p>
-                      <p className="text-xs text-slate-400">Sent</p>
+                      <p className="text-xs text-gray-400">Sent</p>
                     </div>
                     <div className="text-center">
-                      <p className="text-emerald-400 font-bold">{campaign.totalOpened.toLocaleString()}</p>
-                      <p className="text-xs text-slate-400">Opened</p>
+                      <p className="text-gold font-bold">{campaign.totalOpened.toLocaleString()}</p>
+                      <p className="text-xs text-gray-400">Opened</p>
                     </div>
                     <div className="text-center">
                       <p className="text-purple-400 font-bold">{campaign.totalClicked.toLocaleString()}</p>
-                      <p className="text-xs text-slate-400">Clicked</p>
+                      <p className="text-xs text-gray-400">Clicked</p>
                     </div>
                     <div className="text-center">
                       <p className="text-red-400 font-bold">{campaign.totalFailed}</p>
-                      <p className="text-xs text-slate-400">Failed</p>
+                      <p className="text-xs text-gray-400">Failed</p>
                     </div>
                   </div>
                 </div>
@@ -412,11 +412,11 @@ export default function CampaignsPage() {
                 {/* Open Rate Bar */}
                 {campaign.totalSent > 0 && (
                   <div className="mt-3">
-                    <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
+                    <div className="flex items-center justify-between text-xs text-gray-400 mb-1">
                       <span>Open rate</span>
                       <span>{Math.round((campaign.totalOpened / campaign.totalSent) * 100)}%</span>
                     </div>
-                    <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                    <div className="w-full h-1.5 bg-neutral-800 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-emerald-500 rounded-full"
                         style={{
@@ -431,8 +431,8 @@ export default function CampaignsPage() {
 
             {campaigns.length === 0 && (
               <div className="p-12 text-center">
-                <Mail className="h-12 w-12 text-slate-600 mx-auto mb-3" />
-                <p className="text-slate-400">No campaigns yet</p>
+                <Mail className="h-12 w-12 text-gray-600 mx-auto mb-3" />
+                <p className="text-gray-400">No campaigns yet</p>
                 <button
                   onClick={() => setShowCreate(true)}
                   className="mt-4 text-gold hover:text-gold-light text-sm"

@@ -67,13 +67,13 @@ export function SearchBar({
       <div
         className={cn(
           "relative flex-1 flex items-center rounded-xl transition-all duration-300",
-          "bg-slate-900/80 backdrop-blur-md border",
+          "bg-neutral-900/80 backdrop-blur-md border",
           isFocused
             ? "border-gold/50 shadow-[0_0_20px_rgba(59,130,246,0.15)]"
-            : "border-slate-700/50 hover:border-slate-600/50"
+            : "border-neutral-700/50 hover:border-neutral-600/50"
         )}
       >
-        <Search className="absolute left-4 h-5 w-5 text-slate-400 pointer-events-none" />
+        <Search className="absolute left-4 h-5 w-5 text-gray-400 pointer-events-none" />
         <input
           ref={inputRef}
           type="text"
@@ -83,7 +83,7 @@ export function SearchBar({
           onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
           className={cn(
-            "w-full h-12 pl-12 pr-12 bg-transparent text-white placeholder:text-slate-500",
+            "w-full h-12 pl-12 pr-12 bg-transparent text-white placeholder:text-gray-500",
             "text-sm font-body focus:outline-none"
           )}
           aria-label="Search cars"
@@ -94,7 +94,7 @@ export function SearchBar({
           <button
             type="button"
             onClick={handleClear}
-            className="absolute right-4 h-5 w-5 text-slate-400 hover:text-white transition-colors"
+            className="absolute right-4 h-5 w-5 text-gray-400 hover:text-white transition-colors"
             aria-label="Clear search"
           >
             <X className="h-5 w-5" />
@@ -108,8 +108,8 @@ export function SearchBar({
           onClick={onFilterClick}
           className={cn(
             "h-12 px-4 rounded-xl flex items-center gap-2 transition-all duration-200",
-            "bg-slate-800 border border-slate-700/50 text-slate-300",
-            "hover:bg-slate-700 hover:border-slate-600 hover:text-white",
+            "bg-neutral-800 border border-neutral-700/50 text-gray-300",
+            "hover:bg-neutral-700 hover:border-neutral-600 hover:text-white",
             "focus:outline-none focus:ring-2 focus:ring-gold/50"
           )}
           aria-label="Open filters"

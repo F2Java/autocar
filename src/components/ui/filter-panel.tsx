@@ -81,8 +81,8 @@ export function FilterPanel({
       <div
         className={cn(
           "fixed lg:relative inset-y-0 right-0 lg:inset-auto z-50 lg:z-auto",
-          "w-full sm:w-80 lg:w-72 bg-slate-900 lg:bg-transparent",
-          "border-l border-slate-800 lg:border-0",
+          "w-full sm:w-80 lg:w-72 bg-neutral-900 lg:bg-transparent",
+          "border-l border-neutral-800 lg:border-0",
           "overflow-y-auto lg:overflow-visible",
           "transition-transform duration-300 lg:transition-none",
           isOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0",
@@ -99,7 +99,7 @@ export function FilterPanel({
             <div className="flex items-center gap-2">
               <button
                 onClick={onReset}
-                className="flex items-center gap-1 text-sm text-slate-400 hover:text-white transition-colors"
+                className="flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors"
                 aria-label="Reset all filters"
               >
                 <RotateCcw className="h-4 w-4" />
@@ -107,7 +107,7 @@ export function FilterPanel({
               </button>
               <button
                 onClick={onClose}
-                className="lg:hidden p-1 text-slate-400 hover:text-white"
+                className="lg:hidden p-1 text-gray-400 hover:text-white"
                 aria-label="Close filters"
               >
                 <X className="h-5 w-5" />
@@ -117,7 +117,7 @@ export function FilterPanel({
 
           {/* Result Count */}
           {resultCount !== undefined && (
-            <p className="text-sm text-slate-400">
+            <p className="text-sm text-gray-400">
               <span className="text-white font-medium">{resultCount}</span> cars found
             </p>
           )}
@@ -141,7 +141,7 @@ export function FilterPanel({
                     "px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200",
                     filters.condition === cond
                       ? "bg-red-600 text-white"
-                      : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700"
+                      : "bg-neutral-800 text-gray-300 hover:bg-neutral-700 border border-neutral-700"
                   )}
                 >
                   {cond === "CERTIFIED_PRE_OWNED" ? "CPO" : cond}
@@ -208,24 +208,24 @@ export function FilterPanel({
           >
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className="block text-xs text-slate-400 mb-1">Min</label>
+                <label className="block text-xs text-gray-400 mb-1">Min</label>
                 <input
                   type="number"
                   value={filters.priceMin}
                   onChange={(e) => onFilterChange({ priceMin: e.target.value })}
                   placeholder="0"
-                  className="w-full h-9 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                  className="w-full h-9 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                   aria-label="Minimum price"
                 />
               </div>
               <div>
-                <label className="block text-xs text-slate-400 mb-1">Max</label>
+                <label className="block text-xs text-gray-400 mb-1">Max</label>
                 <input
                   type="number"
                   value={filters.priceMax}
                   onChange={(e) => onFilterChange({ priceMax: e.target.value })}
                   placeholder="No limit"
-                  className="w-full h-9 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                  className="w-full h-9 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                   aria-label="Maximum price"
                 />
               </div>
@@ -250,7 +250,7 @@ export function FilterPanel({
                     "px-2 py-1 rounded text-xs font-medium transition-colors",
                     filters.priceMin === range.min && filters.priceMax === range.max
                       ? "bg-red-600 text-white"
-                      : "bg-slate-800 text-slate-400 hover:bg-slate-700"
+                      : "bg-neutral-800 text-gray-400 hover:bg-neutral-700"
                   )}
                 >
                   {range.label}
@@ -278,7 +278,7 @@ export function FilterPanel({
                     "px-3 py-1.5 rounded-lg text-sm transition-all duration-200",
                     filters.fuelType === fuel
                       ? "bg-red-600 text-white"
-                      : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700"
+                      : "bg-neutral-800 text-gray-300 hover:bg-neutral-700 border border-neutral-700"
                   )}
                 >
                   {fuel}
@@ -306,7 +306,7 @@ export function FilterPanel({
                     "px-3 py-1.5 rounded-lg text-sm transition-all duration-200",
                     filters.transmission === trans
                       ? "bg-red-600 text-white"
-                      : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700"
+                      : "bg-neutral-800 text-gray-300 hover:bg-neutral-700 border border-neutral-700"
                   )}
                 >
                   {trans}
@@ -317,13 +317,13 @@ export function FilterPanel({
 
           {/* Sort */}
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">
+            <label className="block text-sm font-medium text-gray-300 mb-2">
               Sort By
             </label>
             <select
               value={filters.sortBy}
               onChange={(e) => onFilterChange({ sortBy: e.target.value })}
-              className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+              className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
               aria-label="Sort cars by"
             >
               <option value="newest">Newest First</option>
@@ -360,7 +360,7 @@ function FilterSection({
   children: React.ReactNode
 }) {
   return (
-    <div className="border-b border-slate-800 pb-4">
+    <div className="border-b border-neutral-800 pb-4">
       <button
         onClick={onToggle}
         className="flex items-center justify-between w-full text-left"
@@ -368,9 +368,9 @@ function FilterSection({
       >
         <span className="text-sm font-medium text-white">{title}</span>
         {expanded ? (
-          <ChevronUp className="h-4 w-4 text-slate-400" />
+          <ChevronUp className="h-4 w-4 text-gray-400" />
         ) : (
-          <ChevronDown className="h-4 w-4 text-slate-400" />
+          <ChevronDown className="h-4 w-4 text-gray-400" />
         )}
       </button>
       {expanded && <div className="mt-3">{children}</div>}
@@ -393,11 +393,11 @@ function SelectFilter({
 }) {
   return (
     <div>
-      <label className="block text-xs text-slate-400 mb-1">{label}</label>
+      <label className="block text-xs text-gray-400 mb-1">{label}</label>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full h-9 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+        className="w-full h-9 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
         aria-label={`Filter by ${label}`}
       >
         <option value="">{placeholder}</option>

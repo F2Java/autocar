@@ -43,19 +43,19 @@ export default function AdminLayout({
   const pathname = usePathname()
 
   return (
-    <div className="min-h-screen bg-slate-950 flex">
+    <div className="min-h-screen bg-black flex">
       {/* Sidebar - Desktop */}
       <aside
         className={cn(
           "hidden lg:flex flex-col fixed inset-y-0 left-0 z-40 transition-all duration-300",
-          "bg-slate-900 border-r border-slate-800",
+          "bg-neutral-900 border-r border-neutral-800",
           sidebarOpen ? "w-64" : "w-20"
         )}
       >
         {/* Logo */}
-        <div className="h-16 flex items-center justify-between px-4 border-b border-slate-800">
+        <div className="h-16 flex items-center justify-between px-4 border-b border-neutral-800">
           <Link href="/admin" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-red-600 to-gold flex items-center justify-center flex-shrink-0">
+            <div className="w-9 h-9 rounded-lg  from-red-600 flex items-center justify-center flex-shrink-0">
               <Car className="h-5 w-5 text-white" />
             </div>
             {sidebarOpen && (
@@ -67,7 +67,7 @@ export default function AdminLayout({
           </Link>
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-neutral-800 transition-colors"
             aria-label={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
           >
             {sidebarOpen ? (
@@ -90,7 +90,7 @@ export default function AdminLayout({
                   "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all",
                   isActive
                     ? "bg-red-600/20 text-gold border border-gold/20"
-                    : "text-slate-400 hover:text-white hover:bg-slate-800/50"
+                    : "text-gray-400 hover:text-white hover:bg-neutral-800/50"
                 )}
                 title={!sidebarOpen ? item.label : undefined}
               >
@@ -102,12 +102,12 @@ export default function AdminLayout({
         </nav>
 
         {/* Footer */}
-        <div className="p-3 border-t border-slate-800">
+        <div className="p-3 border-t border-neutral-800">
           <Link
             href="/"
             className={cn(
               "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all",
-              "text-slate-400 hover:text-white hover:bg-slate-800/50"
+              "text-gray-400 hover:text-white hover:bg-neutral-800/50"
             )}
           >
             <LogOut className="h-5 w-5 flex-shrink-0" />
@@ -127,13 +127,13 @@ export default function AdminLayout({
       {/* Mobile Sidebar */}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 border-r border-slate-800 lg:hidden transition-transform duration-300",
+          "fixed inset-y-0 left-0 z-50 w-64 bg-neutral-900 border-r border-neutral-800 lg:hidden transition-transform duration-300",
           mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="h-16 flex items-center justify-between px-4 border-b border-slate-800">
+        <div className="h-16 flex items-center justify-between px-4 border-b border-neutral-800">
           <Link href="/admin" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-red-600 to-gold flex items-center justify-center">
+            <div className="w-9 h-9 rounded-lg  from-red-600 flex items-center justify-center">
               <Car className="h-5 w-5 text-white" />
             </div>
             <span className="text-lg font-bold font-heading tracking-widest">
@@ -143,7 +143,7 @@ export default function AdminLayout({
           </Link>
           <button
             onClick={() => setMobileMenuOpen(false)}
-            className="p-1.5 text-slate-400 hover:text-white"
+            className="p-1.5 text-gray-400 hover:text-white"
           >
             <X className="h-5 w-5" />
           </button>
@@ -160,7 +160,7 @@ export default function AdminLayout({
                   "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all",
                   isActive
                     ? "bg-red-600/20 text-gold"
-                    : "text-slate-400 hover:text-white hover:bg-slate-800/50"
+                    : "text-gray-400 hover:text-white hover:bg-neutral-800/50"
                 )}
               >
                 <item.icon className="h-5 w-5" />
@@ -174,11 +174,11 @@ export default function AdminLayout({
       {/* Main Content */}
       <div className={cn("flex-1 transition-all duration-300", sidebarOpen ? "lg:ml-64" : "lg:ml-20")}>
         {/* Top Header */}
-        <header className="h-16 bg-slate-900/80 backdrop-blur-xl border-b border-slate-800 sticky top-0 z-30">
+        <header className="h-16 bg-neutral-900/80 backdrop-blur-xl border-b border-neutral-800 sticky top-0 z-30">
           <div className="h-full flex items-center justify-between px-4 lg:px-6">
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="lg:hidden p-2 text-slate-400 hover:text-white"
+              className="lg:hidden p-2 text-gray-400 hover:text-white"
               aria-label="Open menu"
             >
               <Menu className="h-5 w-5" />
@@ -186,11 +186,11 @@ export default function AdminLayout({
 
             <div className="flex-1 max-w-md mx-4 hidden sm:block">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
                 <input
                   type="text"
                   placeholder="Search cars, campaigns..."
-                  className="w-full h-9 pl-10 pr-4 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
+                  className="w-full h-9 pl-10 pr-4 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
                   aria-label="Search"
                 />
               </div>
@@ -198,7 +198,7 @@ export default function AdminLayout({
 
             <div className="flex items-center gap-3">
               <button
-                className="relative p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                className="relative p-2 text-gray-400 hover:text-white hover:bg-neutral-800 rounded-lg transition-colors"
                 aria-label="Notifications"
               >
                 <Bell className="h-5 w-5" />

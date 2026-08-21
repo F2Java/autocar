@@ -47,7 +47,7 @@ export function Navbar() {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         isScrolled
-          ? "bg-slate-900/90 backdrop-blur-xl border-b border-slate-800/50 shadow-[0_4px_30px_rgba(0,0,0,0.3)]"
+          ? "bg-neutral-900/90 backdrop-blur-xl border-b border-neutral-800/50 shadow-[0_4px_30px_rgba(0,0,0,0.3)]"
           : "bg-transparent"
       )}
     >
@@ -60,10 +60,10 @@ export function Navbar() {
             aria-label="AutoCar Home"
           >
             <div className="relative">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-gold flex items-center justify-center transition-transform group-hover:scale-105">
+              <div className="w-10 h-10 rounded-xl  from-red-600 flex items-center justify-center transition-transform group-hover:scale-105">
                 <Car className="h-6 w-6 text-white" />
               </div>
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-red-600 to-gold blur-lg opacity-0 group-hover:opacity-50 transition-opacity" />
+              <div className="absolute inset-0 rounded-xl  from-red-600 blur-lg opacity-0 group-hover:opacity-50 transition-opacity" />
             </div>
             <div className="hidden sm:block">
               <span className="text-xl font-bold text-white font-heading tracking-widest">
@@ -85,7 +85,7 @@ export function Navbar() {
                   "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                   pathname === link.href
                     ? "bg-red-600/20 text-gold"
-                    : "text-slate-300 hover:text-white hover:bg-slate-800/50"
+                    : "text-gray-300 hover:text-white hover:bg-neutral-800/50"
                 )}
               >
                 {link.label}
@@ -97,14 +97,14 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-3">
             <Link
               href="/search"
-              className="p-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all"
+              className="p-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-neutral-800/50 transition-all"
               aria-label="Search cars"
             >
               <Search className="h-5 w-5" />
             </Link>
             <Link
               href="/favorites"
-              className="p-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all"
+              className="p-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-neutral-800/50 transition-all"
               aria-label="Favorites"
             >
               <Heart className="h-5 w-5" />
@@ -113,7 +113,7 @@ export function Navbar() {
               href="https://wa.me/6281234567890"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium transition-colors"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-medium transition-colors"
               aria-label="Contact via WhatsApp"
             >
               <MessageCircle className="h-4 w-4" />
@@ -131,7 +131,7 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-slate-400 hover:text-white"
+            className="lg:hidden p-2 text-gray-400 hover:text-white"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
           >
@@ -151,7 +151,7 @@ export function Navbar() {
           mobileMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         )}
       >
-        <div className="bg-slate-900/95 backdrop-blur-xl border-t border-slate-800 p-4 space-y-2">
+        <div className="bg-neutral-900/95 backdrop-blur-xl border-t border-neutral-800 p-4 space-y-2">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -160,18 +160,18 @@ export function Navbar() {
                 "block px-4 py-3 rounded-xl text-sm font-medium transition-colors",
                 pathname === link.href
                   ? "bg-red-600/20 text-gold"
-                  : "text-slate-300 hover:bg-slate-800"
+                  : "text-gray-300 hover:bg-neutral-800"
               )}
             >
               {link.label}
             </Link>
           ))}
-          <div className="border-t border-slate-800 pt-3 mt-3 space-y-2">
+          <div className="border-t border-neutral-800 pt-3 mt-3 space-y-2">
             <a
               href="https://wa.me/6281234567890"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-emerald-600 text-white text-sm font-medium"
+              className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-red-600 text-white text-sm font-medium"
             >
               <MessageCircle className="h-4 w-4" />
               WhatsApp Us

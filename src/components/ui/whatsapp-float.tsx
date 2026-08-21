@@ -31,7 +31,7 @@ export function WhatsAppFloat({
       {isOpen && (
         <div className="absolute bottom-20 right-0 w-80 bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200 animate-fade-in-up">
           {/* Header */}
-          <div className="bg-emerald-600 p-4 flex items-center justify-between">
+          <div className="bg-red-600 p-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
                 <MessageCircle className="h-5 w-5 text-white" />
@@ -76,7 +76,7 @@ export function WhatsAppFloat({
               />
               <button
                 onClick={handleSend}
-                className="w-10 h-10 rounded-full bg-emerald-600 hover:bg-emerald-500 flex items-center justify-center transition-colors"
+                className="w-10 h-10 rounded-full bg-red-600 hover:bg-red-500 flex items-center justify-center transition-colors"
                 aria-label="Send message"
               >
                 <Send className="h-4 w-4 text-white" />

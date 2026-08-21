@@ -259,7 +259,7 @@ export function UploadZone({
           "relative border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-200",
           isDragging
             ? "border-gold bg-red-500/10"
-            : "border-slate-700 hover:border-gold/50 hover:bg-slate-800/50"
+            : "border-neutral-700 hover:border-gold/50 hover:bg-neutral-800/50"
         )}
         role="button"
         tabIndex={0}
@@ -286,12 +286,12 @@ export function UploadZone({
 
         <div className="flex flex-col items-center gap-3">
           {type === "video" ? (
-            <FileVideo className="h-10 w-10 text-slate-500" />
+            <FileVideo className="h-10 w-10 text-gray-500" />
           ) : (
-            <FileImage className="h-10 w-10 text-slate-500" />
+            <FileImage className="h-10 w-10 text-gray-500" />
           )}
           <div>
-            <p className="text-sm text-slate-300">
+            <p className="text-sm text-gray-300">
               {isDragging ? (
                 "Drop files here"
               ) : (
@@ -301,7 +301,7 @@ export function UploadZone({
                 </>
               )}
             </p>
-            <p className="text-xs text-slate-500 mt-1">
+            <p className="text-xs text-gray-500 mt-1">
               {type === "image"
                 ? "JPG, PNG, WebP up to 10MB"
                 : "MP4, MOV, WebM up to 500MB"}
@@ -312,11 +312,11 @@ export function UploadZone({
 
       {/* Compression Toggle for Video */}
       {type === "video" && (
-        <div className="flex items-center justify-between p-3 rounded-lg bg-slate-800/50 border border-slate-700">
+        <div className="flex items-center justify-between p-3 rounded-lg bg-neutral-800/50 border border-neutral-700">
           <div className="flex items-center gap-2">
             <Scissors className="h-4 w-4 text-gold" />
             <span className="text-sm text-white">Auto-compress large videos</span>
-            <span className="text-xs text-slate-400">(over 20MB → 720p, 2Mbps)</span>
+            <span className="text-xs text-gray-400">(over 20MB → 720p, 2Mbps)</span>
           </div>
           <button
             onClick={() => setAutoCompress(!autoCompress)}
@@ -346,7 +346,7 @@ export function UploadZone({
             <span className="text-sm text-white">Compressing video...</span>
             <span className="text-xs text-gold">{compressProgress}%</span>
           </div>
-          <div className="w-full h-1.5 bg-slate-700 rounded-full overflow-hidden">
+          <div className="w-full h-1.5 bg-neutral-700 rounded-full overflow-hidden">
             <div
               className="h-full bg-gold rounded-full transition-all duration-300"
               style={{ width: `${compressProgress}%` }}
@@ -367,7 +367,7 @@ export function UploadZone({
                   ? "bg-emerald-500/10 border-emerald-500/30"
                   : uploadFile.status === "error"
                     ? "bg-red-500/10 border-red-500/30"
-                    : "bg-slate-800/50 border-slate-700"
+                    : "bg-neutral-800/50 border-neutral-700"
               )}
             >
               {/* Preview */}
@@ -378,21 +378,21 @@ export function UploadZone({
                   className="w-12 h-12 rounded-lg object-cover"
                 />
               ) : (
-                <div className="w-12 h-12 rounded-lg bg-slate-700 flex items-center justify-center">
-                  <FileVideo className="h-5 w-5 text-slate-400" />
+                <div className="w-12 h-12 rounded-lg bg-neutral-700 flex items-center justify-center">
+                  <FileVideo className="h-5 w-5 text-gray-400" />
                 </div>
               )}
 
               {/* Info */}
               <div className="flex-1 min-w-0">
                 <p className="text-sm text-white truncate">{uploadFile.file.name}</p>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-gray-400">
                   {(uploadFile.file.size / 1024 / 1024).toFixed(1)} MB
                 </p>
 
                 {/* Progress Bar */}
                 {uploadFile.status === "uploading" && (
-                  <div className="mt-1.5 w-full h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                  <div className="mt-1.5 w-full h-1.5 bg-neutral-700 rounded-full overflow-hidden">
                     <div
                       className="h-full bg-red-500 rounded-full transition-all duration-300"
                       style={{ width: `${uploadFile.progress}%` }}
@@ -414,14 +414,14 @@ export function UploadZone({
                   <span className="text-xs text-gold">{uploadFile.progress}%</span>
                 )}
                 {uploadFile.status === "success" && (
-                  <CheckCircle className="h-5 w-5 text-emerald-400" />
+                  <CheckCircle className="h-5 w-5 text-gold" />
                 )}
                 {uploadFile.status === "uploading" && (
                   <Loader2 className="h-4 w-4 text-gold animate-spin" />
                 )}
                 <button
                   onClick={() => removeFile(uploadFile.id)}
-                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
+                  className="p-1 rounded-lg hover:bg-neutral-700 text-gray-400 hover:text-white transition-colors"
                   aria-label={`Remove ${uploadFile.file.name}`}
                 >
                   <X className="h-4 w-4" />

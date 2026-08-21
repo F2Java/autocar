@@ -68,9 +68,9 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-slate-950 border-t border-slate-800/50">
+    <footer className="bg-black border-t border-neutral-800/50">
       {/* Trust Features */}
-      <div className="border-b border-slate-800/50">
+      <div className="border-b border-neutral-800/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {trustFeatures.map((feature) => (
@@ -80,7 +80,7 @@ export function Footer() {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-white">{feature.label}</p>
-                  <p className="text-xs text-slate-400">{feature.desc}</p>
+                  <p className="text-xs text-gray-400">{feature.desc}</p>
                 </div>
               </div>
             ))}
@@ -94,7 +94,7 @@ export function Footer() {
           {/* Brand & Newsletter */}
           <div className="lg:col-span-4 space-y-6">
             <Link href="/" className="flex items-center gap-3" aria-label="AutoCar Home">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-gold flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl  from-red-600 flex items-center justify-center">
                 <Car className="h-6 w-6 text-white" />
               </div>
               <div>
@@ -106,7 +106,7 @@ export function Footer() {
                 </span>
               </div>
             </Link>
-            <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
+            <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
               Indonesia&apos;s leading automotive marketplace. Buy and sell new &amp; used
               cars with confidence. Video listings, verified sellers, and secure transactions.
             </p>
@@ -118,13 +118,13 @@ export function Footer() {
               </h4>
               <form onSubmit={handleSubscribe} className="flex gap-2">
                 <div className="relative flex-1">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Your email address"
-                    className="w-full h-10 pl-10 pr-4 rounded-xl bg-slate-900 border border-slate-800 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold transition-colors"
+                    className="w-full h-10 pl-10 pr-4 rounded-xl bg-neutral-900 border border-neutral-800 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold transition-colors"
                     required
                     aria-label="Email for newsletter"
                   />
@@ -134,7 +134,7 @@ export function Footer() {
                   className={cn(
                     "h-10 px-4 rounded-xl flex items-center justify-center transition-all duration-200",
                     subscribed
-                      ? "bg-emerald-600 text-white"
+                      ? "bg-red-600 text-white"
                       : "bg-red-600 hover:bg-red-500 text-white"
                   )}
                   aria-label="Subscribe to newsletter"
@@ -162,7 +162,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-xl bg-slate-800/50 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
+                  className="w-9 h-9 rounded-xl bg-neutral-800/50 flex items-center justify-center text-gray-400 hover:text-white hover:bg-neutral-800 transition-all"
                   aria-label={social.label}
                 >
                   <social.icon className="h-4 w-4" />
@@ -182,7 +182,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-slate-400 hover:text-gold transition-colors"
+                      className="text-sm text-gray-400 hover:text-gold transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -199,7 +199,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-slate-400 hover:text-gold transition-colors"
+                      className="text-sm text-gray-400 hover:text-gold transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -216,7 +216,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-slate-400 hover:text-gold transition-colors"
+                      className="text-sm text-gray-400 hover:text-gold transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -233,7 +233,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-slate-400 hover:text-gold transition-colors"
+                      className="text-sm text-gray-400 hover:text-gold transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -246,13 +246,13 @@ export function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-slate-800/50">
+      <div className="border-t border-neutral-800/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-gray-500">
               &copy; {new Date().getFullYear()} AutoCar. All rights reserved.
             </p>
-            <div className="flex items-center gap-6 text-xs text-slate-500">
+            <div className="flex items-center gap-6 text-xs text-gray-500">
               <Link href="/privacy" className="hover:text-white transition-colors">
                 Privacy
               </Link>

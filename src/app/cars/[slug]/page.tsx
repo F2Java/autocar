@@ -158,11 +158,11 @@ export default function CarDetailPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-black">
       {/* Breadcrumb */}
-      <div className="bg-slate-900 border-b border-slate-800">
+      <div className="bg-neutral-900 border-b border-neutral-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <nav className="flex items-center gap-2 text-sm text-slate-400">
+          <nav className="flex items-center gap-2 text-sm text-gray-400">
             <Link href="/" className="hover:text-white transition-colors">Home</Link>
             <ChevronRight className="h-3 w-3" />
             <Link href="/cars" className="hover:text-white transition-colors">Cars</Link>
@@ -177,7 +177,7 @@ export default function CarDetailPage() {
           {/* Left Column - Media */}
           <div className="lg:col-span-2 space-y-4">
             {/* Main Video/Image */}
-            <div className="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800">
+            <div className="rounded-2xl overflow-hidden bg-neutral-900 border border-neutral-800">
               {activeImage === 0 && car.videoUrl ? (
                 <VideoCard
                   src={car.videoUrl}
@@ -207,7 +207,7 @@ export default function CarDetailPage() {
                     "aspect-video rounded-lg overflow-hidden relative border-2 transition-all",
                     activeImage === 0
                       ? "border-gold"
-                      : "border-transparent hover:border-slate-600"
+                      : "border-transparent hover:border-neutral-600"
                   )}
                 >
                   <img
@@ -228,7 +228,7 @@ export default function CarDetailPage() {
                     "aspect-video rounded-lg overflow-hidden border-2 transition-all",
                     activeImage === i + 1
                       ? "border-gold"
-                      : "border-transparent hover:border-slate-600"
+                      : "border-transparent hover:border-neutral-600"
                   )}
                 >
                   <img
@@ -241,26 +241,26 @@ export default function CarDetailPage() {
             </div>
 
             {/* Description */}
-            <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800">
+            <div className="bg-neutral-900 rounded-2xl p-6 border border-neutral-800">
               <h2 className="text-lg font-bold text-white font-heading tracking-wide mb-3">
                 DESCRIPTION
               </h2>
-              <p className="text-slate-300 leading-relaxed whitespace-pre-line">
+              <p className="text-gray-300 leading-relaxed whitespace-pre-line">
                 {car.description}
               </p>
             </div>
 
             {/* Key Specs */}
-            <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800">
+            <div className="bg-neutral-900 rounded-2xl p-6 border border-neutral-800">
               <h2 className="text-lg font-bold text-white font-heading tracking-wide mb-4">
                 KEY SPECIFICATIONS
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {specs.map((spec) => (
-                  <div key={spec.label} className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/50">
+                  <div key={spec.label} className="flex items-center gap-3 p-3 rounded-xl bg-neutral-800/50">
                     <spec.icon className="h-5 w-5 text-gold flex-shrink-0" />
                     <div>
-                      <p className="text-xs text-slate-400">{spec.label}</p>
+                      <p className="text-xs text-gray-400">{spec.label}</p>
                       <p className="text-sm font-medium text-white">{spec.value}</p>
                     </div>
                   </div>
@@ -269,13 +269,13 @@ export default function CarDetailPage() {
             </div>
 
             {/* Features */}
-            <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800">
+            <div className="bg-neutral-900 rounded-2xl p-6 border border-neutral-800">
               <h2 className="text-lg font-bold text-white font-heading tracking-wide mb-4">
                 FEATURES & EQUIPMENT
               </h2>
               <div className="grid grid-cols-2 gap-2">
                 {car.features.map((feature) => (
-                  <div key={feature} className="flex items-center gap-2 text-sm text-slate-300">
+                  <div key={feature} className="flex items-center gap-2 text-sm text-gray-300">
                     <div className="w-1.5 h-1.5 rounded-full bg-red-500" />
                     {feature}
                   </div>
@@ -284,14 +284,14 @@ export default function CarDetailPage() {
             </div>
 
             {/* Safety */}
-            <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800">
+            <div className="bg-neutral-900 rounded-2xl p-6 border border-neutral-800">
               <h2 className="text-lg font-bold text-white font-heading tracking-wide mb-4">
                 SAFETY FEATURES
               </h2>
               <div className="grid grid-cols-2 gap-2">
                 {car.safetyFeatures.map((feature) => (
-                  <div key={feature} className="flex items-center gap-2 text-sm text-slate-300">
-                    <Shield className="h-4 w-4 text-emerald-400" />
+                  <div key={feature} className="flex items-center gap-2 text-sm text-gray-300">
+                    <Shield className="h-4 w-4 text-gold" />
                     {feature}
                   </div>
                 ))}
@@ -302,7 +302,7 @@ export default function CarDetailPage() {
           {/* Right Column - Price & Contact */}
           <div className="space-y-6">
             {/* Price Card */}
-            <div className="bg-slate-900 rounded-2xl p-6 border border-slate-800 sticky top-24">
+            <div className="bg-neutral-900 rounded-2xl p-6 border border-neutral-800 sticky top-24">
               <div className="space-y-4">
                 <div>
                   <div className="flex items-center gap-2 mb-1">
@@ -318,7 +318,7 @@ export default function CarDetailPage() {
                   <h1 className="text-2xl font-bold text-white font-heading tracking-wide mt-2">
                     {car.title}
                   </h1>
-                  <div className="flex items-center gap-4 mt-2 text-sm text-slate-400">
+                  <div className="flex items-center gap-4 mt-2 text-sm text-gray-400">
                     <span className="flex items-center gap-1">
                       <MapPin className="h-4 w-4" /> {car.city}, {car.province}
                     </span>
@@ -335,16 +335,16 @@ export default function CarDetailPage() {
                       {formatPrice(car.price)}
                     </span>
                     {car.originalPrice && (
-                      <span className="text-sm text-slate-500 line-through">
+                      <span className="text-sm text-gray-500 line-through">
                         {formatPrice(car.originalPrice)}
                       </span>
                     )}
                   </div>
                   {car.negotiable && (
-                    <p className="text-xs text-emerald-400 mt-1">Price negotiable</p>
+                    <p className="text-xs text-gold mt-1">Price negotiable</p>
                   )}
                   {car.installmentAvail && car.installmentFrom && (
-                    <p className="text-xs text-slate-400 mt-1">
+                    <p className="text-xs text-gray-400 mt-1">
                       From {formatPrice(car.installmentFrom)}/month
                     </p>
                   )}
@@ -354,7 +354,7 @@ export default function CarDetailPage() {
                 <div className="space-y-3">
                   <button
                     onClick={handleWhatsApp}
-                    className="w-full flex items-center justify-center gap-2 h-12 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium transition-colors"
+                    className="w-full flex items-center justify-center gap-2 h-12 rounded-xl bg-red-600 hover:bg-red-500 text-white font-medium transition-colors"
                   >
                     <MessageCircle className="h-5 w-5" />
                     Chat via WhatsApp
@@ -368,7 +368,7 @@ export default function CarDetailPage() {
                   </button>
                   <a
                     href={`tel:${car.dealerPhone}`}
-                    className="w-full flex items-center justify-center gap-2 h-12 rounded-xl border border-slate-700 text-white hover:bg-slate-800 transition-colors"
+                    className="w-full flex items-center justify-center gap-2 h-12 rounded-xl border border-neutral-700 text-white hover:bg-neutral-800 transition-colors"
                   >
                     <Phone className="h-5 w-5" />
                     Call Dealer
@@ -376,7 +376,7 @@ export default function CarDetailPage() {
                 </div>
 
                 {/* Quick Inquiry Form */}
-                <div className="border-t border-slate-800 pt-4">
+                <div className="border-t border-neutral-800 pt-4">
                   <h3 className="text-sm font-bold text-white mb-3">QUICK INQUIRY</h3>
                   <form
                     onSubmit={(e) => {
@@ -394,7 +394,7 @@ export default function CarDetailPage() {
                       placeholder="Your Name"
                       value={inquiryForm.name}
                       onChange={(e) => setInquiryForm({ ...inquiryForm, name: e.target.value })}
-                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                      className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                       required
                       aria-label="Your name"
                     />
@@ -403,7 +403,7 @@ export default function CarDetailPage() {
                       placeholder="Email Address"
                       value={inquiryForm.email}
                       onChange={(e) => setInquiryForm({ ...inquiryForm, email: e.target.value })}
-                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                      className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                       required
                       aria-label="Email address"
                     />
@@ -412,14 +412,14 @@ export default function CarDetailPage() {
                       placeholder="Phone Number"
                       value={inquiryForm.phone}
                       onChange={(e) => setInquiryForm({ ...inquiryForm, phone: e.target.value })}
-                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                      className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                       aria-label="Phone number"
                     />
                     <textarea
                       placeholder="Message (optional)"
                       value={inquiryForm.message}
                       onChange={(e) => setInquiryForm({ ...inquiryForm, message: e.target.value })}
-                      className="w-full h-20 px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold resize-none"
+                      className="w-full h-20 px-3 py-2 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold resize-none"
                       aria-label="Message"
                     />
                     <div className="flex gap-2">
@@ -434,17 +434,17 @@ export default function CarDetailPage() {
                 </div>
 
                 {/* Dealer Info */}
-                <div className="border-t border-slate-800 pt-4">
+                <div className="border-t border-neutral-800 pt-4">
                   <h3 className="text-sm font-bold text-white mb-3">SELLER INFORMATION</h3>
                   <div className="space-y-2 text-sm">
                     <p className="text-white font-medium">{car.dealerName}</p>
-                    <p className="text-slate-400 flex items-center gap-2">
+                    <p className="text-gray-400 flex items-center gap-2">
                       <Phone className="h-4 w-4" /> {car.dealerPhone}
                     </p>
-                    <p className="text-slate-400 flex items-center gap-2">
+                    <p className="text-gray-400 flex items-center gap-2">
                       <Mail className="h-4 w-4" /> {car.dealerEmail}
                     </p>
-                    <p className="text-slate-400 flex items-center gap-2">
+                    <p className="text-gray-400 flex items-center gap-2">
                       <MapPin className="h-4 w-4" /> {car.address}
                     </p>
                   </div>

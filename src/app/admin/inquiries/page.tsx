@@ -115,9 +115,9 @@ export default function InquiriesPage() {
 
   const statusConfig = {
     new: { label: "New", color: "bg-red-500/20 text-gold", icon: AlertCircle },
-    contacted: { label: "Contacted", color: "bg-amber-500/20 text-amber-400", icon: Phone },
-    converted: { label: "Converted", color: "bg-emerald-500/20 text-emerald-400", icon: CheckCircle },
-    closed: { label: "Closed", color: "bg-slate-500/20 text-slate-400", icon: CheckCircle },
+    contacted: { label: "Contacted", color: "bg-gold/20 text-gold", icon: Phone },
+    converted: { label: "Converted", color: "bg-emerald-500/20 text-gold", icon: CheckCircle },
+    closed: { label: "Closed", color: "bg-slate-500/20 text-gray-400", icon: CheckCircle },
   }
 
   const formatPrice = (amount: number) =>
@@ -134,7 +134,7 @@ export default function InquiriesPage() {
         <h1 className="text-2xl font-bold text-white font-heading tracking-wide">
           INQUIRIES
         </h1>
-        <p className="text-slate-400 mt-1">
+        <p className="text-gray-400 mt-1">
           {filtered.length} inquiries found
         </p>
       </div>
@@ -151,13 +151,13 @@ export default function InquiriesPage() {
               className={cn(
                 "p-4 rounded-xl border transition-all text-left",
                 statusFilter === status
-                  ? "bg-slate-800 border-gold/50"
-                  : "bg-slate-900 border-slate-800 hover:border-slate-700"
+                  ? "bg-neutral-800 border-gold/50"
+                  : "bg-neutral-900 border-neutral-800 hover:border-neutral-700"
               )}
             >
               <div className="flex items-center gap-2">
                 <config.icon className={cn("h-4 w-4", config.color.split(" ")[1])} />
-                <span className="text-sm text-slate-400 capitalize">{status}</span>
+                <span className="text-sm text-gray-400 capitalize">{status}</span>
               </div>
               <p className="text-2xl font-bold text-white mt-2">{count}</p>
             </button>
@@ -167,13 +167,13 @@ export default function InquiriesPage() {
 
       {/* Search */}
       <div className="relative max-w-md">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
         <input
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search inquiries..."
-          className="w-full h-10 pl-10 pr-4 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
+          className="w-full h-10 pl-10 pr-4 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
           aria-label="Search inquiries"
         />
       </div>
@@ -185,7 +185,7 @@ export default function InquiriesPage() {
           return (
             <div
               key={inquiry.id}
-              className="bg-slate-900 rounded-xl border border-slate-800 p-5 hover:border-slate-700 transition-colors"
+              className="bg-neutral-900 rounded-xl border border-neutral-800 p-5 hover:border-neutral-700 transition-colors"
             >
               <div className="flex items-start justify-between">
                 <div className="space-y-2">
@@ -198,7 +198,7 @@ export default function InquiriesPage() {
                       className={cn(
                         "px-2 py-0.5 rounded-full text-xs font-medium",
                         inquiry.preferredContact === "whatsapp"
-                          ? "bg-emerald-500/20 text-emerald-400"
+                          ? "bg-emerald-500/20 text-gold"
                           : inquiry.preferredContact === "email"
                             ? "bg-red-500/20 text-gold"
                             : "bg-purple-500/20 text-purple-400"
@@ -209,13 +209,13 @@ export default function InquiriesPage() {
                   </div>
 
                   <p className="text-sm text-gold">{inquiry.carTitle}</p>
-                  <p className="text-sm text-slate-400">{formatPrice(inquiry.carPrice)}</p>
+                  <p className="text-sm text-gray-400">{formatPrice(inquiry.carPrice)}</p>
 
-                  <div className="bg-slate-800/50 rounded-lg p-3 max-w-2xl">
-                    <p className="text-sm text-slate-300">&ldquo;{inquiry.message}&rdquo;</p>
+                  <div className="bg-neutral-800/50 rounded-lg p-3 max-w-2xl">
+                    <p className="text-sm text-gray-300">&ldquo;{inquiry.message}&rdquo;</p>
                   </div>
 
-                  <div className="flex items-center gap-4 text-xs text-slate-500">
+                  <div className="flex items-center gap-4 text-xs text-gray-500">
                     <span className="flex items-center gap-1">
                       <Clock className="h-3 w-3" /> {inquiry.createdAt}
                     </span>
@@ -237,7 +237,7 @@ export default function InquiriesPage() {
                       href={`https://wa.me/${inquiry.buyerPhone}?text=Hi ${inquiry.buyerName}, thank you for your inquiry about the ${inquiry.carTitle}.`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition-colors"
+                      className="p-2 rounded-lg bg-red-600 hover:bg-red-500 text-white transition-colors"
                       aria-label="Reply via WhatsApp"
                     >
                       <MessageCircle className="h-4 w-4" />
@@ -253,7 +253,7 @@ export default function InquiriesPage() {
                   <select
                     value={inquiry.status}
                     onChange={(e) => updateStatus(inquiry.id, e.target.value as Inquiry["status"])}
-                    className="h-9 px-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-gold"
+                    className="h-9 px-2 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-xs focus:outline-none focus:border-gold"
                     aria-label="Update status"
                   >
                     <option value="new">New</option>
@@ -269,8 +269,8 @@ export default function InquiriesPage() {
 
         {filtered.length === 0 && (
           <div className="text-center py-12">
-            <MessageCircle className="h-12 w-12 text-slate-600 mx-auto mb-3" />
-            <p className="text-slate-400">No inquiries found</p>
+            <MessageCircle className="h-12 w-12 text-gray-600 mx-auto mb-3" />
+            <p className="text-gray-400">No inquiries found</p>
           </div>
         )}
       </div>

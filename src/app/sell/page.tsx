@@ -104,9 +104,9 @@ export default function SellCarPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-black">
       {/* Header */}
-      <div className="bg-slate-900 border-b border-slate-800">
+      <div className="bg-neutral-900 border-b border-neutral-800">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-6">
           <h1 className="text-2xl font-bold text-white font-heading tracking-wide mb-6">
             SELL YOUR CAR
@@ -122,7 +122,7 @@ export default function SellCarPage() {
                       "w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all",
                       currentStep >= step.id
                         ? "bg-red-600 text-white"
-                        : "bg-slate-800 text-slate-500"
+                        : "bg-neutral-800 text-gray-500"
                     )}
                   >
                     {currentStep > step.id ? (
@@ -134,7 +134,7 @@ export default function SellCarPage() {
                   <span
                     className={cn(
                       "text-sm font-medium hidden sm:block",
-                      currentStep >= step.id ? "text-white" : "text-slate-500"
+                      currentStep >= step.id ? "text-white" : "text-gray-500"
                     )}
                   >
                     {step.label}
@@ -144,7 +144,7 @@ export default function SellCarPage() {
                   <div
                     className={cn(
                       "w-12 sm:w-20 h-0.5 mx-2 sm:mx-4",
-                      currentStep > step.id ? "bg-red-600" : "bg-slate-800"
+                      currentStep > step.id ? "bg-red-600" : "bg-neutral-800"
                     )}
                   />
                 )}
@@ -156,7 +156,7 @@ export default function SellCarPage() {
 
       {/* Form */}
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
-        <div className="bg-slate-900 rounded-2xl border border-slate-800 p-6 sm:p-8">
+        <div className="bg-neutral-900 rounded-2xl border border-neutral-800 p-6 sm:p-8">
           {/* Step 1: Car Details */}
           {currentStep === 1 && (
             <div className="space-y-6">
@@ -169,7 +169,7 @@ export default function SellCarPage() {
                   <select
                     value={form.make}
                     onChange={(e) => updateForm("make", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                   >
                     <option value="">Select Make</option>
                     {makes.map((m) => (
@@ -184,7 +184,7 @@ export default function SellCarPage() {
                     value={form.model}
                     onChange={(e) => updateForm("model", e.target.value)}
                     placeholder="e.g., Camry, Civic, X5"
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
                   />
                 </FormField>
 
@@ -192,7 +192,7 @@ export default function SellCarPage() {
                   <select
                     value={form.year}
                     onChange={(e) => updateForm("year", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                   >
                     <option value="">Select Year</option>
                     {years.map((y) => (
@@ -205,7 +205,7 @@ export default function SellCarPage() {
                   <select
                     value={form.condition}
                     onChange={(e) => updateForm("condition", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                   >
                     {conditions.map((c) => (
                       <option key={c} value={c}>{c}</option>
@@ -217,7 +217,7 @@ export default function SellCarPage() {
                   <select
                     value={form.bodyType}
                     onChange={(e) => updateForm("bodyType", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                   >
                     <option value="">Select Body Type</option>
                     {bodyTypes.map((b) => (
@@ -230,7 +230,7 @@ export default function SellCarPage() {
                   <select
                     value={form.fuelType}
                     onChange={(e) => updateForm("fuelType", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                   >
                     <option value="">Select Fuel Type</option>
                     {fuelTypes.map((f) => (
@@ -243,7 +243,7 @@ export default function SellCarPage() {
                   <select
                     value={form.transmission}
                     onChange={(e) => updateForm("transmission", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                   >
                     <option value="">Select Transmission</option>
                     {transmissions.map((t) => (
@@ -258,7 +258,7 @@ export default function SellCarPage() {
                     value={form.mileage}
                     onChange={(e) => updateForm("mileage", e.target.value)}
                     placeholder="e.g., 25000"
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
                   />
                 </FormField>
               </div>
@@ -268,7 +268,7 @@ export default function SellCarPage() {
                   value={form.description}
                   onChange={(e) => updateForm("description", e.target.value)}
                   placeholder="Describe your car's condition, history, and any notable features..."
-                  className="w-full h-32 px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold resize-none"
+                  className="w-full h-32 px-3 py-2 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold resize-none"
                 />
               </FormField>
             </div>
@@ -318,7 +318,7 @@ export default function SellCarPage() {
                 <label className="block text-sm font-medium text-white mb-2">
                   Video Tour
                 </label>
-                <p className="text-xs text-slate-400 mb-3">
+                <p className="text-xs text-gray-400 mb-3">
                   Upload a video walkthrough of your car. Videos significantly increase buyer interest.
                 </p>
                 <VideoUploader
@@ -345,7 +345,7 @@ export default function SellCarPage() {
                   value={form.price}
                   onChange={(e) => updateForm("price", e.target.value)}
                   placeholder="e.g., 500000000"
-                  className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
+                  className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
                 />
               </FormField>
 
@@ -355,7 +355,7 @@ export default function SellCarPage() {
                   value={form.originalPrice}
                   onChange={(e) => updateForm("originalPrice", e.target.value)}
                   placeholder="Optional"
-                  className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
+                  className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
                 />
               </FormField>
 
@@ -365,7 +365,7 @@ export default function SellCarPage() {
                     type="checkbox"
                     checked={form.negotiable}
                     onChange={(e) => updateForm("negotiable", e.target.checked)}
-                    className="w-4 h-4 rounded bg-slate-800 border-slate-700 text-gold focus:ring-gold"
+                    className="w-4 h-4 rounded bg-neutral-800 border-neutral-700 text-gold focus:ring-gold"
                   />
                   <span className="text-sm text-white">Price negotiable</span>
                 </label>
@@ -374,7 +374,7 @@ export default function SellCarPage() {
                     type="checkbox"
                     checked={form.installmentAvail}
                     onChange={(e) => updateForm("installmentAvail", e.target.checked)}
-                    className="w-4 h-4 rounded bg-slate-800 border-slate-700 text-gold focus:ring-gold"
+                    className="w-4 h-4 rounded bg-neutral-800 border-neutral-700 text-gold focus:ring-gold"
                   />
                   <span className="text-sm text-white">Installment available</span>
                 </label>
@@ -402,7 +402,7 @@ export default function SellCarPage() {
                         "flex-1 h-10 rounded-lg text-sm font-medium transition-all capitalize",
                         form.sellerType === type
                           ? "bg-red-600 text-white"
-                          : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700"
+                          : "bg-neutral-800 text-gray-300 hover:bg-neutral-700 border border-neutral-700"
                       )}
                     >
                       {type}
@@ -418,7 +418,7 @@ export default function SellCarPage() {
                     value={form.dealerName}
                     onChange={(e) => updateForm("dealerName", e.target.value)}
                     placeholder="Business name"
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
                   />
                 </FormField>
               )}
@@ -430,7 +430,7 @@ export default function SellCarPage() {
                     value={form.phone}
                     onChange={(e) => updateForm("phone", e.target.value)}
                     placeholder="+62 812-3456-7890"
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
                   />
                 </FormField>
 
@@ -440,7 +440,7 @@ export default function SellCarPage() {
                     value={form.whatsapp}
                     onChange={(e) => updateForm("whatsapp", e.target.value)}
                     placeholder="6281234567890"
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
                   />
                 </FormField>
 
@@ -450,7 +450,7 @@ export default function SellCarPage() {
                     value={form.email}
                     onChange={(e) => updateForm("email", e.target.value)}
                     placeholder="your@email.com"
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
                   />
                 </FormField>
 
@@ -460,7 +460,7 @@ export default function SellCarPage() {
                     value={form.city}
                     onChange={(e) => updateForm("city", e.target.value)}
                     placeholder="e.g., Jakarta"
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
+                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
                   />
                 </FormField>
               </div>
@@ -471,18 +471,18 @@ export default function SellCarPage() {
                   value={form.address}
                   onChange={(e) => updateForm("address", e.target.value)}
                   placeholder="Full address"
-                  className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
+                  className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
                 />
               </FormField>
             </div>
           )}
 
           {/* Navigation */}
-          <div className="flex items-center justify-between mt-8 pt-6 border-t border-slate-800">
+          <div className="flex items-center justify-between mt-8 pt-6 border-t border-neutral-800">
             {currentStep > 1 ? (
               <button
                 onClick={prevStep}
-                className="flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-700 text-white hover:bg-slate-800 transition-colors text-sm font-medium"
+                className="flex items-center gap-2 px-6 py-3 rounded-xl border border-neutral-700 text-white hover:bg-neutral-800 transition-colors text-sm font-medium"
               >
                 <ChevronLeft className="h-4 w-4" /> Back
               </button>
@@ -500,7 +500,7 @@ export default function SellCarPage() {
             ) : (
               <button
                 onClick={handleSubmit}
-                className="flex items-center gap-2 px-8 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold transition-colors glow-red"
+                className="flex items-center gap-2 px-8 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-bold transition-colors glow-red"
               >
                 <Check className="h-4 w-4" /> Submit Listing
               </button>

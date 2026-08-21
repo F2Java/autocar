@@ -59,26 +59,26 @@ export default function AnalyticsPage() {
         <h1 className="text-2xl font-bold text-white font-heading tracking-wide">
           ANALYTICS
         </h1>
-        <p className="text-slate-400 mt-1">Performance insights and trends</p>
+        <p className="text-gray-400 mt-1">Performance insights and trends</p>
       </div>
 
       {/* Stats Row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { label: "Total Views", value: "64,600", change: "+18.2%", icon: Eye, color: "text-gold" },
-          { label: "Total Inquiries", value: "2,830", change: "+22.5%", icon: MessageCircle, color: "text-emerald-400" },
+          { label: "Total Inquiries", value: "2,830", change: "+22.5%", icon: MessageCircle, color: "text-gold" },
           { label: "Conversion Rate", value: "4.4%", change: "+0.8%", icon: TrendingUp, color: "text-purple-400" },
-          { label: "Avg. Response Time", value: "2.3h", change: "-15%", icon: Calendar, color: "text-amber-400" },
+          { label: "Avg. Response Time", value: "2.3h", change: "-15%", icon: Calendar, color: "text-gold" },
         ].map((stat) => (
-          <div key={stat.label} className="bg-slate-900 rounded-xl p-5 border border-slate-800">
+          <div key={stat.label} className="bg-neutral-900 rounded-xl p-5 border border-neutral-800">
             <div className="flex items-center gap-3">
               <stat.icon className={cn("h-5 w-5", stat.color)} />
               <div>
                 <p className="text-2xl font-bold text-white">{stat.value}</p>
-                <p className="text-xs text-slate-400">{stat.label}</p>
+                <p className="text-xs text-gray-400">{stat.label}</p>
               </div>
             </div>
-            <p className={cn("text-sm font-medium mt-2", stat.change.startsWith("+") ? "text-emerald-400" : "text-red-400")}>
+            <p className={cn("text-sm font-medium mt-2", stat.change.startsWith("+") ? "text-gold" : "text-red-400")}>
               {stat.change} vs last month
             </p>
           </div>
@@ -88,7 +88,7 @@ export default function AnalyticsPage() {
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Views & Inquiries Trend */}
-        <div className="bg-slate-900 rounded-xl p-6 border border-slate-800">
+        <div className="bg-neutral-900 rounded-xl p-6 border border-neutral-800">
           <h2 className="text-lg font-bold text-white font-heading tracking-wide mb-6">
             VIEWS & INQUIRIES TREND
           </h2>
@@ -122,7 +122,7 @@ export default function AnalyticsPage() {
         </div>
 
         {/* Listings Growth */}
-        <div className="bg-slate-900 rounded-xl p-6 border border-slate-800">
+        <div className="bg-neutral-900 rounded-xl p-6 border border-neutral-800">
           <h2 className="text-lg font-bold text-white font-heading tracking-wide mb-6">
             NEW LISTINGS
           </h2>
@@ -148,8 +148,8 @@ export default function AnalyticsPage() {
       {/* Bottom Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Top Performing Cars */}
-        <div className="bg-slate-900 rounded-xl border border-slate-800">
-          <div className="p-6 border-b border-slate-800">
+        <div className="bg-neutral-900 rounded-xl border border-neutral-800">
+          <div className="p-6 border-b border-neutral-800">
             <h2 className="text-lg font-bold text-white font-heading tracking-wide">
               TOP PERFORMING CARS
             </h2>
@@ -157,10 +157,10 @@ export default function AnalyticsPage() {
           <div className="divide-y divide-slate-800">
             {topPerformingCars.map((car, i) => (
               <div key={car.name} className="p-4 flex items-center gap-4">
-                <span className="text-lg font-bold text-slate-500 w-8">{i + 1}</span>
+                <span className="text-lg font-bold text-gray-500 w-8">{i + 1}</span>
                 <div className="flex-1">
                   <p className="text-sm text-white font-medium">{car.name}</p>
-                  <div className="flex items-center gap-4 mt-1 text-xs text-slate-400">
+                  <div className="flex items-center gap-4 mt-1 text-xs text-gray-400">
                     <span className="flex items-center gap-1">
                       <Eye className="h-3 w-3" /> {car.views.toLocaleString()}
                     </span>
@@ -169,14 +169,14 @@ export default function AnalyticsPage() {
                     </span>
                   </div>
                 </div>
-                <span className="text-sm text-emerald-400 font-medium">{car.转化率}</span>
+                <span className="text-sm text-gold font-medium">{car.转化率}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Traffic Sources */}
-        <div className="bg-slate-900 rounded-xl p-6 border border-slate-800">
+        <div className="bg-neutral-900 rounded-xl p-6 border border-neutral-800">
           <h2 className="text-lg font-bold text-white font-heading tracking-wide mb-6">
             TRAFFIC SOURCES
           </h2>
@@ -184,10 +184,10 @@ export default function AnalyticsPage() {
             {trafficSources.map((source) => (
               <div key={source.source}>
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-sm text-slate-300">{source.source}</span>
+                  <span className="text-sm text-gray-300">{source.source}</span>
                   <span className="text-sm text-white font-medium">{source.percentage}%</span>
                 </div>
-                <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                <div className="w-full h-2 bg-neutral-800 rounded-full overflow-hidden">
                   <div
                     className="h-full rounded-full transition-all duration-500"
                     style={{

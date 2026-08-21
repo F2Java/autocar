@@ -137,14 +137,14 @@ export function VideoUploader({
   return (
     <div className={cn("space-y-4", className)}>
       {/* Mode Toggle */}
-      <div className="flex items-center gap-2 p-1 bg-slate-800 rounded-xl">
+      <div className="flex items-center gap-2 p-1 bg-neutral-800 rounded-xl">
         <button
           onClick={() => setMode("upload")}
           className={cn(
             "flex-1 flex items-center justify-center gap-2 h-9 rounded-lg text-sm font-medium transition-colors",
             mode === "upload"
               ? "bg-red-600 text-white"
-              : "text-slate-400 hover:text-white"
+              : "text-gray-400 hover:text-white"
           )}
         >
           <Upload className="h-4 w-4" /> Upload File
@@ -155,7 +155,7 @@ export function VideoUploader({
             "flex-1 flex items-center justify-center gap-2 h-9 rounded-lg text-sm font-medium transition-colors",
             mode === "url"
               ? "bg-red-600 text-white"
-              : "text-slate-400 hover:text-white"
+              : "text-gray-400 hover:text-white"
           )}
         >
           <LinkIcon className="h-4 w-4" /> Paste URL
@@ -185,7 +185,7 @@ export function VideoUploader({
                 setUrlError("")
               }}
               placeholder="https://youtube.com/watch?v=... or https://vimeo.com/..."
-              className="flex-1 h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
+              className="flex-1 h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
               onKeyDown={(e) => {
                 if (e.key === "Enter") handleAddExternalUrl()
               }}
@@ -203,7 +203,7 @@ export function VideoUploader({
               <AlertCircle className="h-3 w-3" /> {urlError}
             </p>
           )}
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-gray-500">
             Supports YouTube and Vimeo URLs
           </p>
         </div>
@@ -212,16 +212,16 @@ export function VideoUploader({
       {/* Uploaded Videos List */}
       {uploadedVideos.length > 0 && (
         <div className="space-y-2">
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-gray-400">
             {uploadedVideos.length} video{uploadedVideos.length !== 1 ? "s" : ""} added
           </p>
           {uploadedVideos.map((video) => (
             <div
               key={video.id}
-              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/50 border border-slate-700"
+              className="flex items-center gap-3 p-3 rounded-xl bg-neutral-800/50 border border-neutral-700"
             >
               {/* Thumbnail */}
-              <div className="w-20 h-12 rounded-lg overflow-hidden bg-slate-700 flex-shrink-0 relative">
+              <div className="w-20 h-12 rounded-lg overflow-hidden bg-neutral-700 flex-shrink-0 relative">
                 {video.thumbnail ? (
                   <img
                     src={video.thumbnail}
@@ -230,7 +230,7 @@ export function VideoUploader({
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <Video className="h-5 w-5 text-slate-500" />
+                    <Video className="h-5 w-5 text-gray-500" />
                   </div>
                 )}
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -241,15 +241,15 @@ export function VideoUploader({
               {/* Info */}
               <div className="flex-1 min-w-0">
                 <p className="text-sm text-white truncate">{video.filename}</p>
-                <p className="text-xs text-slate-400 truncate">{video.url}</p>
+                <p className="text-xs text-gray-400 truncate">{video.url}</p>
               </div>
 
               {/* Actions */}
               <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-emerald-400" />
+                <CheckCircle className="h-4 w-4 text-gold" />
                 <button
                   onClick={() => removeVideo(video.id)}
-                  className="p-1 rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition-colors"
+                  className="p-1 rounded-lg hover:bg-neutral-700 text-gray-400 hover:text-white transition-colors"
                   aria-label={`Remove ${video.filename}`}
                 >
                   <X className="h-4 w-4" />

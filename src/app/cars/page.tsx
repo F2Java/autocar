@@ -144,9 +144,9 @@ function CarsContent() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-black">
       {/* Header */}
-      <div className="bg-slate-900 border-b border-slate-800">
+      <div className="bg-neutral-900 border-b border-neutral-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <h1 className="text-2xl font-bold text-white font-heading tracking-wide mb-4">
             BROWSE CARS
@@ -166,7 +166,7 @@ function CarsContent() {
                 onClick={() => setViewMode("grid")}
                 className={cn(
                   "p-2.5 rounded-lg transition-colors",
-                  viewMode === "grid" ? "bg-red-600 text-white" : "bg-slate-800 text-slate-400 hover:text-white"
+                  viewMode === "grid" ? "bg-red-600 text-white" : "bg-neutral-800 text-gray-400 hover:text-white"
                 )}
                 aria-label="Grid view"
               >
@@ -176,7 +176,7 @@ function CarsContent() {
                 onClick={() => setViewMode("list")}
                 className={cn(
                   "p-2.5 rounded-lg transition-colors",
-                  viewMode === "list" ? "bg-red-600 text-white" : "bg-slate-800 text-slate-400 hover:text-white"
+                  viewMode === "list" ? "bg-red-600 text-white" : "bg-neutral-800 text-gray-400 hover:text-white"
                 )}
                 aria-label="List view"
               >
@@ -205,7 +205,7 @@ function CarsContent() {
           <div className="flex-1">
             {filteredCars.length === 0 ? (
               <div className="text-center py-20">
-                <p className="text-slate-400 text-lg">No cars found matching your criteria</p>
+                <p className="text-gray-400 text-lg">No cars found matching your criteria</p>
                 <button
                   onClick={handleReset}
                   className="mt-4 text-gold hover:text-gold-light text-sm"
@@ -237,7 +237,7 @@ function CarsContent() {
 export default function CarsPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
       </div>
     }>

@@ -153,7 +153,7 @@ export default function AdminDashboardPage() {
         <h1 className="text-2xl font-bold text-white font-heading tracking-wide">
           DASHBOARD
         </h1>
-        <p className="text-slate-400 mt-1">Welcome back! Here&apos;s what&apos;s happening.</p>
+        <p className="text-gray-400 mt-1">Welcome back! Here&apos;s what&apos;s happening.</p>
       </div>
 
       {/* Stats Cards */}
@@ -164,7 +164,7 @@ export default function AdminDashboardPage() {
             value: stats.totalCars.toString(),
             change: stats.carsChange,
             icon: Car,
-            color: "from-red-600 to-red-800",
+            color: "from-red-600",
             href: "/admin/cars",
           },
           {
@@ -172,7 +172,7 @@ export default function AdminDashboardPage() {
             value: stats.totalViews.toLocaleString(),
             change: stats.viewsChange,
             icon: Eye,
-            color: "from-emerald-600 to-emerald-800",
+            color: "from-red-600",
             href: "/admin/analytics",
           },
           {
@@ -180,7 +180,7 @@ export default function AdminDashboardPage() {
             value: stats.totalInquiries.toLocaleString(),
             change: stats.inquiriesChange,
             icon: MessageCircle,
-            color: "from-purple-600 to-purple-800",
+            color: "from-red-600",
             href: "/admin/inquiries",
           },
           {
@@ -188,23 +188,23 @@ export default function AdminDashboardPage() {
             value: "3",
             change: 15,
             icon: Mail,
-            color: "from-amber-600 to-amber-800",
+            color: "from-red-600",
             href: "/admin/campaigns",
           },
         ].map((stat) => (
           <Link
             key={stat.label}
             href={stat.href}
-            className="bg-slate-900 rounded-xl p-5 border border-slate-800 hover:border-gold/30 transition-all group"
+            className="bg-neutral-900 rounded-xl p-5 border border-neutral-800 hover:border-gold/30 transition-all group"
           >
             <div className="flex items-start justify-between">
               <div>
-                <p className="text-sm text-slate-400">{stat.label}</p>
+                <p className="text-sm text-gray-400">{stat.label}</p>
                 <p className="text-2xl font-bold text-white mt-1">{stat.value}</p>
               </div>
               <div
                 className={cn(
-                  "w-10 h-10 rounded-xl bg-gradient-to-br flex items-center justify-center",
+                  "w-10 h-10 rounded-xl  flex items-center justify-center",
                   stat.color
                 )}
               >
@@ -213,19 +213,19 @@ export default function AdminDashboardPage() {
             </div>
             <div className="flex items-center gap-1 mt-3">
               {stat.change > 0 ? (
-                <ArrowUpRight className="h-4 w-4 text-emerald-400" />
+                <ArrowUpRight className="h-4 w-4 text-gold" />
               ) : (
                 <ArrowDownRight className="h-4 w-4 text-red-400" />
               )}
               <span
                 className={cn(
                   "text-sm font-medium",
-                  stat.change > 0 ? "text-emerald-400" : "text-red-400"
+                  stat.change > 0 ? "text-gold" : "text-red-400"
                 )}
               >
                 {Math.abs(stat.change)}%
               </span>
-              <span className="text-xs text-slate-500">vs last week</span>
+              <span className="text-xs text-gray-500">vs last week</span>
             </div>
           </Link>
         ))}
@@ -234,22 +234,22 @@ export default function AdminDashboardPage() {
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Views Chart */}
-        <div className="lg:col-span-2 bg-slate-900 rounded-xl p-6 border border-slate-800">
+        <div className="lg:col-span-2 bg-neutral-900 rounded-xl p-6 border border-neutral-800">
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-lg font-bold text-white font-heading tracking-wide">
                 VIEWS & INQUIRIES
               </h2>
-              <p className="text-sm text-slate-400">Last 7 days</p>
+              <p className="text-sm text-gray-400">Last 7 days</p>
             </div>
             <div className="flex items-center gap-4 text-sm">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-red-500" />
-                <span className="text-slate-400">Views</span>
+                <span className="text-gray-400">Views</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                <span className="text-slate-400">Inquiries</span>
+                <span className="text-gray-400">Inquiries</span>
               </div>
             </div>
           </div>
@@ -295,7 +295,7 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Category Pie Chart */}
-        <div className="bg-slate-900 rounded-xl p-6 border border-slate-800">
+        <div className="bg-neutral-900 rounded-xl p-6 border border-neutral-800">
           <h2 className="text-lg font-bold text-white font-heading tracking-wide mb-6">
             BY CATEGORY
           </h2>
@@ -332,7 +332,7 @@ export default function AdminDashboardPage() {
                     className="w-3 h-3 rounded-full"
                     style={{ backgroundColor: cat.color }}
                   />
-                  <span className="text-sm text-slate-300">{cat.name}</span>
+                  <span className="text-sm text-gray-300">{cat.name}</span>
                 </div>
                 <span className="text-sm text-white font-medium">{cat.value}%</span>
               </div>
@@ -344,8 +344,8 @@ export default function AdminDashboardPage() {
       {/* Bottom Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Listings */}
-        <div className="bg-slate-900 rounded-xl border border-slate-800">
-          <div className="p-6 border-b border-slate-800">
+        <div className="bg-neutral-900 rounded-xl border border-neutral-800">
+          <div className="p-6 border-b border-neutral-800">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-bold text-white font-heading tracking-wide">
                 RECENT LISTINGS
@@ -360,7 +360,7 @@ export default function AdminDashboardPage() {
           </div>
           <div className="divide-y divide-slate-800">
             {recentCars.map((car) => (
-              <div key={car.id} className="p-4 flex items-center gap-4 hover:bg-slate-800/30 transition-colors">
+              <div key={car.id} className="p-4 flex items-center gap-4 hover:bg-neutral-800/30 transition-colors">
                 <img
                   src={car.coverImage}
                   alt={car.title}
@@ -376,10 +376,10 @@ export default function AdminDashboardPage() {
                       className={cn(
                         "px-1.5 py-0.5 rounded text-xs font-medium",
                         car.status === "AVAILABLE"
-                          ? "bg-emerald-500/20 text-emerald-400"
+                          ? "bg-emerald-500/20 text-gold"
                           : car.status === "SOLD"
                             ? "bg-red-500/20 text-red-400"
-                            : "bg-amber-500/20 text-amber-400"
+                            : "bg-gold/20 text-gold"
                       )}
                     >
                       {car.status}
@@ -387,7 +387,7 @@ export default function AdminDashboardPage() {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm text-slate-400 flex items-center gap-1">
+                  <p className="text-sm text-gray-400 flex items-center gap-1">
                     <Eye className="h-3 w-3" /> {car.views.toLocaleString()}
                   </p>
                 </div>
@@ -397,8 +397,8 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Recent Inquiries */}
-        <div className="bg-slate-900 rounded-xl border border-slate-800">
-          <div className="p-6 border-b border-slate-800">
+        <div className="bg-neutral-900 rounded-xl border border-neutral-800">
+          <div className="p-6 border-b border-neutral-800">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-bold text-white font-heading tracking-wide">
                 RECENT INQUIRIES
@@ -413,7 +413,7 @@ export default function AdminDashboardPage() {
           </div>
           <div className="divide-y divide-slate-800">
             {recentInquiries.map((inquiry) => (
-              <div key={inquiry.id} className="p-4 hover:bg-slate-800/30 transition-colors">
+              <div key={inquiry.id} className="p-4 hover:bg-neutral-800/30 transition-colors">
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="text-sm text-white font-medium">{inquiry.buyerName}</p>
@@ -423,17 +423,17 @@ export default function AdminDashboardPage() {
                     className={cn(
                       "px-2 py-0.5 rounded-full text-xs font-medium",
                       inquiry.preferredContact === "whatsapp"
-                        ? "bg-emerald-500/20 text-emerald-400"
+                        ? "bg-emerald-500/20 text-gold"
                         : "bg-red-500/20 text-gold"
                     )}
                   >
                     {inquiry.preferredContact}
                   </span>
                 </div>
-                <p className="text-sm text-slate-400 mt-2 line-clamp-1">
+                <p className="text-sm text-gray-400 mt-2 line-clamp-1">
                   &ldquo;{inquiry.message}&rdquo;
                 </p>
-                <p className="text-xs text-slate-500 mt-2 flex items-center gap-1">
+                <p className="text-xs text-gray-500 mt-2 flex items-center gap-1">
                   <Clock className="h-3 w-3" /> {inquiry.createdAt}
                 </p>
               </div>

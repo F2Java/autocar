@@ -40,7 +40,7 @@ export default function ProductDetailPage() {
       <Link href="/" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gold mb-6"><ArrowLeft className="h-4 w-4" /> Kembali</Link>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-200 flex items-center justify-center">
+        <div className="aspect-square  from-gray-50 to-gray-100 rounded-xl border border-gray-200 flex items-center justify-center">
           {product.image ? <img src={product.image} alt={product.name} className="w-full h-full object-cover rounded-xl" /> : <Package className="h-24 w-24 text-gray-300" />}
         </div>
 

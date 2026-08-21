@@ -27,8 +27,8 @@ const footerLinks = {
   ],
   sell: [
     { label: "Sell Your Car", href: "/sell" },
-    { label: "Car Valuation", href: "/valuation" },
-    { label: "Dealer Portal", href: "/dealer" },
+    { label: "Get Estimate", href: "/estimate" },
+    { label: "Find Dealers", href: "/locations" },
     { label: "Promote Listing", href: "/promote" },
   ],
   company: [

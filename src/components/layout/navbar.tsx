@@ -21,7 +21,8 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/cars", label: "Browse Cars" },
   { href: "/sell", label: "Sell Car" },
-  { href: "/about", label: "About" },
+  { href: "/locations", label: "Dealers" },
+  { href: "/estimate", label: "Get Quote" },
   { href: "/contact", label: "Contact" },
 ]
 

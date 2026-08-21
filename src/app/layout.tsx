@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
 import { WhatsAppFloat } from "@/components/ui/whatsapp-float"
+import { Providers } from "@/components/layout/providers"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -39,14 +40,16 @@ export default function RootLayout({
   return (
     <html lang="id" className="scroll-smooth">
       <body className="min-h-screen bg-black text-white antialiased font-body">
-        <Navbar />
-        <main className="pt-16 lg:pt-20">{children}</main>
-        <Footer />
-        <WhatsAppFloat
-          phoneNumber="6281234567890"
-          businessName="Pasar Mobil Bekas"
-          message="Hi! I'm interested in buying a car. Can you help me?"
-        />
+        <Providers>
+          <Navbar />
+          <main className="pt-16 lg:pt-20">{children}</main>
+          <Footer />
+          <WhatsAppFloat
+            phoneNumber="6281234567890"
+            businessName="Pasar Mobil Bekas"
+            message="Hi! I'm interested in buying a car. Can you help me?"
+          />
+        </Providers>
       </body>
     </html>
   )

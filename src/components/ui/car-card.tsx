@@ -14,10 +14,12 @@ import {
   Car,
   Shield,
   Star,
+  GitCompareArrows,
 } from "lucide-react"
 import { VideoCard } from "./video-card"
 import { Badge } from "./badge"
 import { cn } from "@/lib/utils"
+import { useCompare } from "@/lib/compare-context"
 
 interface CarCardProps {
   id: string
@@ -46,6 +48,7 @@ interface CarCardProps {
   dealerWhatsapp?: string
   exteriorColor?: string
   horsepower?: number
+  bodyType?: string
   className?: string
 }
 
@@ -62,6 +65,7 @@ export function CarCard({
   mileage,
   fuelType,
   transmission,
+  bodyType,
   city,
   province,
   coverImage,
@@ -78,6 +82,8 @@ export function CarCard({
   horsepower,
   className,
 }: CarCardProps) {
+  const { addToCompare, removeFromCompare, isInCompare } = useCompare()
+  const inCompare = isInCompare(id)
   const [isFavorited, setIsFavorited] = useState(false)
 
   const formatPrice = (amount: number) => {
@@ -215,6 +221,34 @@ export function CarCard({
               aria-label="Share"
             >
               <Share2 className="h-4 w-4" />
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                if (inCompare) {
+                  removeFromCompare(id)
+                } else {
+                  addToCompare({
+                    id, slug, title, make, model, year,
+                    condition, price, mileage: mileage || 0,
+                    fuelType, transmission,
+                    bodyType: bodyType || "",
+                    horsepower: horsepower || 0,
+                    city: city || "",
+                    coverImage: coverImage || "",
+                    features,
+                  })
+                }
+              }}
+              className={cn(
+                "w-9 h-9 rounded-full backdrop-blur-sm flex items-center justify-center transition-all duration-200",
+                inCompare
+                  ? "bg-gold/90 text-black"
+                  : "bg-black/40 text-white/80 hover:bg-black/60 hover:text-white"
+              )}
+              aria-label={inCompare ? "Remove from compare" : "Add to compare"}
+            >
+              <GitCompareArrows className="h-4 w-4" />
             </button>
           </div>
 

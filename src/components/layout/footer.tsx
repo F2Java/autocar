@@ -75,7 +75,7 @@ export function Footer() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {trustFeatures.map((feature) => (
               <div key={feature.label} className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-red-600/10 flex items-center justify-center flex-shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center flex-shrink-0">
                   <feature.icon className="h-5 w-5 text-gold" />
                 </div>
                 <div>
@@ -94,7 +94,7 @@ export function Footer() {
           {/* Brand & Newsletter */}
           <div className="lg:col-span-4 space-y-6">
             <Link href="/" className="flex items-center gap-3" aria-label="AutoCar Home">
-              <div className="w-10 h-10 rounded-xl  from-red-600 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center">
                 <Car className="h-6 w-6 text-white" />
               </div>
               <div>

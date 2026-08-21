@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useRef } from "react"
-import { Play, Pause, Volume2, VolumeX, Maximize2 } from "lucide-react"
+import { useState, useRef, useCallback } from "react"
+import { Play, Pause, Volume2, VolumeX, Maximize } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface VideoCardProps {
@@ -9,13 +9,8 @@ interface VideoCardProps {
   poster?: string
   alt?: string
   className?: string
-  aspectRatio?: "video" | "square" | "portrait"
-  autoPlay?: boolean
-  muted?: boolean
-  loop?: boolean
-  showControls?: boolean
+  aspectRatio?: "video" | "square"
   overlay?: React.ReactNode
-  onClick?: () => void
 }
 
 export function VideoCard({
@@ -24,149 +19,147 @@ export function VideoCard({
   alt,
   className,
   aspectRatio = "video",
-  autoPlay = false,
-  muted = true,
-  loop = true,
-  showControls = true,
   overlay,
-  onClick,
 }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [isMuted, setIsMuted] = useState(muted)
-  const [isHovered, setIsHovered] = useState(false)
+  const [isMuted, setIsMuted] = useState(true)
+  const [progress, setProgress] = useState(0)
+  const [isLoaded, setIsLoaded] = useState(false)
   const [hasError, setHasError] = useState(false)
+  const [showControls, setShowControls] = useState(false)
 
-  const aspectClasses = {
-    video: "aspect-video",
-    square: "aspect-square",
-    portrait: "aspect-[3/4]",
-  }
-
-  const togglePlay = () => {
-    if (!videoRef.current) return
+  const handlePlay = useCallback(() => {
+    const video = videoRef.current
+    if (!video) return
     if (isPlaying) {
-      videoRef.current.pause()
+      video.pause()
+      setIsPlaying(false)
     } else {
-      videoRef.current.play().catch(() => {})
+      video.play().then(() => setIsPlaying(true)).catch(() => setHasError(true))
     }
-    setIsPlaying(!isPlaying)
-  }
+  }, [isPlaying])
 
-  const toggleMute = () => {
-    if (!videoRef.current) return
-    videoRef.current.muted = !isMuted
+  const handleMute = useCallback(() => {
+    const video = videoRef.current
+    if (!video) return
+    video.muted = !video.muted
     setIsMuted(!isMuted)
-  }
+  }, [isMuted])
+
+  const handleTimeUpdate = useCallback(() => {
+    const video = videoRef.current
+    if (!video || !video.duration) return
+    setProgress((video.currentTime / video.duration) * 100)
+  }, [])
+
+  const handleFullscreen = useCallback(() => {
+    const video = videoRef.current
+    if (video?.requestFullscreen) {
+      video.requestFullscreen()
+    }
+  }, [])
 
   return (
     <div
       className={cn(
-        "relative group overflow-hidden rounded-xl bg-black video-card cursor-pointer",
-        aspectClasses[aspectRatio],
+        "relative group overflow-hidden rounded-xl bg-black border border-neutral-800",
+        aspectRatio === "video" ? "aspect-video" : "aspect-square",
         className
       )}
-      onMouseEnter={() => {
-        setIsHovered(true)
-        if (videoRef.current) {
-          videoRef.current.play().catch(() => {})
-        }
-      }}
+      onMouseEnter={() => setShowControls(true)}
       onMouseLeave={() => {
-        setIsHovered(false)
-        if (videoRef.current) {
+        setShowControls(false)
+        if (videoRef.current && isPlaying) {
           videoRef.current.pause()
-          videoRef.current.currentTime = 0
           setIsPlaying(false)
+          videoRef.current.currentTime = 0
         }
       }}
-      onClick={onClick}
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault()
-          onClick?.()
-        }
-      }}
-      aria-label={alt || "Video card"}
     >
-      {/* Poster Image (always visible behind video) */}
-      {poster && (
-        <img
-          src={poster}
-          alt={alt || ""}
-          className={cn(
-            "absolute inset-0 w-full h-full object-cover transition-opacity duration-300",
-            isPlaying ? "opacity-0" : "opacity-100"
-          )}
-        />
+      {/* Poster / Thumbnail */}
+      {poster && !isLoaded && (
+        <div className="absolute inset-0 z-0">
+          <img
+            src={poster}
+            alt={alt || "Video thumbnail"}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
       )}
 
       {/* Video Element */}
       <video
         ref={videoRef}
-        src={src}
+        className={cn(
+          "w-full h-full object-cover transition-opacity duration-300",
+          isLoaded ? "opacity-100" : "opacity-0"
+        )}
+        poster={poster}
         muted={isMuted}
-        loop={loop}
         playsInline
         preload="metadata"
-        className="w-full h-full object-cover"
+        onLoadedData={() => setIsLoaded(true)}
+        onError={() => setHasError(true)}
+        onTimeUpdate={handleTimeUpdate}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
-        onError={() => setHasError(true)}
-      />
+        onEnded={() => {
+          setIsPlaying(false)
+          setProgress(0)
+        }}
+      >
+        <source src={src} type="video/mp4" />
+      </video>
 
-      {/* Loading / Error State */}
+      {/* Error Fallback */}
       {hasError && poster && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black">
-          <img src={poster} alt={alt || ""} className="w-full h-full object-cover opacity-50" />
+        <div className="absolute inset-0 z-0">
+          <img
+            src={poster}
+            alt={alt || "Video unavailable"}
+            className="w-full h-full object-cover"
+          />
         </div>
       )}
 
-      {/* Play Button (when paused) */}
-      {!isPlaying && !hasError && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center shadow-lg transition-transform hover:scale-110">
+      {/* Default Play Button (when paused) */}
+      {!isPlaying && !showControls && isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center z-10">
+          <button
+            onClick={handlePlay}
+            className="w-16 h-16 rounded-full bg-red-600/90 flex items-center justify-center hover:bg-red-500 transition-colors"
+            aria-label="Play video"
+          >
             <Play className="h-7 w-7 text-white ml-1" fill="white" />
-          </div>
+          </button>
         </div>
       )}
 
-      {/* Hover Border */}
-      <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-gold/50 transition-colors duration-300 pointer-events-none" />
+      {/* Hover Controls */}
+      {showControls && isLoaded && (
+        <div className="absolute inset-0 z-10 flex flex-col justify-end">
+          {/* Gradient overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
-      {/* Overlay Content */}
-      {overlay && (
-        <div className="absolute inset-0 flex items-end p-4">
-          {overlay}
-        </div>
-      )}
-
-      {/* Video Controls */}
-      {showControls && isHovered && !hasError && (
-        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <div className="flex items-center gap-2">
+          {/* Control Buttons */}
+          <div className="relative z-20 p-3 flex items-center gap-2">
             <button
-              onClick={(e) => {
-                e.stopPropagation()
-                togglePlay()
-              }}
-              className="w-8 h-8 rounded-full bg-black/70 flex items-center justify-center hover:bg-black transition-colors"
+              onClick={handlePlay}
+              className="w-9 h-9 rounded-full bg-red-600 flex items-center justify-center hover:bg-red-500 transition-colors flex-shrink-0"
               aria-label={isPlaying ? "Pause" : "Play"}
             >
               {isPlaying ? (
-                <Pause className="h-4 w-4 text-white" />
+                <Pause className="h-4 w-4 text-white" fill="white" />
               ) : (
                 <Play className="h-4 w-4 text-white ml-0.5" fill="white" />
               )}
             </button>
+
             <button
-              onClick={(e) => {
-                e.stopPropagation()
-                toggleMute()
-              }}
-              className="w-8 h-8 rounded-full bg-black/70 flex items-center justify-center hover:bg-black transition-colors"
+              onClick={handleMute}
+              className="w-9 h-9 rounded-full bg-black/60 flex items-center justify-center hover:bg-black/80 transition-colors flex-shrink-0"
               aria-label={isMuted ? "Unmute" : "Mute"}
             >
               {isMuted ? (
@@ -175,17 +168,30 @@ export function VideoCard({
                 <Volume2 className="h-4 w-4 text-white" />
               )}
             </button>
+
+            {/* Progress Bar */}
+            <div className="flex-1 h-1.5 bg-white/20 rounded-full overflow-hidden mx-2">
+              <div
+                className="h-full bg-red-500 rounded-full transition-all duration-100"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+
+            <button
+              onClick={handleFullscreen}
+              className="w-9 h-9 rounded-full bg-black/60 flex items-center justify-center hover:bg-black/80 transition-colors flex-shrink-0"
+              aria-label="Fullscreen"
+            >
+              <Maximize className="h-4 w-4 text-white" />
+            </button>
           </div>
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              videoRef.current?.requestFullscreen()
-            }}
-            className="w-8 h-8 rounded-full bg-black/70 flex items-center justify-center hover:bg-black transition-colors"
-            aria-label="Fullscreen"
-          >
-            <Maximize2 className="h-4 w-4 text-white" />
-          </button>
+        </div>
+      )}
+
+      {/* Overlay Content */}
+      {overlay && (
+        <div className="absolute top-3 left-3 right-3 z-20">
+          {overlay}
         </div>
       )}
     </div>

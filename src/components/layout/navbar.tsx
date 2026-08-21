@@ -60,10 +60,10 @@ export function Navbar() {
             aria-label="AutoCar Home"
           >
             <div className="relative">
-              <div className="w-10 h-10 rounded-xl  from-red-600 flex items-center justify-center transition-transform group-hover:scale-105">
+              <div className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center transition-transform group-hover:scale-105">
                 <Car className="h-6 w-6 text-white" />
               </div>
-              <div className="absolute inset-0 rounded-xl  from-red-600 blur-lg opacity-0 group-hover:opacity-50 transition-opacity" />
+              <div className="absolute inset-0 rounded-xl bg-red-600 blur-lg opacity-0 group-hover:opacity-50 transition-opacity" />
             </div>
             <div className="hidden sm:block">
               <span className="text-xl font-bold text-white font-heading tracking-widest">

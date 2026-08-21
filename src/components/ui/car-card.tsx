@@ -146,9 +146,6 @@ export function CarCard({
               poster={videoThumbnail || coverImage}
               alt={`${year} ${make} ${model}`}
               aspectRatio="video"
-              muted
-              loop
-              showControls
             />
           ) : (
             <div className="aspect-video relative overflow-hidden bg-neutral-800">

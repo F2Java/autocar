@@ -184,7 +184,6 @@ export default function CarDetailPage() {
                   poster={car.coverImage}
                   alt={car.title}
                   aspectRatio="video"
-                  muted
                 />
               ) : (
                 <div className="aspect-video">

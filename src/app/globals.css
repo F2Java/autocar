@@ -17,11 +17,11 @@
   --color-red-dark: #991B1B;
   --color-background: #000000;
   --color-foreground: #FFFFFF;
-  --color-card: #111111;
+  --color-card: #1A0505;
   --color-card-foreground: #FFFFFF;
-  --color-muted: #1A1A1A;
-  --color-muted-foreground: #999999;
-  --color-border: #222222;
+  --color-muted: #2A0A0A;
+  --color-muted-foreground: #CCCCCC;
+  --color-border: #3A1111;
   --color-destructive: #DC2626;
   --color-success: #D4AF37;
 }
@@ -64,9 +64,19 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.2);
 }
 
-/* Hero overlay */
+/* Hero overlay - darker for text readability */
 .hero-overlay {
-  background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(180, 20, 20, 0.6) 0%,
+    rgba(0, 0, 0, 0.5) 40%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+
+/* Red section background */
+.bg-red-section {
+  background: linear-gradient(135deg, #991B1B 0%, #DC2626 50%, #B91C1C 100%);
 }
 
 /* Gold line */
@@ -77,7 +87,7 @@
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-track { background: #1A0505; }
 ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
 
 /* Selection */
@@ -91,6 +101,27 @@
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-in-up { animation: fadeInUp 0.5s ease-out; }
+
+/* Ensure text doesn't overlap */
+.text-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Proper video sizing */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+.video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .animate-fade-in-up, .animate-pulse { animation: none; }

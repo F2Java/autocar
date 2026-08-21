@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import {
   Car,
   LayoutDashboard,
@@ -15,11 +15,10 @@ import {
   Menu,
   X,
   Bell,
-  Search,
   LogOut,
   Users,
-  FileText,
-  Image,
+  Shield,
+  Search,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -55,8 +54,8 @@ export default function AdminLayout({
         {/* Logo */}
         <div className="h-16 flex items-center justify-between px-4 border-b border-neutral-800">
           <Link href="/admin" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg  from-red-600 flex items-center justify-center flex-shrink-0">
-              <Car className="h-5 w-5 text-white" />
+            <div className="w-9 h-9 rounded-lg bg-red-600 flex items-center justify-center flex-shrink-0">
+              <Shield className="h-5 w-5 text-white" />
             </div>
             {sidebarOpen && (
               <span className="text-lg font-bold font-heading tracking-widest">
@@ -102,7 +101,7 @@ export default function AdminLayout({
         </nav>
 
         {/* Footer */}
-        <div className="p-3 border-t border-neutral-800">
+        <div className="p-3 border-t border-neutral-800 space-y-1">
           <Link
             href="/"
             className={cn(
@@ -110,9 +109,23 @@ export default function AdminLayout({
               "text-gray-400 hover:text-white hover:bg-neutral-800/50"
             )}
           >
-            <LogOut className="h-5 w-5 flex-shrink-0" />
+            <Car className="h-5 w-5 flex-shrink-0" />
             {sidebarOpen && <span>Back to Site</span>}
           </Link>
+          <button
+            onClick={async () => {
+              await fetch("/api/auth/admin/logout", { method: "POST" })
+              localStorage.removeItem("admin_user")
+              window.location.href = "/admin/login"
+            }}
+            className={cn(
+              "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all w-full",
+              "text-red-400 hover:text-red-300 hover:bg-red-600/10"
+            )}
+          >
+            <LogOut className="h-5 w-5 flex-shrink-0" />
+            {sidebarOpen && <span>Sign Out</span>}
+          </button>
         </div>
       </aside>
 
@@ -133,8 +146,8 @@ export default function AdminLayout({
       >
         <div className="h-16 flex items-center justify-between px-4 border-b border-neutral-800">
           <Link href="/admin" className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg  from-red-600 flex items-center justify-center">
-              <Car className="h-5 w-5 text-white" />
+            <div className="w-9 h-9 rounded-lg bg-red-600 flex items-center justify-center">
+              <Shield className="h-5 w-5 text-white" />
             </div>
             <span className="text-lg font-bold font-heading tracking-widest">
               <span className="text-white">AUTO</span>
@@ -204,8 +217,21 @@ export default function AdminLayout({
                 <Bell className="h-5 w-5" />
                 <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-red-500" />
               </button>
-              <div className="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-white text-sm font-bold">
-                A
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-white text-sm font-bold">
+                  A
+                </div>
+                <button
+                  onClick={async () => {
+                    await fetch("/api/auth/admin/logout", { method: "POST" })
+                    localStorage.removeItem("admin_user")
+                    window.location.href = "/admin/login"
+                  }}
+                  className="p-2 text-gray-400 hover:text-red-400 hover:bg-red-600/10 rounded-lg transition-colors"
+                  aria-label="Sign out"
+                >
+                  <LogOut className="h-4 w-4" />
+                </button>
               </div>
             </div>
           </div>

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "db:seed": "tsx prisma/seed.ts",
-    "db:reset": "prisma migrate reset --force && pnpm db:seed"
+    "db:seed:admin": "tsx prisma/seed-admin.ts",
+    "db:reset": "prisma migrate reset --force && pnpm db:seed && pnpm db:seed:admin"
   },
   "postinstall": "prisma generate",
   "prisma": {
@@ -21,6 +22,7 @@
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "jose": "^6.2.9",
     "lucide-react": "^1.24.0",
     "next": "16.2.10",
     "react": "19.2.4",

@@ -66,11 +66,19 @@ export function VideoCard({
         aspectClasses[aspectRatio],
         className
       )}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={() => {
+        setIsHovered(true)
+        // Lazy load: start playing video on hover
+        if (videoRef.current && !autoPlay) {
+          videoRef.current.load()
+          videoRef.current.play().catch(() => {})
+        }
+      }}
       onMouseLeave={() => {
         setIsHovered(false)
         if (videoRef.current && !autoPlay) {
           videoRef.current.pause()
+          videoRef.current.currentTime = 0
           setIsPlaying(false)
         }
       }}
@@ -93,7 +101,7 @@ export function VideoCard({
         muted={isMuted}
         loop={loop}
         playsInline
-        preload="metadata"
+        preload="none"
         className={cn(
           "w-full h-full object-cover transition-transform duration-500",
           isHovered && "scale-105"
@@ -101,6 +109,7 @@ export function VideoCard({
         onLoadedData={() => setIsLoaded(true)}
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
+        onError={() => setIsLoaded(true)}
       />
 
       {/* Loading State */}

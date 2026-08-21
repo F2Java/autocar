@@ -9,8 +9,10 @@ import {
   FileImage,
   FileVideo,
   Loader2,
+  Scissors,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { compressVideo, formatFileSize, generateThumbnail } from "@/lib/video-compress"
 
 interface UploadFile {
   id: string
@@ -48,7 +50,10 @@ export function UploadZone({
 }: UploadZoneProps) {
   const [files, setFiles] = useState<UploadFile[]>([])
   const [isDragging, setIsDragging] = useState(false)
+  const [compressing, setCompressing] = useState(false)
+  const [compressProgress, setCompressProgress] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
+  const [autoCompress, setAutoCompress] = useState(true)
 
   const defaultAccept = type === "image"
     ? "image/jpeg,image/png,image/webp,image/avif"
@@ -116,6 +121,30 @@ export function UploadZone({
     updateFile({ status: "uploading", progress: 0 })
 
     try {
+      let fileToUpload = uploadFile.file
+
+      // Compress video if it's large and autoCompress is enabled
+      if (type === "video" && autoCompress && uploadFile.file.size > 20 * 1024 * 1024) {
+        setCompressing(true)
+        updateFile({ progress: 0, status: "uploading" })
+        
+        try {
+          const { blob } = await compressVideo(
+            uploadFile.file,
+            { maxWidth: 1280, maxHeight: 720, videoBitrate: 2_000_000 },
+            (progress) => setCompressProgress(progress)
+          )
+          fileToUpload = new File([blob], uploadFile.file.name.replace(/\.\w+$/, ".webm"), {
+            type: "video/webm",
+          })
+          updateFile({ progress: 50 })
+        } catch (compressErr) {
+          console.warn("Compression failed, uploading original:", compressErr)
+          // Continue with original file
+        }
+        setCompressing(false)
+      }
+
       // Step 1: Get presigned URL
       const presignRes = await fetch("/api/upload/presign", {
         method: "POST",
@@ -155,8 +184,8 @@ export function UploadZone({
         }
         xhr.onerror = () => reject(new Error("Upload failed"))
         xhr.open("PUT", data.uploadUrl)
-        xhr.setRequestHeader("Content-Type", uploadFile.file.type)
-        xhr.send(uploadFile.file)
+        xhr.setRequestHeader("Content-Type", fileToUpload.type)
+        xhr.send(fileToUpload)
       })
 
       await uploadPromise
@@ -280,6 +309,51 @@ export function UploadZone({
           </div>
         </div>
       </div>
+
+      {/* Compression Toggle for Video */}
+      {type === "video" && (
+        <div className="flex items-center justify-between p-3 rounded-lg bg-slate-800/50 border border-slate-700">
+          <div className="flex items-center gap-2">
+            <Scissors className="h-4 w-4 text-gold" />
+            <span className="text-sm text-white">Auto-compress large videos</span>
+            <span className="text-xs text-slate-400">(over 20MB → 720p, 2Mbps)</span>
+          </div>
+          <button
+            onClick={() => setAutoCompress(!autoCompress)}
+            className={cn(
+              "relative w-10 h-5 rounded-full transition-colors",
+              autoCompress ? "bg-gold" : "bg-slate-600"
+            )}
+            role="switch"
+            aria-checked={autoCompress}
+            aria-label="Toggle auto-compress"
+          >
+            <div
+              className={cn(
+                "absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform",
+                autoCompress ? "translate-x-5" : "translate-x-0.5"
+              )}
+            />
+          </button>
+        </div>
+      )}
+
+      {/* Compression Progress */}
+      {compressing && (
+        <div className="p-3 rounded-lg bg-gold/10 border border-gold/30">
+          <div className="flex items-center gap-2 mb-2">
+            <Loader2 className="h-4 w-4 text-gold animate-spin" />
+            <span className="text-sm text-white">Compressing video...</span>
+            <span className="text-xs text-gold">{compressProgress}%</span>
+          </div>
+          <div className="w-full h-1.5 bg-slate-700 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-gold rounded-full transition-all duration-300"
+              style={{ width: `${compressProgress}%` }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* File List */}
       {files.length > 0 && (

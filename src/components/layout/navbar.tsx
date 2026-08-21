@@ -65,11 +65,11 @@ export function Navbar() {
               </div>
               <div className="absolute inset-0 rounded-xl bg-red-600 blur-lg opacity-0 group-hover:opacity-50 transition-opacity" />
             </div>
-            <div className="hidden sm:block">
-              <span className="text-sm font-bold text-white font-heading tracking-widest">
+            <div className="block">
+              <span className="text-xs sm:text-sm font-bold text-white font-heading tracking-widest">
                 PASAR MOBIL
               </span>
-              <span className="text-sm font-bold text-gold font-heading tracking-widest block">
+              <span className="text-xs sm:text-sm font-bold text-gold font-heading tracking-widest block">
                 BEKAS
               </span>
             </div>

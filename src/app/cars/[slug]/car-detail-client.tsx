@@ -389,7 +389,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
                 {car.dealerWhatsapp && (
                   <a
                     href={`https://wa.me/${car.dealerWhatsapp}?text=${encodeURIComponent(
-                      `Hi, I'm interested in ${car.title} listed at ${formatPrice(car.price)}`
+                      `Halo! 👋\nSaya tertarik dengan:\n\n🚗 *${car.title}*\n💰 Harga: ${formatPrice(car.price)}\n\nBisa info lebih lanjut? Terima kasih!`
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"

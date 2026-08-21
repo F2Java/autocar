@@ -1,20 +1,15 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
 import {
   X,
   Save,
-  Car,
-  Fuel,
-  Gauge,
-  MapPin,
-  DollarSign,
   Image,
   Video,
-  AlertCircle,
+  Plus,
+  Trash2,
+  Loader2,
 } from "lucide-react"
-import { UploadZone } from "./upload-zone"
-import { VideoUploader } from "./video-uploader"
 import { cn } from "@/lib/utils"
 
 interface CarData {
@@ -48,7 +43,6 @@ interface CarData {
   dealerEmail?: string
   coverImage?: string
   videoUrl?: string
-  isFeatured: boolean
 }
 
 interface CarEditModalProps {
@@ -58,59 +52,59 @@ interface CarEditModalProps {
   onSave: (data: Partial<CarData>) => void
 }
 
-const makes = ["Toyota", "Honda", "BMW", "Mercedes-Benz", "Tesla", "Suzuki", "Mitsubishi", "Hyundai", "Kia", "Nissan", "Mazda", "Daihatsu", "Ford"]
-const bodyTypes = ["Sedan", "SUV", "Hatchback", "Coupe", "Convertible", "MPV", "Pickup Truck"]
-const fuelTypes = ["Gasoline", "Diesel", "Electric", "Hybrid"]
-const transmissions = ["Automatic", "Manual", "CVT"]
-const conditions = ["New", "Used", "Certified Pre-Owned"]
+const conditions = ["NEW", "USED", "CERTIFIED_PRE_OWNED"]
 const statuses = ["AVAILABLE", "SOLD", "RESERVED", "PENDING", "DRAFT"]
+const bodyTypes = ["SEDAN", "SUV", "HATCHBACK", "COUPE", "CONVERTIBLE", "WAGON", "PICKUP_TRUCK", "VAN", "MPV"]
+const fuelTypes = ["GASOLINE", "DIESEL", "ELECTRIC", "HYBRID", "PLUGIN_HYBRID"]
+const transmissions = ["AUTOMATIC", "MANUAL", "CVT", "DCT"]
 
 export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps) {
   const [form, setForm] = useState<Partial<CarData>>({})
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [saving, setSaving] = useState(false)
-  const modalRef = useRef<HTMLDivElement>(null)
+
+  // Additional images (up to 6)
+  const [images, setImages] = useState<string[]>([])
+  const [newImageUrl, setNewImageUrl] = useState("")
 
   useEffect(() => {
     if (car) {
       setForm({ ...car })
-      setErrors({})
+      // Extract images from car data
+      const allImages = [car.coverImage].filter(Boolean) as string[]
+      setImages(allImages.length > 0 ? allImages : [""])
     }
   }, [car])
 
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose()
-    }
-    if (isOpen) {
-      document.addEventListener("keydown", handleEscape)
-      document.body.style.overflow = "hidden"
-    }
-    return () => {
-      document.removeEventListener("keydown", handleEscape)
-      document.body.style.overflow = ""
-    }
-  }, [isOpen, onClose])
-
-  if (!isOpen || !car) return null
-
-  const updateField = (field: string, value: any) => {
-    setForm((prev) => ({ ...prev, [field]: value }))
-    if (errors[field]) {
+  const updateField = (key: string, value: unknown) => {
+    setForm((prev) => ({ ...prev, [key]: value }))
+    if (errors[key]) {
       setErrors((prev) => {
         const next = { ...prev }
-        delete next[field]
+        delete next[key]
         return next
       })
     }
   }
 
+  const addImage = () => {
+    if (newImageUrl && images.length < 6) {
+      setImages([...images, newImageUrl])
+      setNewImageUrl("")
+    }
+  }
+
+  const removeImage = (index: number) => {
+    const updated = images.filter((_, i) => i !== index)
+    setImages(updated.length > 0 ? updated : [""])
+  }
+
   const validate = (): boolean => {
     const newErrors: Record<string, string> = {}
-    if (!form.make) newErrors.make = "Make is required"
-    if (!form.model) newErrors.model = "Model is required"
-    if (!form.year || form.year < 1900) newErrors.year = "Valid year is required"
-    if (!form.price || form.price <= 0) newErrors.price = "Valid price is required"
+    if (!form.make) newErrors.make = "Required"
+    if (!form.model) newErrors.model = "Required"
+    if (!form.year) newErrors.year = "Required"
+    if (!form.price) newErrors.price = "Required"
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -118,346 +112,204 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
   const handleSave = async () => {
     if (!validate()) return
     setSaving(true)
-    // Simulate API call
-    await new Promise((r) => setTimeout(r, 500))
-    onSave(form)
+
+    // Combine images: first one is coverImage
+    const validImages = images.filter(Boolean)
+    const coverImage = validImages[0] || form.coverImage
+
+    onSave({
+      ...form,
+      coverImage,
+    })
+
     setSaving(false)
-    onClose()
   }
 
-  const formatPrice = (amount: number) =>
-    new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-    }).format(amount)
+  if (!isOpen || !car) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Backdrop */}
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4" onClick={onClose}>
       <div
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-        onClick={onClose}
-      />
-
-      {/* Modal */}
-      <div
-        ref={modalRef}
-        className="relative w-full max-w-4xl max-h-[90vh] bg-neutral-900 rounded-2xl border border-neutral-800 shadow-2xl overflow-hidden animate-fade-in-up"
+        className="bg-neutral-900 border border-neutral-800 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col"
+        onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-neutral-800">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-red-600/20 flex items-center justify-center">
-              <Car className="h-5 w-5 text-gold" />
-            </div>
-            <div>
-              <h2 className="text-lg font-bold text-white font-heading tracking-wide">
-                EDIT LISTING
-              </h2>
-              <p className="text-sm text-gray-400">{car.title}</p>
-            </div>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-neutral-800 transition-colors"
-            aria-label="Close"
-          >
+        <div className="flex items-center justify-between p-5 border-b border-neutral-800">
+          <h2 className="text-lg font-bold text-white font-heading tracking-wide">EDIT CAR</h2>
+          <button onClick={onClose} className="p-2 text-gray-400 hover:text-white hover:bg-neutral-800 rounded-lg">
             <X className="h-5 w-5" />
           </button>
         </div>
 
-        {/* Body */}
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Left Column */}
-            <div className="space-y-4">
-              <SectionTitle title="Basic Info" />
-
-              <FormField label="Make *" error={errors.make}>
-                <select
-                  value={form.make || ""}
-                  onChange={(e) => updateField("make", e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                >
-                  <option value="">Select Make</option>
-                  {makes.map((m) => (
-                    <option key={m} value={m}>{m}</option>
-                  ))}
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto p-5 space-y-6">
+          {/* Basic Info */}
+          <Section title="Basic Information">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <Field label="Make *" error={errors.make}>
+                <input value={form.make || ""} onChange={(e) => updateField("make", e.target.value)} className={inputCls} />
+              </Field>
+              <Field label="Model *" error={errors.model}>
+                <input value={form.model || ""} onChange={(e) => updateField("model", e.target.value)} className={inputCls} />
+              </Field>
+              <Field label="Year *" error={errors.year}>
+                <input type="number" value={form.year || ""} onChange={(e) => updateField("year", parseInt(e.target.value))} className={inputCls} />
+              </Field>
+              <Field label="Condition">
+                <select value={form.condition || ""} onChange={(e) => updateField("condition", e.target.value)} className={inputCls}>
+                  {conditions.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
-              </FormField>
+              </Field>
+            </div>
+            <Field label="Description">
+              <textarea value={form.description || ""} onChange={(e) => updateField("description", e.target.value)} rows={2} className={cn(inputCls, "resize-none")} />
+            </Field>
+          </Section>
 
-              <FormField label="Model *" error={errors.model}>
-                <input
-                  type="text"
-                  value={form.model || ""}
-                  onChange={(e) => updateField("model", e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                />
-              </FormField>
+          {/* Specs */}
+          <Section title="Specifications">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <Field label="Body Type">
+                <select value={form.bodyType || ""} onChange={(e) => updateField("bodyType", e.target.value)} className={inputCls}>
+                  {bodyTypes.map((b) => <option key={b} value={b}>{b}</option>)}
+                </select>
+              </Field>
+              <Field label="Fuel Type">
+                <select value={form.fuelType || ""} onChange={(e) => updateField("fuelType", e.target.value)} className={inputCls}>
+                  {fuelTypes.map((f) => <option key={f} value={f}>{f}</option>)}
+                </select>
+              </Field>
+              <Field label="Transmission">
+                <select value={form.transmission || ""} onChange={(e) => updateField("transmission", e.target.value)} className={inputCls}>
+                  {transmissions.map((t) => <option key={t} value={t}>{t}</option>)}
+                </select>
+              </Field>
+              <Field label="Horsepower">
+                <input type="number" value={form.horsepower || ""} onChange={(e) => updateField("horsepower", parseInt(e.target.value))} className={inputCls} />
+              </Field>
+            </div>
+          </Section>
 
-              <div className="grid grid-cols-2 gap-3">
-                <FormField label="Year *" error={errors.year}>
-                  <input
-                    type="number"
-                    value={form.year || ""}
-                    onChange={(e) => updateField("year", parseInt(e.target.value))}
-                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                  />
-                </FormField>
-                <FormField label="Condition">
-                  <select
-                    value={form.condition || ""}
-                    onChange={(e) => updateField("condition", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                  >
-                    {conditions.map((c) => (
-                      <option key={c} value={c}>{c}</option>
-                    ))}
-                  </select>
-                </FormField>
-              </div>
-
-              <FormField label="Description">
-                <textarea
-                  value={form.description || ""}
-                  onChange={(e) => updateField("description", e.target.value)}
-                  rows={3}
-                  className="w-full px-3 py-2 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold resize-none"
-                />
-              </FormField>
-
-              <SectionTitle title="Specifications" />
-
-              <div className="grid grid-cols-2 gap-3">
-                <FormField label="Body Type">
-                  <select
-                    value={form.bodyType || ""}
-                    onChange={(e) => updateField("bodyType", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                  >
-                    {bodyTypes.map((b) => (
-                      <option key={b} value={b}>{b}</option>
-                    ))}
-                  </select>
-                </FormField>
-                <FormField label="Fuel Type">
-                  <select
-                    value={form.fuelType || ""}
-                    onChange={(e) => updateField("fuelType", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                  >
-                    {fuelTypes.map((f) => (
-                      <option key={f} value={f}>{f}</option>
-                    ))}
-                  </select>
-                </FormField>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <FormField label="Transmission">
-                  <select
-                    value={form.transmission || ""}
-                    onChange={(e) => updateField("transmission", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                  >
-                    {transmissions.map((t) => (
-                      <option key={t} value={t}>{t}</option>
-                    ))}
-                  </select>
-                </FormField>
-                <FormField label="Horsepower">
-                  <input
-                    type="number"
-                    value={form.horsepower || ""}
-                    onChange={(e) => updateField("horsepower", parseInt(e.target.value))}
-                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                  />
-                </FormField>
+          {/* Pricing */}
+          <Section title="Pricing & Status">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <Field label="Price (IDR) *" error={errors.price}>
+                <input type="number" value={form.price || ""} onChange={(e) => updateField("price", parseInt(e.target.value))} className={inputCls} />
+              </Field>
+              <Field label="Status">
+                <select value={form.status || ""} onChange={(e) => updateField("status", e.target.value)} className={inputCls}>
+                  {statuses.map((s) => <option key={s} value={s}>{s}</option>)}
+                </select>
+              </Field>
+              <Field label="Exterior Color">
+                <input value={form.exteriorColor || ""} onChange={(e) => updateField("exteriorColor", e.target.value)} className={inputCls} />
+              </Field>
+              <div className="flex items-end gap-4">
+                <label className="flex items-center gap-2 text-sm text-gray-300 pb-2">
+                  <input type="checkbox" checked={form.negotiable ?? true} onChange={(e) => updateField("negotiable", e.target.checked)} className="w-4 h-4 rounded bg-neutral-800 border-neutral-700 text-gold" />
+                  Negotiable
+                </label>
               </div>
             </div>
+          </Section>
 
-            {/* Right Column */}
-            <div className="space-y-4">
-              <SectionTitle title="Pricing & Status" />
-
-              <div className="grid grid-cols-2 gap-3">
-                <FormField label="Price (IDR) *" error={errors.price}>
-                  <input
-                    type="number"
-                    value={form.price || ""}
-                    onChange={(e) => updateField("price", parseInt(e.target.value))}
-                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                  />
-                </FormField>
-                <FormField label="Status">
-                  <select
-                    value={form.status || ""}
-                    onChange={(e) => updateField("status", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                  >
-                    {statuses.map((s) => (
-                      <option key={s} value={s}>{s}</option>
-                    ))}
-                  </select>
-                </FormField>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={form.negotiable || false}
-                    onChange={(e) => updateField("negotiable", e.target.checked)}
-                    className="w-4 h-4 rounded bg-neutral-800 border-neutral-700 text-gold focus:ring-gold"
-                  />
-                  <span className="text-sm text-white">Negotiable</span>
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={form.isFeatured || false}
-                    onChange={(e) => updateField("isFeatured", e.target.checked)}
-                    className="w-4 h-4 rounded bg-neutral-800 border-neutral-700 text-gold focus:ring-gold"
-                  />
-                  <span className="text-sm text-white">Featured</span>
-                </label>
-              </div>
-
-              {form.price && form.price > 0 && (
-                <div className="p-3 rounded-lg bg-red-600/10 border border-gold/20">
-                  <p className="text-sm text-gray-400">Preview</p>
-                  <p className="text-xl font-bold text-gold font-heading">
-                    {formatPrice(form.price)}
-                  </p>
+          {/* Images - 6 slots */}
+          <Section title="Photos (up to 6)">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {images.map((url, i) => (
+                <div key={i} className="relative group">
+                  {url ? (
+                    <>
+                      <img src={url} alt={`Photo ${i + 1}`} className="w-full h-32 object-cover rounded-lg border border-neutral-700" />
+                      <button
+                        onClick={() => removeImage(i)}
+                        className="absolute top-1 right-1 p-1 rounded bg-black/60 text-white opacity-0 group-hover:opacity-100 hover:bg-red-600 transition-all"
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </button>
+                      {i === 0 && (
+                        <span className="absolute bottom-1 left-1 px-2 py-0.5 rounded text-xs bg-gold/90 text-black font-medium">
+                          Cover
+                        </span>
+                      )}
+                    </>
+                  ) : (
+                    <div className="w-full h-32 rounded-lg border-2 border-dashed border-neutral-700 flex items-center justify-center text-gray-500">
+                      <Image className="h-6 w-6" />
+                    </div>
+                  )}
                 </div>
-              )}
-
-              <SectionTitle title="Location" />
-
-              <div className="grid grid-cols-2 gap-3">
-                <FormField label="City">
-                  <input
-                    type="text"
-                    value={form.city || ""}
-                    onChange={(e) => updateField("city", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                  />
-                </FormField>
-                <FormField label="Province">
-                  <input
-                    type="text"
-                    value={form.province || ""}
-                    onChange={(e) => updateField("province", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                  />
-                </FormField>
-              </div>
-
-              <SectionTitle title="Seller Info" />
-
-              <FormField label="Dealer Name">
-                <input
-                  type="text"
-                  value={form.dealerName || ""}
-                  onChange={(e) => updateField("dealerName", e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                />
-              </FormField>
-
-              <div className="grid grid-cols-2 gap-3">
-                <FormField label="WhatsApp">
-                  <input
-                    type="tel"
-                    value={form.dealerWhatsapp || ""}
-                    onChange={(e) => updateField("dealerWhatsapp", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                  />
-                </FormField>
-                <FormField label="Phone">
-                  <input
-                    type="tel"
-                    value={form.dealerPhone || ""}
-                    onChange={(e) => updateField("dealerPhone", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                  />
-                </FormField>
-              </div>
-
-              <SectionTitle title="Photos & Video" />
-
-              <div>
-                <label className="block text-xs font-medium text-gray-400 mb-1.5">Cover Image</label>
-                <UploadZone
-                  type="image"
-                  multiple={false}
-                  carId={form.slug}
-                  onUploadComplete={(files) => {
-                    if (files[0]) updateField("coverImage", files[0].url)
-                  }}
-                />
-                {form.coverImage && (
-                  <div className="mt-2 relative">
-                    <img
-                      src={form.coverImage}
-                      alt="Cover"
-                      className="w-full h-32 object-cover rounded-lg"
-                    />
-                    <button
-                      onClick={() => updateField("coverImage", null)}
-                      className="absolute top-2 right-2 p-1 rounded-lg bg-black/60 text-white hover:bg-red-600 transition-colors"
-                    >
-                      <X className="h-3 w-3" />
-                    </button>
-                  </div>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-gray-400 mb-1.5">Additional Photos</label>
-                <UploadZone
-                  type="image"
-                  multiple={true}
-                  maxFiles={8}
-                  carId={form.slug}
-                  onUploadComplete={(files) => {
-                    // Handle additional images
-                  }}
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-medium text-gray-400 mb-1.5">Video Tour</label>
-                <VideoUploader
-                  carId={form.slug}
-                  maxVideos={3}
-                  onVideosChange={(videos) => {
-                    if (videos[0]) updateField("videoUrl", videos[0].url)
-                  }}
-                />
-              </div>
+              ))}
             </div>
-          </div>
+
+            {/* Add Image URL */}
+            {images.length < 6 && (
+              <div className="flex gap-2 mt-3">
+                <input
+                  type="url"
+                  value={newImageUrl}
+                  onChange={(e) => setNewImageUrl(e.target.value)}
+                  placeholder="Paste image URL and press Add"
+                  className={cn(inputCls, "flex-1")}
+                  onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), addImage())}
+                />
+                <button
+                  onClick={addImage}
+                  disabled={!newImageUrl}
+                  className="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-white text-sm font-medium disabled:opacity-50 transition-colors flex items-center gap-1"
+                >
+                  <Plus className="h-4 w-4" /> Add
+                </button>
+              </div>
+            )}
+            <p className="text-xs text-gray-500 mt-1">Paste image URLs (Unsplash, Imgur, etc.) — first image is the cover</p>
+          </Section>
+
+          {/* Video */}
+          <Section title="Video Tour">
+            <Field label="Video URL (YouTube, Vimeo, or MP4)">
+              <input
+                type="url"
+                value={form.videoUrl || ""}
+                onChange={(e) => updateField("videoUrl", e.target.value)}
+                placeholder="https://youtube.com/watch?v=... or https://example.com/video.mp4"
+                className={inputCls}
+              />
+            </Field>
+            {form.videoUrl && (
+              <div className="mt-2 rounded-lg overflow-hidden border border-neutral-700">
+                <div className="aspect-video bg-neutral-800 flex items-center justify-center">
+                  <Video className="h-8 w-8 text-gray-500" />
+                </div>
+              </div>
+            )}
+            <p className="text-xs text-gray-500 mt-1">YouTube, Vimeo, or direct MP4 link</p>
+          </Section>
+
+          {/* Seller Info */}
+          <Section title="Seller Info">
+            <div className="grid grid-cols-2 gap-3">
+              <Field label="Dealer Name">
+                <input value={form.dealerName || ""} onChange={(e) => updateField("dealerName", e.target.value)} className={inputCls} />
+              </Field>
+              <Field label="WhatsApp">
+                <input type="tel" value={form.dealerWhatsapp || ""} onChange={(e) => updateField("dealerWhatsapp", e.target.value)} className={inputCls} placeholder="6281234567890" />
+              </Field>
+            </div>
+          </Section>
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-end gap-3 p-6 border-t border-neutral-800 bg-neutral-900/50">
-          <button
-            onClick={onClose}
-            className="px-4 py-2.5 rounded-xl border border-neutral-700 text-white text-sm hover:bg-neutral-800 transition-colors"
-          >
+        <div className="flex items-center justify-end gap-3 p-5 border-t border-neutral-800">
+          <button onClick={onClose} className="px-4 py-2 rounded-lg text-sm text-gray-400 hover:text-white transition-colors">
             Cancel
           </button>
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-medium transition-colors disabled:opacity-50"
+            className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-red-600 hover:bg-red-500 text-white text-sm font-medium disabled:opacity-50 transition-colors"
           >
-            {saving ? (
-              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            ) : (
-              <Save className="h-4 w-4" />
-            )}
+            {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
             {saving ? "Saving..." : "Save Changes"}
           </button>
         </div>
@@ -466,32 +318,24 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
   )
 }
 
-function SectionTitle({ title }: { title: string }) {
+// Reusable components
+const inputCls = "w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <h3 className="text-sm font-bold text-white font-heading tracking-wider pt-2 border-t border-neutral-800 first:border-0 first:pt-0">
-      {title}
-    </h3>
+    <div>
+      <h3 className="text-sm font-bold text-gold font-heading tracking-wide mb-3">{title}</h3>
+      <div className="space-y-3">{children}</div>
+    </div>
   )
 }
 
-function FormField({
-  label,
-  error,
-  children,
-}: {
-  label: string
-  error?: string
-  children: React.ReactNode
-}) {
+function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
   return (
     <div>
-      <label className="block text-xs font-medium text-gray-400 mb-1.5">{label}</label>
+      <label className="block text-xs font-medium text-gray-400 mb-1">{label}</label>
       {children}
-      {error && (
-        <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
-          <AlertCircle className="h-3 w-3" /> {error}
-        </p>
-      )}
+      {error && <p className="text-xs text-red-400 mt-1">{error}</p>}
     </div>
   )
 }

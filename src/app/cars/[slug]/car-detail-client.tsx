@@ -250,10 +250,10 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
                   </span>
                 )}
               </div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-white font-heading tracking-wide mb-2">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white font-heading tracking-wide mb-2 break-words">
                 {car.title}
               </h1>
-              <div className="flex items-center gap-4 text-sm text-gray-400">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-400">
                 <span className="flex items-center gap-1">
                   <MapPin className="h-4 w-4" />
                   {car.city}, {car.province}
@@ -266,23 +266,23 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
             </div>
 
             {/* Price Card */}
-            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
-              <div className="flex items-baseline gap-3 mb-2">
-                <span className="text-3xl font-bold text-gold">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-6 overflow-hidden">
+              <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 mb-2">
+                <span className="text-2xl sm:text-3xl font-bold text-gold break-words">
                   {formatPrice(car.price)}
                 </span>
                 {car.originalPrice && (
-                  <span className="text-lg text-gray-500 line-through">
+                  <span className="text-sm sm:text-lg text-gray-500 line-through">
                     {formatPrice(car.originalPrice)}
                   </span>
                 )}
               </div>
               {car.negotiable && (
-                <p className="text-sm text-green-400 mb-3">Price negotiable</p>
+                <p className="text-sm text-green-400 mb-2">Price negotiable</p>
               )}
               {car.installmentAvail && car.installmentFrom && (
-                <p className="text-sm text-gray-400">
-                  Installment from {formatPrice(car.installmentFrom)}/month
+                <p className="text-xs sm:text-sm text-gray-400">
+                  From {formatPrice(car.installmentFrom)}/month
                 </p>
               )}
             </div>
@@ -367,9 +367,9 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-6 min-w-0">
             {/* Contact Card */}
-            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 sticky top-24">
+            <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-6 sticky top-24 overflow-hidden">
               <h3 className="text-lg font-bold text-white font-heading tracking-wide mb-4">
                 CONTACT SELLER
               </h3>
@@ -379,7 +379,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
                   <Car className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <p className="font-medium text-white">{car.dealerName || "Private Seller"}</p>
+                  <p className="font-medium text-white text-sm truncate max-w-[200px]">{car.dealerName || "Private Seller"}</p>
                   <p className="text-xs text-gray-400 capitalize">{car.dealerType}</p>
                 </div>
               </div>
@@ -508,16 +508,16 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
               )}
 
               {/* Quick Stats */}
-              <div className="mt-6 pt-6 border-t border-neutral-800">
-                <div className="flex items-center justify-between text-sm">
+              <div className="mt-4 pt-4 border-t border-neutral-800">
+                <div className="flex items-center justify-between text-xs sm:text-sm">
                   <span className="text-gray-400">Views</span>
                   <span className="text-white">{car.views.toLocaleString()}</span>
                 </div>
-                <div className="flex items-center justify-between text-sm mt-2">
+                <div className="flex items-center justify-between text-xs sm:text-sm mt-2">
                   <span className="text-gray-400">Favorites</span>
                   <span className="text-white">{car.favorites}</span>
                 </div>
-                <div className="flex items-center justify-between text-sm mt-2">
+                <div className="flex items-center justify-between text-xs sm:text-sm mt-2">
                   <span className="text-gray-400">Listed</span>
                   <span className="text-white">
                     {new Date(car.createdAt).toLocaleDateString("id-ID")}

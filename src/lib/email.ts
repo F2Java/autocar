@@ -2,8 +2,8 @@ import { Resend } from "resend"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-const FROM_EMAIL = process.env.EMAIL_FROM || "AutoCar <noreply@autocar.id>"
-const FROM_NAME = "AutoCar"
+const FROM_EMAIL = process.env.EMAIL_FROM || "Pasar Mobil Bekas <noreply@pasarmobilbekas.id>"
+const FROM_NAME = "Pasar Mobil Bekas"
 
 // ─── Base Email Sender ───────────────────────────────────────────────────────
 
@@ -67,14 +67,14 @@ export async function sendInquiryNotification(data: InquiryEmailData) {
         <div style="background:linear-gradient(135deg,#1e293b,#334155);border-radius:16px;padding:32px;border:1px solid rgba(59,130,246,0.2);">
           <!-- Header -->
           <div style="text-align:center;margin-bottom:24px;">
-            <h1 style="color:#3b82f6;font-size:24px;margin:0;letter-spacing:2px;">AUTO<span style="color:#06b6d4;">CAR</span></h1>
+            <h1 style="color:#DC2626;font-size:24px;margin:0;letter-spacing:2px;">PASAR<span style="color:#D4AF37;"> MOBIL</span></h1>
             <p style="color:#94a3b8;font-size:12px;margin-top:4px;">New Inquiry Notification</p>
           </div>
 
           <!-- Car Info -->
           <div style="background:rgba(59,130,246,0.1);border-radius:12px;padding:20px;margin-bottom:20px;border:1px solid rgba(59,130,246,0.2);">
             <h2 style="color:#f1f5f9;font-size:18px;margin:0 0 8px 0;">${data.carTitle}</h2>
-            <p style="color:#3b82f6;font-size:24px;font-weight:bold;margin:0;">${data.carPrice}</p>
+            <p style="color:#DC2626;font-size:24px;font-weight:bold;margin:0;">${data.carPrice}</p>
           </div>
 
           <!-- Buyer Info -->
@@ -117,7 +117,7 @@ export async function sendInquiryNotification(data: InquiryEmailData) {
 
           <!-- Footer -->
           <div style="text-align:center;margin-top:32px;padding-top:20px;border-top:1px solid #334155;">
-            <p style="color:#64748b;font-size:12px;margin:0;">This inquiry was sent via AutoCar marketplace</p>
+            <p style="color:#64748b;font-size:12px;margin:0;">This inquiry was sent via Pasar Mobil Bekas marketplace</p>
           </div>
         </div>
       </div>
@@ -162,7 +162,7 @@ export async function sendPromotionEmail(data: PromotionEmailData) {
         <div style="background:linear-gradient(135deg,#1e293b,#334155);border-radius:16px;padding:32px;border:1px solid rgba(59,130,246,0.2);">
           <!-- Header -->
           <div style="text-align:center;margin-bottom:24px;">
-            <h1 style="color:#3b82f6;font-size:24px;margin:0;letter-spacing:2px;">AUTO<span style="color:#06b6d4;">CAR</span></h1>
+            <h1 style="color:#DC2626;font-size:24px;margin:0;letter-spacing:2px;">PASAR<span style="color:#D4AF37;"> MOBIL</span></h1>
           </div>
 
           <!-- Headline -->
@@ -175,7 +175,7 @@ export async function sendPromotionEmail(data: PromotionEmailData) {
             ${data.carImage ? `<img src="${data.carImage}" alt="${data.carTitle}" style="width:100%;height:200px;object-fit:cover;" />` : ""}
             <div style="padding:20px;">
               <h3 style="color:#f1f5f9;font-size:18px;margin:0 0 8px 0;">${data.carTitle}</h3>
-              ${data.carPrice ? `<p style="color:#3b82f6;font-size:24px;font-weight:bold;margin:0;">${data.carPrice}</p>` : ""}
+              ${data.carPrice ? `<p style="color:#DC2626;font-size:24px;font-weight:bold;margin:0;">${data.carPrice}</p>` : ""}
             </div>
           </div>
           ` : ""}
@@ -188,14 +188,14 @@ export async function sendPromotionEmail(data: PromotionEmailData) {
           <!-- CTA -->
           ${data.ctaUrl ? `
           <div style="text-align:center;margin:32px 0;">
-            <a href="${data.ctaUrl}" style="display:inline-block;background:linear-gradient(135deg,#3b82f6,#06b6d4);color:#ffffff;padding:14px 40px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;">${data.ctaText || "View Now"}</a>
+            <a href="${data.ctaUrl}" style="display:inline-block;background:linear-gradient(135deg,#DC2626,#B91C1C);color:#ffffff;padding:14px 40px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;">${data.ctaText || "View Now"}</a>
           </div>
           ` : ""}
 
           <!-- Footer -->
           <div style="text-align:center;margin-top:32px;padding-top:20px;border-top:1px solid #334155;">
-            <p style="color:#64748b;font-size:12px;margin:0 0 8px 0;">You received this because you subscribed to AutoCar updates.</p>
-            <a href="${process.env.NEXT_PUBLIC_APP_URL || "https://autocar.id"}/unsubscribe?email=${encodeURIComponent(data.recipientEmail)}" style="color:#64748b;font-size:12px;">Unsubscribe</a>
+            <p style="color:#64748b;font-size:12px;margin:0 0 8px 0;">You received this because you subscribed to Pasar Mobil Bekas updates.</p>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || "https://pasarmobilbekas.id"}/unsubscribe?email=${encodeURIComponent(data.recipientEmail)}" style="color:#64748b;font-size:12px;">Unsubscribe</a>
           </div>
         </div>
       </div>
@@ -230,10 +230,10 @@ export async function sendWelcomeEmail(data: WelcomeEmailData) {
       <div style="max-width:600px;margin:0 auto;padding:40px 20px;">
         <div style="background:linear-gradient(135deg,#1e293b,#334155);border-radius:16px;padding:32px;border:1px solid rgba(59,130,246,0.2);">
           <div style="text-align:center;margin-bottom:24px;">
-            <h1 style="color:#3b82f6;font-size:24px;margin:0;letter-spacing:2px;">AUTO<span style="color:#06b6d4;">CAR</span></h1>
+            <h1 style="color:#DC2626;font-size:24px;margin:0;letter-spacing:2px;">PASAR<span style="color:#D4AF37;"> MOBIL</span></h1>
           </div>
 
-          <h2 style="color:#f1f5f9;font-size:22px;text-align:center;margin:0 0 16px 0;">Welcome to AutoCar! 🚗</h2>
+          <h2 style="color:#f1f5f9;font-size:22px;text-align:center;margin:0 0 16px 0;">Welcome to Pasar Mobil Bekas! 🚗</h2>
           <p style="color:#94a3b8;font-size:14px;text-align:center;margin:0 0 24px 0;">Hi ${data.name}, thanks for joining Indonesia's leading automotive marketplace.</p>
 
           <div style="color:#cbd5e1;font-size:14px;line-height:1.8;margin-bottom:24px;">
@@ -246,7 +246,7 @@ export async function sendWelcomeEmail(data: WelcomeEmailData) {
           </div>
 
           <div style="text-align:center;margin:32px 0;">
-            <a href="${process.env.NEXT_PUBLIC_APP_URL || "https://autocar.id"}/cars" style="display:inline-block;background:linear-gradient(135deg,#3b82f6,#06b6d4);color:#ffffff;padding:14px 40px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;">Start Browsing</a>
+            <a href="${process.env.NEXT_PUBLIC_APP_URL || "https://pasarmobilbekas.id"}/cars" style="display:inline-block;background:linear-gradient(135deg,#DC2626,#B91C1C);color:#ffffff;padding:14px 40px;border-radius:8px;text-decoration:none;font-weight:bold;font-size:16px;">Start Browsing</a>
           </div>
 
           <div style="text-align:center;margin-top:32px;padding-top:20px;border-top:1px solid #334155;">
@@ -260,7 +260,7 @@ export async function sendWelcomeEmail(data: WelcomeEmailData) {
 
   return sendEmail({
     to: data.email,
-    subject: "Welcome to AutoCar! 🚗",
+    subject: "Welcome to Pasar Mobil Bekas! 🚗",
     html,
     tags: [{ name: "category", value: "welcome" }],
   })

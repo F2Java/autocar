@@ -48,8 +48,8 @@ export default function ContactPage() {
     {
       icon: Mail,
       label: "Email",
-      value: "hello@autocar.id",
-      action: () => window.open("mailto:hello@autocar.id"),
+      value: "hello@pasarmobilbekas.id",
+      action: () => window.open("mailto:hello@pasarmobilbekas.id"),
       color: "bg-purple-500",
     },
     {

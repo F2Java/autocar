@@ -60,7 +60,7 @@ export default function AdminLoginPage() {
           <h1 className="text-3xl font-bold text-white font-heading tracking-wider">
             ADMIN PANEL
           </h1>
-          <p className="text-gray-400 mt-2">Sign in to manage AutoCar</p>
+          <p className="text-gray-400 mt-2">Sign in to manage Pasar Mobil Bekas</p>
         </div>
 
         {/* Login Form */}
@@ -75,7 +75,7 @@ export default function AdminLoginPage() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@autocar.id"
+                placeholder="admin@pasarmobilbekas.id"
                 className="w-full px-4 py-3 rounded-xl bg-neutral-800 border border-neutral-700 text-white placeholder:text-gray-500 focus:outline-none focus:border-gold transition-colors"
                 required
                 autoFocus
@@ -140,7 +140,7 @@ export default function AdminLoginPage() {
           <div className="mt-6 p-4 rounded-xl bg-gold/10 border border-gold/20">
             <p className="text-xs text-gold font-medium mb-2">Demo Admin Credentials:</p>
             <p className="text-xs text-gray-400">
-              Email: <span className="text-white">admin@autocar.id</span>
+              Email: <span className="text-white">admin@pasarmobilbekas.id</span>
             </p>
             <p className="text-xs text-gray-400">
               Password: <span className="text-white">admin123</span>
@@ -154,7 +154,7 @@ export default function AdminLoginPage() {
             href="/"
             className="text-sm text-gray-400 hover:text-gold transition-colors"
           >
-            ← Back to AutoCar
+            ← Back to Pasar Mobil Bekas
           </Link>
         </div>
       </div>

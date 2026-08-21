@@ -6,8 +6,8 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   title: {
-    default: "AutoCar — Buy & Sell New and Used Cars",
-    template: "%s | AutoCar",
+    default: "Pasar Mobil Bekas — Buy & Sell New and Used Cars",
+    template: "%s | Pasar Mobil Bekas",
   },
   description:
     "Indonesia's leading automotive marketplace. Browse thousands of new and used cars with video listings, verified sellers, and secure transactions.",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "mobil baru",
   ],
   openGraph: {
-    title: "AutoCar — Buy & Sell New and Used Cars",
+    title: "Pasar Mobil Bekas — Buy & Sell New and Used Cars",
     description:
       "Indonesia's leading automotive marketplace with video listings.",
     type: "website",
@@ -44,7 +44,7 @@ export default function RootLayout({
         <Footer />
         <WhatsAppFloat
           phoneNumber="6281234567890"
-          businessName="AutoCar"
+          businessName="Pasar Mobil Bekas"
           message="Hi! I'm interested in buying a car. Can you help me?"
         />
       </body>

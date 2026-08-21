@@ -59,8 +59,8 @@ export default function AdminLayout({
             </div>
             {sidebarOpen && (
               <span className="text-lg font-bold font-heading tracking-widest">
-                <span className="text-white">AUTO</span>
-                <span className="text-gold">CAR</span>
+                <span className="text-white text-sm">PASAR</span>
+                <span className="text-gold text-sm">MOBIL</span>
               </span>
             )}
           </Link>
@@ -150,8 +150,8 @@ export default function AdminLayout({
               <Shield className="h-5 w-5 text-white" />
             </div>
             <span className="text-lg font-bold font-heading tracking-widest">
-              <span className="text-white">AUTO</span>
-              <span className="text-gold">CAR</span>
+              <span className="text-white text-sm">PASAR</span>
+              <span className="text-gold text-sm">MOBIL</span>
             </span>
           </Link>
           <button

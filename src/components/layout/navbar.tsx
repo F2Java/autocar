@@ -57,7 +57,7 @@ export function Navbar() {
           <Link
             href="/"
             className="flex items-center gap-3 group"
-            aria-label="AutoCar Home"
+            aria-label="Pasar Mobil Bekas Home"
           >
             <div className="relative">
               <div className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center transition-transform group-hover:scale-105">
@@ -66,11 +66,11 @@ export function Navbar() {
               <div className="absolute inset-0 rounded-xl bg-red-600 blur-lg opacity-0 group-hover:opacity-50 transition-opacity" />
             </div>
             <div className="hidden sm:block">
-              <span className="text-xl font-bold text-white font-heading tracking-widest">
-                AUTO
+              <span className="text-lg font-bold text-white font-heading tracking-widest">
+                PASAR
               </span>
-              <span className="text-xl font-bold text-gold font-heading tracking-widest">
-                CAR
+              <span className="text-lg font-bold text-gold font-heading tracking-widest">
+                MOBIL
               </span>
             </div>
           </Link>

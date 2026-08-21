@@ -32,7 +32,7 @@ const footerLinks = {
     { label: "Promote Listing", href: "/promote" },
   ],
   company: [
-    { label: "About AutoCar", href: "/about" },
+    { label: "About Pasar Mobil Bekas", href: "/about" },
     { label: "How It Works", href: "/how-it-works" },
     { label: "Careers", href: "/careers" },
     { label: "Blog", href: "/blog" },
@@ -93,16 +93,16 @@ export function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Brand & Newsletter */}
           <div className="lg:col-span-4 space-y-6">
-            <Link href="/" className="flex items-center gap-3" aria-label="AutoCar Home">
+            <Link href="/" className="flex items-center gap-3" aria-label="Pasar Mobil Bekas Home">
               <div className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center">
                 <Car className="h-6 w-6 text-white" />
               </div>
               <div>
-                <span className="text-xl font-bold text-white font-heading tracking-widest">
-                  AUTO
+                <span className="text-lg font-bold text-white font-heading tracking-widest">
+                  PASAR
                 </span>
-                <span className="text-xl font-bold text-gold font-heading tracking-widest">
-                  CAR
+                <span className="text-lg font-bold text-gold font-heading tracking-widest">
+                  MOBIL
                 </span>
               </div>
             </Link>
@@ -250,7 +250,7 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-gray-500">
-              &copy; {new Date().getFullYear()} AutoCar. All rights reserved.
+              &copy; {new Date().getFullYear()} Pasar Mobil Bekas. All rights reserved.
             </p>
             <div className="flex items-center gap-6 text-xs text-gray-500">
               <Link href="/privacy" className="hover:text-white transition-colors">

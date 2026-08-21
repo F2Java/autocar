@@ -225,7 +225,7 @@ export function HomePageClient({ featuredCars }: HomePageClientProps) {
               <Car className="h-12 w-12 text-neutral-600 mx-auto mb-4" />
               <h3 className="text-lg font-medium text-white mb-2">No featured cars yet</h3>
               <p className="text-neutral-400 mb-4">
-                Be the first to list a featured car on AutoCar
+                Be the first to list a featured car on Pasar Mobil Bekas
               </p>
               <Link
                 href="/sell"

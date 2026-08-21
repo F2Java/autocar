@@ -80,7 +80,7 @@ ${data.message ? `📝 Message: "${data.message}"` : ""}
 
 Reply to this message or call them directly to follow up.
 
-— AutoCar Marketplace
+— Pasar Mobil Bekas Marketplace
   `.trim()
 }
 
@@ -123,7 +123,7 @@ Hi ${data.recipientName}!
     msg += `\n\n👉 ${data.ctaUrl}`
   }
 
-  msg += `\n\n_Browse more at AutoCar.id_`
+  msg += `\n\n_Browse more at Pasar Mobil Bekas.id_`
 
   return msg
 }
@@ -160,7 +160,7 @@ A car on your watchlist just dropped in price:
 Don't miss out — view details now:
 ${data.carUrl}
 
-— AutoCar Marketplace
+— Pasar Mobil Bekas Marketplace
   `.trim()
 }
 
@@ -204,7 +204,7 @@ Tips to sell faster:
 
 Good luck with the sale!
 
-— AutoCar Marketplace
+— Pasar Mobil Bekas Marketplace
   `.trim()
 }
 
@@ -237,7 +237,7 @@ Regarding: *${data.carTitle}*
 
 Reply to continue the conversation.
 
-— AutoCar Marketplace
+— Pasar Mobil Bekas Marketplace
   `.trim()
 }
 
@@ -274,7 +274,7 @@ We found a new listing that matches your criteria:
 View details:
 ${data.carUrl}
 
-— AutoCar Marketplace
+— Pasar Mobil Bekas Marketplace
   `.trim()
 }
 

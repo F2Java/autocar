@@ -13,7 +13,7 @@ interface WhatsAppFloatProps {
 export function WhatsAppFloat({
   phoneNumber,
   message = "Hi! I'm interested in your cars. Can you help me?",
-  businessName = "AutoCar",
+  businessName = "Pasar Mobil Bekas",
 }: WhatsAppFloatProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [customMessage, setCustomMessage] = useState("")

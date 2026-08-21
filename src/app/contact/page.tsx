@@ -80,7 +80,7 @@ export default function ContactPage() {
           {/* Contact Methods */}
           <div className="space-y-6">
             <h2 className="text-lg font-bold text-white font-heading tracking-wide mb-4">
-              CONTACT US
+              HUBUNGI KAMI
             </h2>
 
             {contactMethods.map((method) => (
@@ -181,7 +181,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <label className="block text-sm font-medium text-white mb-1.5">
-                        Subject *
+                        Subjek *
                       </label>
                       <input
                         type="text"
@@ -189,7 +189,7 @@ export default function ContactPage() {
                         onChange={(e) => setForm({ ...form, subject: e.target.value })}
                         required
                         className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
-                        aria-label="Subject"
+                        aria-label="Subjek"
                       />
                     </div>
                   </div>
@@ -212,7 +212,7 @@ export default function ContactPage() {
                     type="submit"
                     className="w-full h-12 rounded-xl bg-red-600 hover:bg-red-500 text-white font-medium flex items-center justify-center gap-2 transition-colors"
                   >
-                    <Send className="h-4 w-4" /> Send Message
+                    <Send className="h-4 w-4" /> Kirim Pesan
                   </button>
                 </form>
               )}

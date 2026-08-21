@@ -31,10 +31,10 @@ export default function FavoritesPage() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-white font-heading tracking-wide">
-                MY FAVORITES
+                FAVORITKUES
               </h1>
               <p className="text-white/60 mt-1">
-                {favorites.length} saved car{favorites.length !== 1 ? "s" : ""}
+                {favorites.length} simpanan mobil{favorites.length !== 1 ? "s" : ""}
               </p>
             </div>
             {favorites.length > 0 && (
@@ -43,7 +43,7 @@ export default function FavoritesPage() {
                 className="flex items-center gap-2 px-4 py-2 rounded-xl border border-neutral-700 text-gray-400 hover:text-red-400 hover:border-red-500 text-sm transition-colors"
               >
                 <Trash2 className="h-4 w-4" />
-                Clear All
+                Hapus Semua
               </button>
             )}
           </div>
@@ -55,9 +55,9 @@ export default function FavoritesPage() {
         {favorites.length === 0 && (
           <div className="text-center py-20 bg-neutral-900 rounded-xl border border-neutral-800">
             <Heart className="h-16 w-16 text-gray-600 mx-auto mb-4" />
-            <h2 className="text-xl font-bold text-white mb-2">No Favorites Yet</h2>
+            <h2 className="text-xl font-bold text-white mb-2">Belum Ada Favorit</h2>
             <p className="text-gray-400 mb-6 max-w-md mx-auto">
-              Browse our listings and tap the heart icon to save cars you like
+              Jelajahi listing kami dan ketuk ikon hati untuk simpan mobil yang kamu suka
             </p>
             <Link
               href="/cars"
@@ -118,7 +118,7 @@ export default function FavoritesPage() {
                       href={`/cars/${car.slug}`}
                       className="flex-1 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-medium text-center transition-colors"
                     >
-                      View Details
+                      Lihat Detail
                     </Link>
                     <button
                       onClick={() => removeFavorite(car.id)}

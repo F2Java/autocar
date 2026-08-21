@@ -18,12 +18,12 @@ import {
 import { cn } from "@/lib/utils"
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/cars", label: "Browse Cars" },
-  { href: "/sell", label: "Sell Car" },
-  { href: "/locations", label: "Dealers" },
-  { href: "/estimate", label: "Get Quote" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Beranda" },
+  { href: "/cars", label: "Cari Mobil" },
+  { href: "/sell", label: "Jual Mobil" },
+  { href: "/locations", label: "Dealer" },
+  { href: "/estimate", label: "Minta Penawaran" },
+  { href: "/contact", label: "Kontak" },
 ]
 
 export function Navbar() {
@@ -99,14 +99,14 @@ export function Navbar() {
             <Link
               href="/search"
               className="p-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-neutral-800/50 transition-all"
-              aria-label="Search cars"
+              aria-label="Cari mobil"
             >
               <Search className="h-5 w-5" />
             </Link>
             <Link
               href="/favorites"
               className="p-2.5 rounded-xl text-gray-400 hover:text-white hover:bg-neutral-800/50 transition-all"
-              aria-label="Favorites"
+              aria-label="Favorit"
             >
               <Heart className="h-5 w-5" />
             </Link>
@@ -115,7 +115,7 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-medium transition-colors"
-              aria-label="Contact via WhatsApp"
+              aria-label="Hubungi via WhatsApp"
             >
               <MessageCircle className="h-4 w-4" />
               WhatsApp
@@ -173,7 +173,7 @@ export function Navbar() {
               className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-neutral-800 text-white text-sm font-medium"
             >
               <Heart className="h-4 w-4" />
-              My Favorites
+              My Favorit
             </Link>
             <a
               href="https://wa.me/6281234567890"
@@ -182,14 +182,14 @@ export function Navbar() {
               className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-red-600 text-white text-sm font-medium"
             >
               <MessageCircle className="h-4 w-4" />
-              WhatsApp Us
+              Chat WhatsApp
             </a>
             <Link
               href="/sell"
               className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-red-600 text-white text-sm font-medium"
             >
               <PlusCircle className="h-4 w-4" />
-              Sell Your Car
+              Jual Mobil Anda
             </Link>
           </div>
         </div>

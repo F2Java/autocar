@@ -250,7 +250,7 @@ export default function EstimatePage() {
                   value={form.message}
                   onChange={(e) => updateField("message", e.target.value)}
                   rows={4}
-                  placeholder="Tell us more about what you're looking for..."
+                  placeholder="Ceritakan lebih banyak tentang yang kamu cari...'re looking for..."
                   className="w-full px-4 py-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold resize-none"
                 />
               </div>

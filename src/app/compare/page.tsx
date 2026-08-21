@@ -35,7 +35,7 @@ interface CompareCar {
   features: string[]
 }
 
-function formatPrice(price: number): string {
+function formatHarga(price: number): string {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
@@ -45,15 +45,15 @@ function formatPrice(price: number): string {
 }
 
 const specs = [
-  { key: "year", label: "Year", icon: Calendar },
-  { key: "condition", label: "Condition", icon: Car },
-  { key: "price", label: "Price", icon: null },
-  { key: "mileage", label: "Mileage", icon: Gauge },
-  { key: "fuelType", label: "Fuel Type", icon: Fuel },
-  { key: "transmission", label: "Transmission", icon: Settings },
-  { key: "bodyType", label: "Body Type", icon: Car },
-  { key: "horsepower", label: "Horsepower", icon: Zap },
-  { key: "city", label: "Location", icon: MapPin },
+  { key: "year", label: "Tahun", icon: Calendar },
+  { key: "condition", label: "Kondisi", icon: Car },
+  { key: "price", label: "Harga", icon: null },
+  { key: "mileage", label: "Kilometer", icon: Gauge },
+  { key: "fuelType", label: "Jenis Bahan Bakar", icon: Fuel },
+  { key: "transmission", label: "transmisi", icon: Settings },
+  { key: "bodyType", label: "Tipe Bodi", icon: Car },
+  { key: "horsepower", label: "tenaga kuda", icon: Zap },
+  { key: "city", label: "Lokasi", icon: MapPin },
 ]
 
 export default function ComparePage() {
@@ -100,8 +100,8 @@ function CompareContent() {
 
   const getSpecValue = (car: CompareCar, key: string): string => {
     switch (key) {
-      case "price": return formatPrice(car.price)
-      case "mileage": return car.mileage ? `${car.mileage.toLocaleString()} km` : "New"
+      case "price": return formatHarga(car.price)
+      case "mileage": return car.mileage ? `${car.mileage.toLocaleString()} km` : "Baru"
       case "horsepower": return car.horsepower ? `${car.horsepower} HP` : "N/A"
       case "condition": return car.condition.replace("_", " ")
       default: return String(car[key as keyof CompareCar] || "N/A")
@@ -109,10 +109,10 @@ function CompareContent() {
   }
 
   // Find best values for highlighting
-  const getBestPrice = () => Math.min(...cars.map((c) => c.price))
-  const getBestMileage = () => {
-    const withMileage = cars.filter((c) => c.mileage > 0)
-    return withMileage.length > 0 ? Math.min(...withMileage.map((c) => c.mileage)) : null
+  const getBestHarga = () => Math.min(...cars.map((c) => c.price))
+  const getBestKilometer = () => {
+    const withKilometer = cars.filter((c) => c.mileage > 0)
+    return withKilometer.length > 0 ? Math.min(...withKilometer.map((c) => c.mileage)) : null
   }
   const getBestHorsepower = () => {
     const withHP = cars.filter((c) => c.horsepower > 0)
@@ -133,8 +133,8 @@ function CompareContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
             <Car className="h-16 w-16 text-gray-600 mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-white font-heading mb-2">No Cars to Compare</h1>
-            <p className="text-gray-400 mb-6">Select cars from the listing to compare them side by side</p>
+            <h1 className="text-2xl font-bold text-white font-heading mb-2">Belum Ada Mobil untuk Dibandingkan</h1>
+            <p className="text-gray-400 mb-6">Pilih mobil dari listing untuk dibandingkan berdampingan</p>
             <Link
               href="/cars"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-medium transition-colors"
@@ -161,9 +161,9 @@ function CompareContent() {
             Back to listings
           </Link>
           <h1 className="text-2xl sm:text-3xl font-bold text-white font-heading tracking-wide">
-            COMPARE CARS
+            BANDINGKAN MOBIL
           </h1>
-          <p className="text-white/60 mt-1">Comparing {cars.length} vehicles side by side</p>
+          <p className="text-white/60 mt-1"> Membandingkan {cars.length} mobil berdampingan</p>
         </div>
       </div>
 
@@ -179,7 +179,7 @@ function CompareContent() {
               />
               <div className="p-4">
                 <h3 className="text-sm font-bold text-white line-clamp-2">{car.title}</h3>
-                <p className="text-lg font-bold text-gold mt-1">{formatPrice(car.price)}</p>
+                <p className="text-lg font-bold text-gold mt-1">{formatHarga(car.price)}</p>
                 <Link
                   href={`/cars/${car.slug}`}
                   className="inline-block mt-2 text-xs text-gold hover:text-gold-light"
@@ -198,7 +198,7 @@ function CompareContent() {
               <thead>
                 <tr className="border-b border-neutral-800">
                   <th className="text-left p-4 text-sm font-bold text-gold font-heading tracking-wide min-w-[150px]">
-                    SPECIFICATION
+                    SPEK
                   </th>
                   {cars.map((car) => (
                     <th key={car.id} className="text-left p-4 text-sm font-bold text-white min-w-[200px]">
@@ -214,8 +214,8 @@ function CompareContent() {
                     {cars.map((car) => {
                       const value = getSpecValue(car, spec.key)
                       const isBest =
-                        (spec.key === "price" && car.price === getBestPrice()) ||
-                        (spec.key === "mileage" && car.mileage === getBestMileage()) ||
+                        (spec.key === "price" && car.price === getBestHarga()) ||
+                        (spec.key === "mileage" && car.mileage === getBestKilometer()) ||
                         (spec.key === "horsepower" && car.horsepower === getBestHorsepower())
 
                       return (
@@ -234,7 +234,7 @@ function CompareContent() {
 
         {/* Features Comparison */}
         <div className="mt-8 bg-neutral-900 border border-neutral-800 rounded-xl p-6">
-          <h3 className="text-lg font-bold text-white font-heading tracking-wide mb-4">FEATURES</h3>
+          <h3 className="text-lg font-bold text-white font-heading tracking-wide mb-4">FITUR</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {cars.map((car) => (
               <div key={car.id}>
@@ -248,7 +248,7 @@ function CompareContent() {
                       </li>
                     ))
                   ) : (
-                    <li className="text-xs text-gray-500">No features listed</li>
+                    <li className="text-xs text-gray-500">Belum ada fitur</li>
                   )}
                 </ul>
               </div>

@@ -171,10 +171,10 @@ export default function LocationsPage() {
       <div className="bg-red-dark pt-24 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-white font-heading tracking-wide">
-            FIND A DEALER
+            CARI DEALER
           </h1>
           <p className="text-white/60 mt-1">
-            Visit our trusted dealers across Indonesia
+            Kunjungi dealer terpercaya kami di seluruh Indonesia
           </p>
         </div>
       </div>
@@ -188,7 +188,7 @@ export default function LocationsPage() {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by name, address, or city..."
+              placeholder="Cari berdasarkan nama, alamat, atau kota..."
               className="w-full h-12 pl-10 pr-4 rounded-xl bg-neutral-900 border border-neutral-800 text-white placeholder:text-gray-500 focus:outline-none focus:border-gold transition-colors"
             />
           </div>
@@ -197,7 +197,7 @@ export default function LocationsPage() {
             onChange={(e) => setSelectedCity(e.target.value)}
             className="h-12 px-4 rounded-xl bg-neutral-900 border border-neutral-800 text-white focus:outline-none focus:border-gold"
           >
-            <option value="">All Cities</option>
+            <option value="">Semua Kota</option>
             {cities.map((city) => (
               <option key={city} value={city}>{city}</option>
             ))}
@@ -308,7 +308,7 @@ export default function LocationsPage() {
               ) : (
                 <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-8 text-center">
                   <MapPin className="h-12 w-12 text-gray-600 mx-auto mb-3" />
-                  <p className="text-gray-400 text-sm">Click a pin on the map to see dealer details</p>
+                  <p className="text-gray-400 text-sm">Klik pin di peta untuk lihat detail dealer</p>
                 </div>
               )}
             </div>
@@ -375,7 +375,7 @@ export default function LocationsPage() {
         {filteredDealers.length === 0 && (
           <div className="text-center py-16">
             <MapPin className="h-12 w-12 text-gray-600 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-white mb-2">No dealers found</h3>
+            <h3 className="text-lg font-medium text-white mb-2">No dealer ditemukan</h3>
             <p className="text-gray-400">Try adjusting your search or filters</p>
           </div>
         )}

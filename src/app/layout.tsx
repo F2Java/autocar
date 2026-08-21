@@ -7,26 +7,26 @@ import "./globals.css"
 
 export const metadata: Metadata = {
   title: {
-    default: "Pasar Mobil Bekas — Buy & Sell New and Used Cars",
+    default: "Pasar Mobil Bekas — Jual Beli Mobil Bekas & Baru",
     template: "%s | Pasar Mobil Bekas",
   },
   description:
-    "Indonesia's leading automotive marketplace. Browse thousands of new and used cars with video listings, verified sellers, and secure transactions.",
+    "Pasar mobil bekas dan baru terbesar di Indonesia. Temukan ribuan mobil dengan video tour, penjual terverifikasi, dan transaksi aman.",
   keywords: [
-    "buy car",
-    "sell car",
-    "used car",
-    "new car",
-    "automotive",
-    "car marketplace",
-    "Indonesia",
+    "jual mobil",
+    "beli mobil",
     "mobil bekas",
     "mobil baru",
+    "otomotif",
+    "pasar mobil",
+    "Indonesia",
+    "mobil murah",
+    "mobil berkualitas",
   ],
   openGraph: {
-    title: "Pasar Mobil Bekas — Buy & Sell New and Used Cars",
+    title: "Pasar Mobil Bekas — Jual Beli Mobil Bekas & Baru",
     description:
-      "Indonesia's leading automotive marketplace with video listings.",
+      "Pasar mobil bekas dan baru terbesar di Indonesia dengan video tour.",
     type: "website",
     locale: "id_ID",
   },
@@ -47,7 +47,7 @@ export default function RootLayout({
           <WhatsAppFloat
             phoneNumber="6281234567890"
             businessName="Pasar Mobil Bekas"
-            message="Hi! I'm interested in buying a car. Can you help me?"
+            message="Halo! Saya tertarik dengan mobil yang dijual. Bisa bantu saya?"
           />
         </Providers>
       </body>

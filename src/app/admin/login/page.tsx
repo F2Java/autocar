@@ -58,9 +58,9 @@ export default function AdminLoginPage() {
             <Shield className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-white font-heading tracking-wider">
-            ADMIN PANEL
+            PANEL ADMIN
           </h1>
-          <p className="text-gray-400 mt-2">Sign in to manage Pasar Mobil Bekas</p>
+          <p className="text-gray-400 mt-2">Masuk untuk mengelola Pasar Mobil Bekas</p>
         </div>
 
         {/* Login Form */}
@@ -69,7 +69,7 @@ export default function AdminLoginPage() {
             {/* Email */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
-                Email Address
+                Alamat Email
               </label>
               <input
                 type="email"
@@ -92,7 +92,7 @@ export default function AdminLoginPage() {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your password"
+                  placeholder="Masukkan password kamu"
                   className="w-full px-4 py-3 rounded-xl bg-neutral-800 border border-neutral-700 text-white placeholder:text-gray-500 focus:outline-none focus:border-gold transition-colors pr-12"
                   required
                 />
@@ -128,10 +128,10 @@ export default function AdminLoginPage() {
               {loading ? (
                 <>
                   <Loader2 className="h-5 w-5 animate-spin" />
-                  Signing in...
+                  Masuk...
                 </>
               ) : (
-                "Sign In"
+                "Masuk"
               )}
             </button>
           </form>
@@ -154,7 +154,7 @@ export default function AdminLoginPage() {
             href="/"
             className="text-sm text-gray-400 hover:text-gold transition-colors"
           >
-            ← Back to Pasar Mobil Bekas
+            ← Kembali ke Pasar Mobil Bekas
           </Link>
         </div>
       </div>

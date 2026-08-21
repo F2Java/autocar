@@ -125,10 +125,10 @@ function CarsPageContent() {
       <div className="bg-red-dark pt-24 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl font-bold text-white font-heading tracking-wide mb-2">
-            BROWSE CARS
+            CARI MOBIL
           </h1>
           <p className="text-white/70">
-            Find your perfect car from thousands of listings
+            Temu mobil impianmu dari ribuan listing
           </p>
         </div>
       </div>
@@ -201,7 +201,7 @@ function CarsPageContent() {
         {showFilters && (
           <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6 mb-6">
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-bold text-white font-heading tracking-wide">FILTERS</h3>
+              <h3 className="text-lg font-bold text-white font-heading tracking-wide">FILTER</h3>
               <button onClick={() => setShowFilters(false)} className="text-gray-400 hover:text-white">
                 <X className="h-5 w-5" />
               </button>
@@ -214,7 +214,7 @@ function CarsPageContent() {
                   onChange={(e) => updateFilter("make", e.target.value)}
                   className="w-full px-3 py-2 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                 >
-                  <option value="">All Makes</option>
+                  <option value="">Semua Merek</option>
                   <option value="Toyota">Toyota</option>
                   <option value="Honda">Honda</option>
                   <option value="BMW">BMW</option>
@@ -291,7 +291,7 @@ function CarsPageContent() {
         {/* Active Filters */}
         {hasActiveFilters && (
           <div className="flex items-center gap-1.5 sm:gap-2 mb-4 flex-wrap">
-            <span className="text-sm text-gray-400">Active:</span>
+            <span className="text-sm text-gray-400">Filter aktif:</span>
             {searchValue && (
               <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-red-600/20 text-red-400 text-xs">
                 Search: {searchValue}
@@ -311,7 +311,7 @@ function CarsPageContent() {
               ) : null
             )}
             <button onClick={clearFilters} className="text-xs text-gold hover:text-gold-light">
-              Clear all
+              Hapus semua
             </button>
           </div>
         )}
@@ -319,7 +319,7 @@ function CarsPageContent() {
         {/* Results Count */}
         <div className="flex items-center justify-between mb-6">
           <p className="text-sm text-gray-400">
-            {loading ? "Searching..." : `${totalResults} cars found`}
+            {loading ? "Searching..." : `${totalResults} mobil ditemukan`}
           </p>
         </div>
 
@@ -334,13 +334,13 @@ function CarsPageContent() {
         {!loading && cars.length === 0 && (
           <div className="text-center py-20 bg-neutral-900 rounded-xl border border-neutral-800">
             <Car className="h-12 w-12 text-neutral-600 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-white mb-2">No cars found</h3>
-            <p className="text-neutral-400 mb-4">Try adjusting your filters or search terms</p>
+            <h3 className="text-lg font-medium text-white mb-2">Mobil tidak ditemukan</h3>
+            <p className="text-neutral-400 mb-4">Coba ubah filter atau kata kunci pencarianmu</p>
             <button
               onClick={clearFilters}
               className="px-6 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-medium transition-colors"
             >
-              Clear Filters
+              Hapus Filter
             </button>
           </div>
         )}
@@ -368,7 +368,7 @@ function CarsPageContent() {
                   disabled={page === 1}
                   className="px-3 py-2 rounded-lg text-sm font-medium bg-neutral-800 text-gray-400 hover:text-white hover:bg-neutral-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                 >
-                  ← Prev
+                  ← Sebelumnya
                 </button>
 
                 {/* Page numbers */}
@@ -404,14 +404,14 @@ function CarsPageContent() {
                   disabled={page === totalPages}
                   className="px-3 py-2 rounded-lg text-sm font-medium bg-neutral-800 text-gray-400 hover:text-white hover:bg-neutral-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                 >
-                  Next →
+                  Selanjutnya →
                 </button>
               </div>
             )}
 
             {/* Results info */}
             <div className="text-center mt-4 text-sm text-gray-500">
-              Showing {((page - 1) * limit) + 1}–{Math.min(page * limit, totalResults)} of {totalResults} cars
+              Map {((page - 1) * limit) + 1}–{Math.min(page * limit, totalResults)} of {totalResults} cars
             </div>
           </>
         )}

@@ -19,30 +19,30 @@ import { cn } from "@/lib/utils"
 
 const footerLinks = {
   browse: [
-    { label: "New Cars", href: "/cars?condition=NEW" },
-    { label: "Used Cars", href: "/cars?condition=USED" },
-    { label: "Certified Pre-Owned", href: "/cars?condition=CERTIFIED_PRE_OWNED" },
-    { label: "Electric Vehicles", href: "/cars?fuelType=ELECTRIC" },
+    { label: "Mobil Baru", href: "/cars?condition=NEW" },
+    { label: "Mobil Bekas", href: "/cars?condition=USED" },
+    { label: "Mobil Berkualitas", href: "/cars?condition=CERTIFIED_PRE_OWNED" },
+    { label: "Mobil Listrik", href: "/cars?fuelType=ELECTRIC" },
     { label: "SUVs", href: "/cars?bodyType=SUV" },
   ],
   sell: [
-    { label: "Sell Your Car", href: "/sell" },
-    { label: "Get Estimate", href: "/estimate" },
-    { label: "Find Dealers", href: "/locations" },
+    { label: "Jual Mobil Kamu", href: "/sell" },
+    { label: "Minta Penawaran", href: "/estimate" },
+    { label: "Cari Dealer", href: "/locations" },
     { label: "Promote Listing", href: "/promote" },
   ],
   company: [
-    { label: "About Pasar Mobil Bekas", href: "/about" },
-    { label: "How It Works", href: "/how-it-works" },
+    { label: "Tentang Pasar Mobil Bekas", href: "/about" },
+    { label: "Cara Kerja", href: "/how-it-works" },
     { label: "Careers", href: "/careers" },
     { label: "Blog", href: "/blog" },
     { label: "Press", href: "/press" },
   ],
   support: [
-    { label: "Help Center", href: "/help" },
-    { label: "Contact Us", href: "/contact" },
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Service", href: "/terms" },
+    { label: "Pusat Bantuan", href: "/help" },
+    { label: "Hubungi Kami", href: "/contact" },
+    { label: "Kebijakan Privasi", href: "/privacy" },
+    { label: "Syarat Layanan", href: "/terms" },
     { label: "FAQ", href: "/faq" },
   ],
 }
@@ -108,13 +108,13 @@ export function Footer() {
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed max-w-sm">
               Indonesia&apos;s leading automotive marketplace. Buy and sell new &amp; used
-              cars with confidence. Video listings, verified sellers, and secure transactions.
+              dengan percaya diri. Video listing, penjual terverifikasi, dan transaksi aman.
             </p>
 
             {/* Newsletter */}
             <div>
               <h4 className="text-sm font-bold text-white mb-3 font-heading tracking-wide">
-                GET THE LATEST DEALS
+                UPDATE PENAWARAN TERBAIK
               </h4>
               <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2">
                 <div className="relative flex-1">
@@ -123,7 +123,7 @@ export function Footer() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Your email address"
+                    placeholder="Email kamu"
                     className="w-full h-10 pl-10 pr-4 rounded-xl bg-neutral-900 border border-neutral-800 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold transition-colors"
                     required
                     aria-label="Email for newsletter"

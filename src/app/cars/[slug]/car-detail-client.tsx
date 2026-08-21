@@ -163,7 +163,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
           className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white mb-6 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to listings
+          Kembali ke listing
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -310,7 +310,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
             {car.description && (
               <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
                 <h3 className="text-lg font-bold text-white font-heading tracking-wide mb-3">
-                  DESCRIPTION
+                  DESKRIPSI
                 </h3>
                 <p className="text-gray-300 leading-relaxed whitespace-pre-line">
                   {car.description}
@@ -321,7 +321,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
             {/* Technical Specs */}
             <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
               <h3 className="text-lg font-bold text-white font-heading tracking-wide mb-4">
-                TECHNICAL SPECS
+                SPEK TEKNIS
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
@@ -349,7 +349,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
             {car.features.length > 0 && (
               <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
                 <h3 className="text-lg font-bold text-white font-heading tracking-wide mb-4">
-                  FEATURES & EQUIPMENT
+                  FITUR FEATURES & EQUIPMENT PERALATAN
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {car.features.map((feature) => (
@@ -371,7 +371,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
             {/* Contact Card */}
             <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-4 sm:p-6 sticky top-24 overflow-hidden">
               <h3 className="text-lg font-bold text-white font-heading tracking-wide mb-4">
-                CONTACT SELLER
+                HUBUNGI PENJUAL
               </h3>
 
               <div className="flex items-center gap-3 mb-4">
@@ -379,7 +379,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
                   <Car className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <p className="font-medium text-white text-sm truncate max-w-[200px]">{car.dealerName || "Private Seller"}</p>
+                  <p className="font-medium text-white text-sm truncate max-w-[200px]">{car.dealerName || "Penjual Pribadi"}</p>
                   <p className="text-xs text-gray-400 capitalize">{car.dealerType}</p>
                 </div>
               </div>
@@ -405,7 +405,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
                     className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-medium transition-colors"
                   >
                     <Phone className="h-5 w-5" />
-                    Call Now
+                    Hubungi Sekarang
                   </a>
                 )}
                 {car.dealerEmail && (
@@ -428,7 +428,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
                   className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-gold/20 hover:bg-gold/30 text-gold font-medium transition-colors"
                 >
                   <Send className="h-5 w-5" />
-                  Send Inquiry
+                  Send Pertanyaan
                 </button>
               )}
 
@@ -445,7 +445,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
                 <form onSubmit={handleInquirySubmit} className="space-y-3 mt-4">
                   <input
                     type="text"
-                    placeholder="Your Name"
+                    placeholder="Nama kamu"
                     value={inquiryForm.name}
                     onChange={(e) =>
                       setInquiryForm({ ...inquiryForm, name: e.target.value })
@@ -455,7 +455,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
                   />
                   <input
                     type="email"
-                    placeholder="Email Address"
+                    placeholder="Alamat Email"
                     value={inquiryForm.email}
                     onChange={(e) =>
                       setInquiryForm({ ...inquiryForm, email: e.target.value })
@@ -465,7 +465,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
                   />
                   <input
                     type="tel"
-                    placeholder="Phone Number"
+                    placeholder="Nomor HP"
                     value={inquiryForm.phone}
                     onChange={(e) =>
                       setInquiryForm({ ...inquiryForm, phone: e.target.value })
@@ -473,7 +473,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
                     className="w-full px-4 py-2.5 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
                   />
                   <textarea
-                    placeholder="Your message..."
+                    placeholder="Pesan kamu..."
                     rows={3}
                     value={inquiryForm.message}
                     onChange={(e) =>
@@ -501,7 +501,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
                       disabled={submitting}
                       className="px-6 py-2.5 rounded-lg bg-gold hover:bg-gold-dark text-black text-sm font-medium transition-colors disabled:opacity-50"
                     >
-                      {submitting ? "Sending..." : "Send"}
+                      {submitting ? "Mengirim..." : "Send"}
                     </button>
                   </div>
                 </form>
@@ -510,22 +510,22 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
               {/* Quick Stats */}
               <div className="mt-4 pt-4 border-t border-neutral-800">
                 <div className="flex items-center justify-between text-xs sm:text-sm">
-                  <span className="text-gray-400">Views</span>
+                  <span className="text-gray-400">Dilihat</span>
                   <span className="text-white">{car.views.toLocaleString()}</span>
                 </div>
                 <div className="flex items-center justify-between text-xs sm:text-sm mt-2">
-                  <span className="text-gray-400">Favorites</span>
+                  <span className="text-gray-400">Favorit</span>
                   <span className="text-white">{car.favorites}</span>
                 </div>
                 <div className="flex items-center justify-between text-xs sm:text-sm mt-2">
-                  <span className="text-gray-400">Listed</span>
+                  <span className="text-gray-400">Diupload</span>
                   <span className="text-white">
                     {new Date(car.createdAt).toLocaleDateString("id-ID")}
                   </span>
                 </div>
               </div>
 
-              {/* Share */}
+              {/* Bagikan */}
               <div className="mt-6 flex gap-2">
                 <button
                   onClick={() => {
@@ -534,11 +534,11 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
                   className="flex items-center gap-2 flex-1 py-2.5 rounded-lg border border-neutral-700 text-gray-400 hover:text-white hover:border-gold text-sm transition-colors justify-center"
                 >
                   <Share2 className="h-4 w-4" />
-                  Share
+                  Bagikan
                 </button>
                 <button className="flex items-center gap-2 flex-1 py-2.5 rounded-lg border border-neutral-700 text-gray-400 hover:text-red-500 hover:border-red-500 text-sm transition-colors justify-center">
                   <Heart className="h-4 w-4" />
-                  Save
+                  Simpan
                 </button>
               </div>
             </div>

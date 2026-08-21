@@ -17,7 +17,7 @@ import { VideoCard } from "@/components/ui/video-card"
 import { CarCard } from "@/components/ui/car-card"
 import { SearchBar } from "@/components/ui/search-bar"
 
-interface FeaturedCar {
+interface UnggulanCar {
   id: string
   slug: string
   title: string
@@ -44,7 +44,7 @@ interface FeaturedCar {
 }
 
 interface HomePageClientProps {
-  featuredCars: FeaturedCar[]
+  featuredCars: UnggulanCar[]
 }
 
 const categories = [
@@ -93,15 +93,15 @@ export function HomePageClient({ featuredCars }: HomePageClientProps) {
             <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-black/70 border border-gold/50 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
               <span className="text-sm text-gold font-medium">
-                #1 Automotive Marketplace in Indonesia
+                Pasar Mobil #1 di Indonesia
               </span>
             </div>
 
             {/* Heading */}
             <div className="space-y-4">
               <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold font-heading tracking-wider text-white leading-tight">
-                FIND YOUR
-                <span className="block text-gold">DREAM CAR</span>
+                CARI
+                <span className="block text-gold">MOBIL IMPIANMU</span>
               </h1>
               <p className="text-base sm:text-xl text-white max-w-xl leading-relaxed">
                 Browse thousands of new and used cars with immersive video
@@ -143,7 +143,7 @@ export function HomePageClient({ featuredCars }: HomePageClientProps) {
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
           <div className="flex flex-col items-center gap-2 text-white/60">
-            <span className="text-xs uppercase tracking-widest">Scroll to explore</span>
+            <span className="text-xs uppercase tracking-widest">Gulir untuk menjelajahi</span>
             <div className="w-6 h-10 rounded-full border-2 border-white/30 flex justify-center pt-2">
               <div className="w-1 h-3 rounded-full bg-gold animate-bounce" />
             </div>
@@ -157,15 +157,15 @@ export function HomePageClient({ featuredCars }: HomePageClientProps) {
           <div className="flex items-center justify-between mb-8">
             <div>
               <h2 className="text-2xl font-bold text-white font-heading tracking-wide">
-                BROWSE BY CATEGORY
+                JENIS MOBIL
               </h2>
-              <p className="text-white/70 mt-1">Find the perfect car for your lifestyle</p>
+              <p className="text-white/70 mt-1">Temu mobil sesuai kebutuhanmu</p>
             </div>
             <Link
               href="/cars"
               className="hidden sm:flex items-center gap-2 text-sm text-gold hover:text-gold-light transition-colors"
             >
-              View All <ArrowRight className="h-4 w-4" />
+              Lihat Semua <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
@@ -188,7 +188,7 @@ export function HomePageClient({ featuredCars }: HomePageClientProps) {
         </div>
       </section>
 
-      {/* Featured Cars - Black section */}
+      {/* Unggulan Cars - Black section */}
       <section className="py-16 bg-black">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between mb-8">
@@ -196,21 +196,21 @@ export function HomePageClient({ featuredCars }: HomePageClientProps) {
               <div className="flex items-center gap-2 mb-2">
                 <Star className="h-5 w-5 text-gold" fill="currentColor" />
                 <span className="text-sm text-gold font-medium uppercase tracking-wider">
-                  Featured
+                  Unggulan
                 </span>
               </div>
               <h2 className="text-2xl font-bold text-white font-heading tracking-wide">
-                TOP PICKS FOR YOU
+                PILIHAN TERBAIK UNTUKMU
               </h2>
               <p className="text-white/60 mt-1">
-                Handpicked cars with video tours from verified sellers
+                Mobil pilihan dengan video tour dari penjual terverifikasi
               </p>
             </div>
             <Link
               href="/cars?featured=true"
               className="hidden sm:flex items-center gap-2 text-sm text-gold hover:text-gold-light transition-colors"
             >
-              View All <ArrowRight className="h-4 w-4" />
+              Lihat Semua <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
 
@@ -242,7 +242,7 @@ export function HomePageClient({ featuredCars }: HomePageClientProps) {
               href="/cars"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-medium transition-colors"
             >
-              View All Cars <ArrowRight className="h-4 w-4" />
+              Lihat Semua Cars <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>

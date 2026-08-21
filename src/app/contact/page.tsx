@@ -35,7 +35,7 @@ export default function ContactPage() {
       icon: MessageCircle,
       label: "WhatsApp",
       value: "+62 812-3456-7890",
-      action: () => window.open("https://wa.me/6281234567890", "_blank"),
+      action: () => window.open("https://wa.me/6281313717101", "_blank"),
       color: "bg-emerald-500",
     },
     {

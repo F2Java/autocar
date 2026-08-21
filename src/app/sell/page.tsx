@@ -439,7 +439,7 @@ export default function SellCarPage() {
                     type="tel"
                     value={form.whatsapp}
                     onChange={(e) => updateForm("whatsapp", e.target.value)}
-                    placeholder="6281234567890"
+                    placeholder="6281313717101"
                     className="w-full h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
                   />
                 </FormField>

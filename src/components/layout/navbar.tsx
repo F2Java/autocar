@@ -111,7 +111,7 @@ export function Navbar() {
               <Heart className="h-5 w-5" />
             </Link>
             <a
-              href="https://wa.me/6281234567890"
+              href="https://wa.me/6281313717101"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-medium transition-colors"
@@ -176,7 +176,7 @@ export function Navbar() {
               My Favorit
             </Link>
             <a
-              href="https://wa.me/6281234567890"
+              href="https://wa.me/6281313717101"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-red-600 text-white text-sm font-medium"

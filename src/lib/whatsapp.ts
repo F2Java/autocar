@@ -16,7 +16,7 @@ function getClient() {
 // ─── Base Sender ─────────────────────────────────────────────────────────────
 
 interface SendWhatsAppOptions {
-  to: string // Phone number with country code, e.g., "6281234567890"
+  to: string // Phone number with country code, e.g., "6281313717101"
   message: string
   mediaUrl?: string[]
 }

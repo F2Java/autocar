@@ -154,7 +154,7 @@ export function Footer() {
                 { icon: Globe, href: "#", label: "Facebook" },
                 { icon: Globe, href: "#", label: "Twitter" },
                 { icon: Globe, href: "#", label: "YouTube" },
-                { icon: MessageCircle, href: "https://wa.me/6281234567890", label: "WhatsApp" },
+                { icon: MessageCircle, href: "https://wa.me/6281313717101", label: "WhatsApp" },
               ].map((social) => (
                 <a
                   key={social.label}

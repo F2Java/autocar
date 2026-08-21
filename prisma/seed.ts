@@ -185,7 +185,7 @@ const sampleCars = [
     exteriorColor: "Prominence Red", interiorColor: "Black Leather", colorCode: "#DC2626",
     features: ["Head-Up Display", "JBL Premium Audio", "Toyota Safety Sense", "Adaptive Cruise Control", "Blind Spot Monitor", "Apple CarPlay", "Wireless Charging", "Heated Seats"],
     city: "Jakarta", province: "DKI Jakarta", sellerType: "dealer", dealerName: "AutoCar Premium",
-    dealerWhatsapp: "6281234567890", dealerPhone: "+62 812-3456-7890", dealerEmail: "sales@autocar-premium.com",
+    dealerWhatsapp: "6281313717101", dealerPhone: "+62 812-3456-7890", dealerEmail: "sales@autocar-premium.com",
     views: 1247, isFeatured: true, media: media.supras,
   },
   {

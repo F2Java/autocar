@@ -45,7 +45,7 @@ export default function RootLayout({
           <main className="pt-16 lg:pt-20">{children}</main>
           <Footer />
           <WhatsAppFloat
-            phoneNumber="6281234567890"
+            phoneNumber="6281313717101"
             businessName="Pasar Mobil Bekas"
             message="Halo! Saya tertarik dengan mobil yang dijual. Bisa bantu saya?"
           />

@@ -57,7 +57,7 @@ const dealers: Dealer[] = [
     city: "Jakarta",
     province: "DKI Jakarta",
     phone: "+62 812-3456-7890",
-    whatsapp: "6281234567890",
+    whatsapp: "6281313717101",
     hours: "Mon-Sat: 09:00-18:00",
     rating: 4.8,
     reviews: 156,

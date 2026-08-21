@@ -135,7 +135,7 @@ export default function EstimatePage() {
                   type="tel"
                   value={form.phone}
                   onChange={(e) => updateField("phone", e.target.value)}
-                  placeholder="6281234567890"
+                  placeholder="6281313717101"
                   className="w-full h-11 px-4 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
                   required
                 />

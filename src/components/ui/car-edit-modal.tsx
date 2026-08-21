@@ -293,7 +293,7 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                 <input value={form.dealerName || ""} onChange={(e) => updateField("dealerName", e.target.value)} className={inputCls} />
               </Field>
               <Field label="WhatsApp">
-                <input type="tel" value={form.dealerWhatsapp || ""} onChange={(e) => updateField("dealerWhatsapp", e.target.value)} className={inputCls} placeholder="6281234567890" />
+                <input type="tel" value={form.dealerWhatsapp || ""} onChange={(e) => updateField("dealerWhatsapp", e.target.value)} className={inputCls} placeholder="6281313717101" />
               </Field>
             </div>
           </Section>

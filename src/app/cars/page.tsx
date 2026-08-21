@@ -52,10 +52,13 @@ function CarsPageContent() {
   const [cars, setCars] = useState<CarData[]>([])
   const [loading, setLoading] = useState(true)
   const [totalResults, setTotalResults] = useState(0)
+  const [totalPages, setTotalPages] = useState(1)
+  const [page, setPage] = useState(1)
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
   const [showFilters, setShowFilters] = useState(false)
   const [searchValue, setSearchValue] = useState(searchParams.get("search") || "")
   const [sortBy, setSortBy] = useState("newest")
+  const limit = 12
 
   const [filters, setFilters] = useState<Filters>({
     make: searchParams.get("make") || "",
@@ -76,6 +79,8 @@ function CarsPageContent() {
       const params = new URLSearchParams()
       if (searchValue) params.set("search", searchValue)
       if (sortBy) params.set("sortBy", sortBy)
+      params.set("page", page.toString())
+      params.set("limit", limit.toString())
       Object.entries(filters).forEach(([key, value]) => {
         if (value) params.set(key, value)
       })
@@ -84,13 +89,14 @@ function CarsPageContent() {
       const data = await res.json()
       setCars(data.data || [])
       setTotalResults(data.pagination?.total || 0)
+      setTotalPages(data.pagination?.totalPages || 1)
     } catch (error) {
       console.error("Error fetching cars:", error)
       setCars([])
     } finally {
       setLoading(false)
     }
-  }, [searchValue, sortBy, filters])
+  }, [searchValue, sortBy, filters, page])
 
   useEffect(() => {
     fetchCars()
@@ -98,6 +104,7 @@ function CarsPageContent() {
 
   const updateFilter = (key: keyof Filters, value: string) => {
     setFilters((prev) => ({ ...prev, [key]: value }))
+    setPage(1)
   }
 
   const clearFilters = () => {
@@ -107,6 +114,7 @@ function CarsPageContent() {
       priceMin: "", priceMax: "",
     })
     setSearchValue("")
+    setPage(1)
   }
 
   const hasActiveFilters = Object.values(filters).some((v) => v) || searchValue
@@ -339,17 +347,73 @@ function CarsPageContent() {
 
         {/* Results Grid */}
         {!loading && cars.length > 0 && (
-          <div
-            className={cn(
-              viewMode === "grid"
-                ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                : "flex flex-col gap-4"
+          <>
+            <div
+              className={cn(
+                viewMode === "grid"
+                  ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                  : "flex flex-col gap-4"
+              )}
+            >
+              {cars.map((car) => (
+                <CarCard key={car.id} {...car} />
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-8">
+                <button
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={page === 1}
+                  className="px-3 py-2 rounded-lg text-sm font-medium bg-neutral-800 text-gray-400 hover:text-white hover:bg-neutral-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                >
+                  ← Prev
+                </button>
+
+                {/* Page numbers */}
+                {Array.from({ length: Math.min(totalPages, 7) }, (_, i) => {
+                  let pageNum: number
+                  if (totalPages <= 7) {
+                    pageNum = i + 1
+                  } else if (page <= 4) {
+                    pageNum = i + 1
+                  } else if (page >= totalPages - 3) {
+                    pageNum = totalPages - 6 + i
+                  } else {
+                    pageNum = page - 3 + i
+                  }
+                  return pageNum
+                }).map((pageNum) => (
+                  <button
+                    key={pageNum}
+                    onClick={() => setPage(pageNum)}
+                    className={cn(
+                      "w-10 h-10 rounded-lg text-sm font-medium transition-colors",
+                      page === pageNum
+                        ? "bg-red-600 text-white"
+                        : "bg-neutral-800 text-gray-400 hover:text-white hover:bg-neutral-700"
+                    )}
+                  >
+                    {pageNum}
+                  </button>
+                ))}
+
+                <button
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={page === totalPages}
+                  className="px-3 py-2 rounded-lg text-sm font-medium bg-neutral-800 text-gray-400 hover:text-white hover:bg-neutral-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                >
+                  Next →
+                </button>
+              </div>
             )}
-          >
-            {cars.map((car) => (
-              <CarCard key={car.id} {...car} />
-            ))}
-          </div>
+
+            {/* Results info */}
+            <div className="text-center mt-4 text-sm text-gray-500">
+              Showing {((page - 1) * limit) + 1}–{Math.min(page * limit, totalResults)} of {totalResults} cars
+            </div>
+          </>
         )}
       </div>
     </div>

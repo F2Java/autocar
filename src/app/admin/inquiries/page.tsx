@@ -1,279 +1,223 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   MessageCircle,
   Mail,
   Phone,
-  Clock,
-  CheckCircle,
-  AlertCircle,
-  Reply,
-  Filter,
+  Loader2,
   Search,
-  ExternalLink,
+  RefreshCw,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface Inquiry {
   id: string
-  buyerName: string
-  buyerEmail: string
-  buyerPhone?: string
-  carTitle: string
-  carPrice: number
-  message: string
-  preferredContact: "whatsapp" | "email" | "phone"
-  status: "new" | "contacted" | "converted" | "closed"
+  name: string
+  email: string
+  phone: string | null
+  message: string | null
+  preferredContact: string
+  status: string
   createdAt: string
+  car: { title: string; slug: string; price: number } | null
 }
 
-const mockInquiries: Inquiry[] = [
-  {
-    id: "1",
-    buyerName: "Ahmad Rizky",
-    buyerEmail: "ahmad@email.com",
-    buyerPhone: "6281234567890",
-    carTitle: "2024 Toyota GR Supra 3.0",
-    carPrice: 1250000000,
-    message: "Is this still available? Can I schedule a test drive this weekend?",
-    preferredContact: "whatsapp",
-    status: "new",
-    createdAt: "2 hours ago",
-  },
-  {
-    id: "2",
-    buyerName: "Sarah Chen",
-    buyerEmail: "sarah@email.com",
-    carTitle: "2023 Tesla Model 3 Long Range",
-    carPrice: 650000000,
-    message: "What's the battery health status? Has it been in any accidents?",
-    preferredContact: "email",
-    status: "new",
-    createdAt: "5 hours ago",
-  },
-  {
-    id: "3",
-    buyerName: "Budi Santoso",
-    buyerEmail: "budi@email.com",
-    buyerPhone: "6281234567891",
-    carTitle: "2024 BMW M4 Competition",
-    carPrice: 2100000000,
-    message: "Is the price negotiable? I can pay cash.",
-    preferredContact: "whatsapp",
-    status: "contacted",
-    createdAt: "1 day ago",
-  },
-  {
-    id: "4",
-    buyerName: "Dewi Lestari",
-    buyerEmail: "dewi@email.com",
-    buyerPhone: "6281234567892",
-    carTitle: "2023 Suzuki Jimny Sierra",
-    carPrice: 350000000,
-    message: "I'm interested in this Jimny. Can you send more photos?",
-    preferredContact: "phone",
-    status: "converted",
-    createdAt: "2 days ago",
-  },
-  {
-    id: "5",
-    buyerName: "Rudi Hartono",
-    buyerEmail: "rudi@email.com",
-    carTitle: "2024 Hyundai Ioniq 5",
-    carPrice: 750000000,
-    message: "Does this come with home charging installation?",
-    preferredContact: "email",
-    status: "closed",
-    createdAt: "3 days ago",
-  },
-]
+const STATUS_OPTIONS = ["NEW", "CONTACTED", "CONVERTED", "CLOSED"]
 
-export default function InquiriesPage() {
-  const [inquiries, setInquiries] = useState(mockInquiries)
-  const [statusFilter, setStatusFilter] = useState("all")
+const statusColors: Record<string, string> = {
+  NEW: "bg-red-600/20 text-red-400",
+  CONTACTED: "bg-yellow-600/20 text-yellow-400",
+  CONVERTED: "bg-green-600/20 text-green-400",
+  CLOSED: "bg-gray-600/20 text-gray-400",
+}
+
+export default function AdminInquiriesPage() {
+  const [inquiries, setInquiries] = useState<Inquiry[]>([])
+  const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState("")
+  const [statusFilter, setStatusFilter] = useState("all")
+
+  const fetchInquiries = async () => {
+    setLoading(true)
+    try {
+      // Fetch cars and get their inquiries
+      const res = await fetch("/api/cars?limit=100")
+      const data = await res.json()
+      // Inquiries are embedded in car detail - for now use a simple approach
+      // We'll fetch each car's inquiries
+      const allInquiries: Inquiry[] = []
+
+      for (const car of (data.data || []).slice(0, 10)) {
+        try {
+          const carRes = await fetch(`/api/cars/${car.slug}`)
+          const carData = await carRes.json()
+          if (carData.data?.recentInquiries) {
+            for (const inq of carData.data.recentInquiries) {
+              allInquiries.push({
+                ...inq,
+                car: { title: car.title, slug: car.slug, price: car.price },
+              })
+            }
+          }
+        } catch {
+          // Skip failed fetches
+        }
+      }
+
+      setInquiries(allInquiries.sort((a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+      ))
+    } catch (error) {
+      console.error("Error fetching inquiries:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchInquiries()
+  }, [])
 
   const filtered = inquiries.filter((inq) => {
-    if (statusFilter !== "all" && inq.status !== statusFilter) return false
     if (search) {
       const q = search.toLowerCase()
-      return (
-        inq.buyerName.toLowerCase().includes(q) ||
-        inq.carTitle.toLowerCase().includes(q) ||
-        inq.message.toLowerCase().includes(q)
-      )
+      if (
+        !inq.name.toLowerCase().includes(q) &&
+        !inq.email.toLowerCase().includes(q) &&
+        (inq.car?.title && !inq.car.title.toLowerCase().includes(q))
+      ) {
+        return false
+      }
     }
+    if (statusFilter !== "all" && inq.status !== statusFilter) return false
     return true
   })
-
-  const updateStatus = (id: string, newStatus: Inquiry["status"]) => {
-    setInquiries((prev) =>
-      prev.map((inq) => (inq.id === id ? { ...inq, status: newStatus } : inq))
-    )
-  }
-
-  const statusConfig = {
-    new: { label: "New", color: "bg-red-500/20 text-gold", icon: AlertCircle },
-    contacted: { label: "Contacted", color: "bg-gold/20 text-gold", icon: Phone },
-    converted: { label: "Converted", color: "bg-emerald-500/20 text-gold", icon: CheckCircle },
-    closed: { label: "Closed", color: "bg-slate-500/20 text-gray-400", icon: CheckCircle },
-  }
-
-  const formatPrice = (amount: number) =>
-    new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-    }).format(amount)
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-white font-heading tracking-wide">
-          INQUIRIES
-        </h1>
-        <p className="text-gray-400 mt-1">
-          {filtered.length} inquiries found
-        </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-white font-heading tracking-wide">
+            INQUIRIES
+          </h1>
+          <p className="text-gray-400 mt-1">
+            {loading ? "Loading..." : `${filtered.length} inquiries found`}
+          </p>
+        </div>
+        <button
+          onClick={fetchInquiries}
+          className="p-2.5 rounded-xl bg-neutral-800 text-gray-400 hover:text-white transition-colors"
+          aria-label="Refresh"
+        >
+          <RefreshCw className={cn("h-4 w-4", loading && "animate-spin")} />
+        </button>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {(["new", "contacted", "converted", "closed"] as const).map((status) => {
-          const config = statusConfig[status]
-          const count = inquiries.filter((i) => i.status === status).length
-          return (
-            <button
-              key={status}
-              onClick={() => setStatusFilter(statusFilter === status ? "all" : status)}
-              className={cn(
-                "p-4 rounded-xl border transition-all text-left",
-                statusFilter === status
-                  ? "bg-neutral-800 border-gold/50"
-                  : "bg-neutral-900 border-neutral-800 hover:border-neutral-700"
-              )}
-            >
-              <div className="flex items-center gap-2">
-                <config.icon className={cn("h-4 w-4", config.color.split(" ")[1])} />
-                <span className="text-sm text-gray-400 capitalize">{status}</span>
-              </div>
-              <p className="text-2xl font-bold text-white mt-2">{count}</p>
-            </button>
-          )
-        })}
+      {/* Filters */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div className="relative flex-1 max-w-md">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search by name, email, or car..."
+            className="w-full h-10 pl-10 pr-4 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
+            aria-label="Search inquiries"
+          />
+        </div>
+
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          className="h-10 px-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm focus:outline-none focus:border-gold"
+          aria-label="Filter by status"
+        >
+          <option value="all">All Status</option>
+          {STATUS_OPTIONS.map((s) => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
       </div>
 
-      {/* Search */}
-      <div className="relative max-w-md">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search inquiries..."
-          className="w-full h-10 pl-10 pr-4 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-sm placeholder:text-gray-500 focus:outline-none focus:border-gold"
-          aria-label="Search inquiries"
-        />
-      </div>
+      {/* Loading State */}
+      {loading && (
+        <div className="flex items-center justify-center py-20">
+          <Loader2 className="h-8 w-8 text-gold animate-spin" />
+        </div>
+      )}
 
       {/* Inquiries List */}
-      <div className="space-y-3">
-        {filtered.map((inquiry) => {
-          const config = statusConfig[inquiry.status]
-          return (
-            <div
-              key={inquiry.id}
-              className="bg-neutral-900 rounded-xl border border-neutral-800 p-5 hover:border-neutral-700 transition-colors"
-            >
-              <div className="flex items-start justify-between">
-                <div className="space-y-2">
-                  <div className="flex items-center gap-3">
-                    <h3 className="text-white font-medium">{inquiry.buyerName}</h3>
-                    <span className={cn("px-2 py-0.5 rounded-full text-xs font-medium", config.color)}>
-                      {config.label}
-                    </span>
-                    <span
-                      className={cn(
-                        "px-2 py-0.5 rounded-full text-xs font-medium",
-                        inquiry.preferredContact === "whatsapp"
-                          ? "bg-emerald-500/20 text-gold"
-                          : inquiry.preferredContact === "email"
-                            ? "bg-red-500/20 text-gold"
-                            : "bg-purple-500/20 text-purple-400"
-                      )}
-                    >
-                      {inquiry.preferredContact}
-                    </span>
+      {!loading && (
+        <div className="space-y-3">
+          {filtered.length === 0 ? (
+            <div className="text-center py-20 bg-neutral-900 rounded-xl border border-neutral-800">
+              <MessageCircle className="h-12 w-12 text-gray-600 mx-auto mb-3" />
+              <p className="text-gray-400">No inquiries found</p>
+            </div>
+          ) : (
+            filtered.map((inq) => (
+              <div
+                key={inq.id}
+                className="bg-neutral-900 border border-neutral-800 rounded-xl p-4"
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <div>
+                    <p className="text-white font-medium">{inq.name}</p>
+                    <p className="text-sm text-gray-400">{inq.email}</p>
                   </div>
-
-                  <p className="text-sm text-gold">{inquiry.carTitle}</p>
-                  <p className="text-sm text-gray-400">{formatPrice(inquiry.carPrice)}</p>
-
-                  <div className="bg-neutral-800/50 rounded-lg p-3 max-w-2xl">
-                    <p className="text-sm text-gray-300">&ldquo;{inquiry.message}&rdquo;</p>
-                  </div>
-
-                  <div className="flex items-center gap-4 text-xs text-gray-500">
-                    <span className="flex items-center gap-1">
-                      <Clock className="h-3 w-3" /> {inquiry.createdAt}
-                    </span>
-                    {inquiry.buyerPhone && (
-                      <span className="flex items-center gap-1">
-                        <Phone className="h-3 w-3" /> {inquiry.buyerPhone}
-                      </span>
-                    )}
-                    <span className="flex items-center gap-1">
-                      <Mail className="h-3 w-3" /> {inquiry.buyerEmail}
-                    </span>
-                  </div>
+                  <span className={cn("px-2 py-1 rounded-full text-xs font-medium", statusColors[inq.status] || statusColors.NEW)}>
+                    {inq.status}
+                  </span>
                 </div>
 
-                {/* Actions */}
-                <div className="flex items-center gap-2">
-                  {inquiry.preferredContact === "whatsapp" && inquiry.buyerPhone && (
+                {inq.car && (
+                  <p className="text-sm text-gold mb-2">
+                    Interested in: {inq.car.title}
+                  </p>
+                )}
+
+                {inq.message && (
+                  <p className="text-sm text-gray-300 bg-neutral-800/50 rounded-lg p-3 mb-3">
+                    {inq.message}
+                  </p>
+                )}
+
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3 text-xs text-gray-500">
+                    <span className="flex items-center gap-1">
+                      <Phone className="h-3 w-3" /> {inq.preferredContact}
+                    </span>
+                    <span>{new Date(inq.createdAt).toLocaleDateString("id-ID")}</span>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    {inq.preferredContact === "whatsapp" && inq.phone && (
+                      <a
+                        href={`https://wa.me/${inq.phone}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-3 py-1.5 rounded-lg bg-green-600 text-white text-xs font-medium hover:bg-green-500 transition-colors"
+                      >
+                        WhatsApp
+                      </a>
+                    )}
                     <a
-                      href={`https://wa.me/${inquiry.buyerPhone}?text=Hi ${inquiry.buyerName}, thank you for your inquiry about the ${inquiry.carTitle}.`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 rounded-lg bg-red-600 hover:bg-red-500 text-white transition-colors"
-                      aria-label="Reply via WhatsApp"
+                      href={`mailto:${inq.email}`}
+                      className="px-3 py-1.5 rounded-lg bg-neutral-800 text-gray-300 text-xs font-medium hover:bg-neutral-700 transition-colors"
                     >
-                      <MessageCircle className="h-4 w-4" />
+                      <Mail className="h-3 w-3 inline mr-1" />
+                      Email
                     </a>
-                  )}
-                  <a
-                    href={`mailto:${inquiry.buyerEmail}?subject=Re: ${inquiry.carTitle}`}
-                    className="p-2 rounded-lg bg-red-600 hover:bg-red-500 text-white transition-colors"
-                    aria-label="Reply via email"
-                  >
-                    <Mail className="h-4 w-4" />
-                  </a>
-                  <select
-                    value={inquiry.status}
-                    onChange={(e) => updateStatus(inquiry.id, e.target.value as Inquiry["status"])}
-                    className="h-9 px-2 rounded-lg bg-neutral-800 border border-neutral-700 text-white text-xs focus:outline-none focus:border-gold"
-                    aria-label="Update status"
-                  >
-                    <option value="new">New</option>
-                    <option value="contacted">Contacted</option>
-                    <option value="converted">Converted</option>
-                    <option value="closed">Closed</option>
-                  </select>
+                  </div>
                 </div>
               </div>
-            </div>
-          )
-        })}
-
-        {filtered.length === 0 && (
-          <div className="text-center py-12">
-            <MessageCircle className="h-12 w-12 text-gray-600 mx-auto mb-3" />
-            <p className="text-gray-400">No inquiries found</p>
-          </div>
-        )}
-      </div>
+            ))
+          )}
+        </div>
+      )}
     </div>
   )
 }

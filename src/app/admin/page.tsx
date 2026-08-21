@@ -5,19 +5,15 @@ import Link from "next/link"
 import {
   Car,
   Eye,
-  Heart,
   TrendingUp,
-  DollarSign,
   MessageCircle,
   Mail,
-  Users,
   ArrowUpRight,
   ArrowDownRight,
   Clock,
   Star,
   BarChart3,
-  PieChart,
-  Activity,
+  Loader2,
 } from "lucide-react"
 import {
   AreaChart,
@@ -27,417 +23,292 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  BarChart,
-  Bar,
-  PieChart as RechartsPieChart,
+  PieChart,
   Pie,
   Cell,
 } from "recharts"
 import { cn } from "@/lib/utils"
 
-// Mock data for charts
-const viewsData = [
-  { name: "Mon", views: 1200, inquiries: 45 },
-  { name: "Tue", views: 1800, inquiries: 62 },
-  { name: "Wed", views: 1500, inquiries: 38 },
-  { name: "Thu", views: 2200, inquiries: 78 },
-  { name: "Fri", views: 2800, inquiries: 95 },
-  { name: "Sat", views: 3200, inquiries: 112 },
-  { name: "Sun", views: 2400, inquiries: 82 },
-]
+interface Stats {
+  totalCars: number
+  activeCars: number
+  pendingCars: number
+  soldCars: number
+  totalInquiries: number
+  newInquiries: number
+  featuredCars: number
+  totalViews: number
+}
 
-const categoryData = [
-  { name: "SUV", value: 45, color: "#3B82F6" },
-  { name: "Sedan", value: 30, color: "#06B6D4" },
-  { name: "Electric", value: 15, color: "#10B981" },
-  { name: "MPV", value: 10, color: "#F59E0B" },
-]
+interface RecentCar {
+  id: string
+  slug: string
+  title: string
+  make: string
+  model: string
+  year: number
+  condition: string
+  status: string
+  price: number
+  coverImage: string | null
+  views: number
+  createdAt: string
+}
 
-const recentCars = [
-  {
-    id: "1",
-    title: "2024 Toyota GR Supra 3.0",
-    price: 1250000000,
-    status: "AVAILABLE",
-    views: 1247,
-    condition: "NEW",
-    coverImage: "https://images.unsplash.com/photo-1625231334401-ff1542dc7e74?w=200",
-  },
-  {
-    id: "2",
-    title: "2023 Tesla Model 3 Long Range",
-    price: 650000000,
-    status: "AVAILABLE",
-    views: 2341,
-    condition: "USED",
-    coverImage: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=200",
-  },
-  {
-    id: "3",
-    title: "2024 BMW M4 Competition",
-    price: 2100000000,
-    status: "SOLD",
-    views: 892,
-    condition: "NEW",
-    coverImage: "https://images.unsplash.com/photo-1555215695-3004980ad54e?w=200",
-  },
-  {
-    id: "4",
-    title: "2023 Suzuki Jimny Sierra",
-    price: 350000000,
-    status: "RESERVED",
-    views: 2890,
-    condition: "USED",
-    coverImage: "https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=200",
-  },
-  {
-    id: "5",
-    title: "2024 Hyundai Ioniq 5",
-    price: 750000000,
-    status: "AVAILABLE",
-    views: 3210,
-    condition: "NEW",
-    coverImage: "https://images.unsplash.com/photo-1619317588810-42e1e1be4f32?w=200",
-  },
-]
+interface RecentInquiry {
+  id: string
+  name: string
+  email: string
+  message: string | null
+  preferredContact: string
+  status: string
+  createdAt: string
+  car: { title: string; slug: string } | null
+}
 
-const recentInquiries = [
-  {
-    id: "1",
-    buyerName: "Ahmad Rizky",
-    carTitle: "2024 Toyota GR Supra 3.0",
-    message: "Is this still available? Can I schedule a test drive?",
-    preferredContact: "whatsapp",
-    createdAt: "2 hours ago",
-  },
-  {
-    id: "2",
-    buyerName: "Sarah Chen",
-    carTitle: "2023 Tesla Model 3 Long Range",
-    message: "What's the battery health status?",
-    preferredContact: "email",
-    createdAt: "5 hours ago",
-  },
-  {
-    id: "3",
-    buyerName: "Budi Santoso",
-    carTitle: "2024 BMW M4 Competition",
-    message: "Is the price negotiable?",
-    preferredContact: "whatsapp",
-    createdAt: "1 day ago",
-  },
-]
+interface DashboardData {
+  stats: Stats
+  distribution: {
+    byCondition: Array<{ name: string; count: number }>
+    byFuelType: Array<{ name: string; count: number }>
+  }
+  recentCars: RecentCar[]
+  recentInquiries: RecentInquiry[]
+}
 
-export default function AdminDashboardPage() {
-  const [stats, setStats] = useState({
-    totalCars: 19,
-    totalViews: 15247,
-    totalInquiries: 512,
-    totalRevenue: 0,
-    viewsChange: 12.5,
-    inquiriesChange: 8.3,
-    carsChange: 5.2,
-  })
+const CONDITION_COLORS: Record<string, string> = {
+  NEW: "#22C55E",
+  USED: "#EAB308",
+  CERTIFIED_PRE_OWNED: "#3B82F6",
+}
 
-  const formatPrice = (amount: number) =>
-    new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-    }).format(amount)
+export default function AdminDashboard() {
+  const [data, setData] = useState<DashboardData | null>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch("/api/admin/stats")
+      .then((res) => res.json())
+      .then((json) => setData(json.data))
+      .catch(console.error)
+      .finally(() => setLoading(false))
+  }, [])
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Loader2 className="h-8 w-8 text-gold animate-spin" />
+      </div>
+    )
+  }
+
+  if (!data) {
+    return (
+      <div className="text-center py-20 text-gray-400">
+        Failed to load dashboard data
+      </div>
+    )
+  }
+
+  const { stats, distribution, recentCars, recentInquiries } = data
+
+  const statCards = [
+    { label: "Total Cars", value: stats.totalCars, icon: Car, color: "text-red-500", change: "+12%", up: true },
+    { label: "Active Listings", value: stats.activeCars, icon: Eye, color: "text-green-500", change: "+8%", up: true },
+    { label: "Total Views", value: stats.totalViews.toLocaleString(), icon: TrendingUp, color: "text-gold", change: "+23%", up: true },
+    { label: "New Inquiries", value: stats.newInquiries, icon: MessageCircle, color: "text-blue-500", change: "+5%", up: true },
+    { label: "Featured Cars", value: stats.featuredCars, icon: Star, color: "text-yellow-500", change: "0%", up: false },
+    { label: "Pending Review", value: stats.pendingCars, icon: Clock, color: "text-orange-500", change: "-3%", up: false },
+  ]
+
+  // Use distribution data for pie chart
+  const categoryData = distribution.byCondition.map((c) => ({
+    name: c.name,
+    value: c.count,
+    color: CONDITION_COLORS[c.name] || "#666",
+  }))
+
+  // Use distribution data for bar chart
+  const fuelData = distribution.byFuelType.map((c) => ({
+    name: c.name,
+    value: c.count,
+  }))
 
   return (
     <div className="space-y-6">
-      {/* Page Header */}
-      <div>
-        <h1 className="text-2xl font-bold text-white font-heading tracking-wide">
-          DASHBOARD
-        </h1>
-        <p className="text-gray-400 mt-1">Welcome back! Here&apos;s what&apos;s happening.</p>
-      </div>
-
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {[
-          {
-            label: "Total Cars",
-            value: stats.totalCars.toString(),
-            change: stats.carsChange,
-            icon: Car,
-            color: "from-red-600",
-            href: "/admin/cars",
-          },
-          {
-            label: "Total Views",
-            value: stats.totalViews.toLocaleString(),
-            change: stats.viewsChange,
-            icon: Eye,
-            color: "from-red-600",
-            href: "/admin/analytics",
-          },
-          {
-            label: "Inquiries",
-            value: stats.totalInquiries.toLocaleString(),
-            change: stats.inquiriesChange,
-            icon: MessageCircle,
-            color: "from-red-600",
-            href: "/admin/inquiries",
-          },
-          {
-            label: "Active Campaigns",
-            value: "3",
-            change: 15,
-            icon: Mail,
-            color: "from-red-600",
-            href: "/admin/campaigns",
-          },
-        ].map((stat) => (
-          <Link
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {statCards.map((stat) => (
+          <div
             key={stat.label}
-            href={stat.href}
-            className="bg-neutral-900 rounded-xl p-5 border border-neutral-800 hover:border-gold/30 transition-all group"
+            className="bg-neutral-900 border border-neutral-800 rounded-xl p-5"
           >
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-sm text-gray-400">{stat.label}</p>
-                <p className="text-2xl font-bold text-white mt-1">{stat.value}</p>
-              </div>
-              <div
-                className={cn(
-                  "w-10 h-10 rounded-xl  flex items-center justify-center",
-                  stat.color
-                )}
-              >
-                <stat.icon className="h-5 w-5 text-white" />
-              </div>
-            </div>
-            <div className="flex items-center gap-1 mt-3">
-              {stat.change > 0 ? (
-                <ArrowUpRight className="h-4 w-4 text-gold" />
-              ) : (
-                <ArrowDownRight className="h-4 w-4 text-red-400" />
-              )}
-              <span
-                className={cn(
-                  "text-sm font-medium",
-                  stat.change > 0 ? "text-gold" : "text-red-400"
-                )}
-              >
-                {Math.abs(stat.change)}%
+            <div className="flex items-center justify-between mb-3">
+              <stat.icon className={cn("h-5 w-5", stat.color)} />
+              <span className={cn(
+                "flex items-center gap-1 text-xs font-medium",
+                stat.up ? "text-green-400" : "text-red-400"
+              )}>
+                {stat.up ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
+                {stat.change}
               </span>
-              <span className="text-xs text-gray-500">vs last week</span>
             </div>
-          </Link>
+            <p className="text-2xl font-bold text-white">{stat.value}</p>
+            <p className="text-sm text-gray-400 mt-1">{stat.label}</p>
+          </div>
         ))}
       </div>
 
       {/* Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Views Chart */}
-        <div className="lg:col-span-2 bg-neutral-900 rounded-xl p-6 border border-neutral-800">
-          <div className="flex items-center justify-between mb-6">
-            <div>
-              <h2 className="text-lg font-bold text-white font-heading tracking-wide">
-                VIEWS & INQUIRIES
-              </h2>
-              <p className="text-sm text-gray-400">Last 7 days</p>
-            </div>
-            <div className="flex items-center gap-4 text-sm">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-                <span className="text-gray-400">Views</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                <span className="text-gray-400">Inquiries</span>
-              </div>
-            </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Fuel Type Distribution */}
+        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
+          <h3 className="text-lg font-bold text-white font-heading tracking-wide mb-4">
+            BY FUEL TYPE
+          </h3>
+          <div className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={fuelData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#333" />
+                <XAxis dataKey="name" stroke="#666" fontSize={12} />
+                <YAxis stroke="#666" fontSize={12} />
+                <Tooltip
+                  contentStyle={{ backgroundColor: "#1a1a1a", border: "1px solid #333", borderRadius: "8px" }}
+                  labelStyle={{ color: "#fff" }}
+                />
+                <Area type="monotone" dataKey="value" stroke="#DC2626" fill="#DC2626" fillOpacity={0.3} />
+              </AreaChart>
+            </ResponsiveContainer>
           </div>
-          <ResponsiveContainer width="100%" height={300}>
-            <AreaChart data={viewsData}>
-              <defs>
-                <linearGradient id="viewsGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.3} />
-                  <stop offset="95%" stopColor="#3B82F6" stopOpacity={0} />
-                </linearGradient>
-                <linearGradient id="inquiriesGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#10B981" stopOpacity={0.3} />
-                  <stop offset="95%" stopColor="#10B981" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-              <XAxis dataKey="name" stroke="#64748B" fontSize={12} />
-              <YAxis stroke="#64748B" fontSize={12} />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "#1E293B",
-                  border: "1px solid #334155",
-                  borderRadius: "8px",
-                  color: "#F1F5F9",
-                }}
-              />
-              <Area
-                type="monotone"
-                dataKey="views"
-                stroke="#3B82F6"
-                fillOpacity={1}
-                fill="url(#viewsGradient)"
-              />
-              <Area
-                type="monotone"
-                dataKey="inquiries"
-                stroke="#10B981"
-                fillOpacity={1}
-                fill="url(#inquiriesGradient)"
-              />
-            </AreaChart>
-          </ResponsiveContainer>
         </div>
 
-        {/* Category Pie Chart */}
-        <div className="bg-neutral-900 rounded-xl p-6 border border-neutral-800">
-          <h2 className="text-lg font-bold text-white font-heading tracking-wide mb-6">
-            BY CATEGORY
-          </h2>
-          <ResponsiveContainer width="100%" height={200}>
-            <RechartsPieChart>
-              <Pie
-                data={categoryData}
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={80}
-                paddingAngle={5}
-                dataKey="value"
-              >
-                {categoryData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "#1E293B",
-                  border: "1px solid #334155",
-                  borderRadius: "8px",
-                  color: "#F1F5F9",
-                }}
-              />
-            </RechartsPieChart>
-          </ResponsiveContainer>
-          <div className="space-y-2 mt-4">
-            {categoryData.map((cat) => (
-              <div key={cat.name} className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div
-                    className="w-3 h-3 rounded-full"
-                    style={{ backgroundColor: cat.color }}
+        {/* Condition Distribution */}
+        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
+          <h3 className="text-lg font-bold text-white font-heading tracking-wide mb-4">
+            BY CONDITION
+          </h3>
+          <div className="h-64 flex items-center justify-center">
+            {categoryData.length > 0 ? (
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={categoryData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={60}
+                    outerRadius={90}
+                    paddingAngle={4}
+                    dataKey="value"
+                  >
+                    {categoryData.map((entry, index) => (
+                      <Cell key={index} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    contentStyle={{ backgroundColor: "#1a1a1a", border: "1px solid #333", borderRadius: "8px" }}
                   />
-                  <span className="text-sm text-gray-300">{cat.name}</span>
-                </div>
-                <span className="text-sm text-white font-medium">{cat.value}%</span>
+                </PieChart>
+              </ResponsiveContainer>
+            ) : (
+              <p className="text-gray-400">No data yet</p>
+            )}
+          </div>
+          <div className="flex items-center justify-center gap-4 mt-2">
+            {categoryData.map((cat) => (
+              <div key={cat.name} className="flex items-center gap-2 text-sm">
+                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: cat.color }} />
+                <span className="text-gray-400">{cat.name}: {cat.value}</span>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Bottom Row */}
+      {/* Recent Listings & Inquiries */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Recent Listings */}
-        <div className="bg-neutral-900 rounded-xl border border-neutral-800">
-          <div className="p-6 border-b border-neutral-800">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold text-white font-heading tracking-wide">
-                RECENT LISTINGS
-              </h2>
-              <Link
-                href="/admin/cars"
-                className="text-sm text-gold hover:text-gold-light"
-              >
-                View All
-              </Link>
-            </div>
+        {/* Recent Cars */}
+        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-bold text-white font-heading tracking-wide">
+              RECENT LISTINGS
+            </h3>
+            <Link href="/admin/cars" className="text-sm text-gold hover:text-gold-light">
+              View All
+            </Link>
           </div>
-          <div className="divide-y divide-slate-800">
-            {recentCars.map((car) => (
-              <div key={car.id} className="p-4 flex items-center gap-4 hover:bg-neutral-800/30 transition-colors">
-                <img
-                  src={car.coverImage}
-                  alt={car.title}
-                  className="w-14 h-14 rounded-lg object-cover"
-                />
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm text-white font-medium truncate">{car.title}</p>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="text-sm text-gold font-bold">
-                      {formatPrice(car.price)}
-                    </span>
-                    <span
-                      className={cn(
-                        "px-1.5 py-0.5 rounded text-xs font-medium",
-                        car.status === "AVAILABLE"
-                          ? "bg-emerald-500/20 text-gold"
-                          : car.status === "SOLD"
-                            ? "bg-red-500/20 text-red-400"
-                            : "bg-gold/20 text-gold"
-                      )}
-                    >
-                      {car.status}
-                    </span>
+          <div className="space-y-3">
+            {recentCars.length === 0 ? (
+              <p className="text-gray-400 text-sm">No listings yet</p>
+            ) : (
+              recentCars.map((car) => (
+                <Link
+                  key={car.id}
+                  href={`/cars/${car.slug}`}
+                  className="flex items-center gap-3 p-3 rounded-lg bg-neutral-800/50 hover:bg-neutral-800 transition-colors"
+                >
+                  <img
+                    src={car.coverImage || "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=100"}
+                    alt={car.title}
+                    className="w-12 h-12 rounded-lg object-cover"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-white truncate">{car.title}</p>
+                    <p className="text-xs text-gray-400">
+                      Rp {(car.price / 1000000).toFixed(0)}M • {car.views} views
+                    </p>
                   </div>
-                </div>
-                <div className="text-right">
-                  <p className="text-sm text-gray-400 flex items-center gap-1">
-                    <Eye className="h-3 w-3" /> {car.views.toLocaleString()}
-                  </p>
-                </div>
-              </div>
-            ))}
+                  <span className={cn(
+                    "px-2 py-0.5 rounded text-xs",
+                    car.condition === "NEW" ? "bg-green-600/20 text-green-400" : "bg-yellow-600/20 text-yellow-400"
+                  )}>
+                    {car.condition}
+                  </span>
+                </Link>
+              ))
+            )}
           </div>
         </div>
 
         {/* Recent Inquiries */}
-        <div className="bg-neutral-900 rounded-xl border border-neutral-800">
-          <div className="p-6 border-b border-neutral-800">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold text-white font-heading tracking-wide">
-                RECENT INQUIRIES
-              </h2>
-              <Link
-                href="/admin/inquiries"
-                className="text-sm text-gold hover:text-gold-light"
-              >
-                View All
-              </Link>
-            </div>
+        <div className="bg-neutral-900 border border-neutral-800 rounded-xl p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-bold text-white font-heading tracking-wide">
+              RECENT INQUIRIES
+            </h3>
+            <Link href="/admin/inquiries" className="text-sm text-gold hover:text-gold-light">
+              View All
+            </Link>
           </div>
-          <div className="divide-y divide-slate-800">
-            {recentInquiries.map((inquiry) => (
-              <div key={inquiry.id} className="p-4 hover:bg-neutral-800/30 transition-colors">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <p className="text-sm text-white font-medium">{inquiry.buyerName}</p>
-                    <p className="text-xs text-gold mt-0.5">{inquiry.carTitle}</p>
+          <div className="space-y-3">
+            {recentInquiries.length === 0 ? (
+              <p className="text-gray-400 text-sm">No inquiries yet</p>
+            ) : (
+              recentInquiries.map((inquiry) => (
+                <div
+                  key={inquiry.id}
+                  className="p-3 rounded-lg bg-neutral-800/50"
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-sm text-white font-medium">{inquiry.name}</p>
+                    <span className={cn(
+                      "px-2 py-0.5 rounded text-xs",
+                      inquiry.status === "NEW"
+                        ? "bg-red-600/20 text-red-400"
+                        : "bg-green-600/20 text-green-400"
+                    )}>
+                      {inquiry.status}
+                    </span>
                   </div>
-                  <span
-                    className={cn(
-                      "px-2 py-0.5 rounded-full text-xs font-medium",
-                      inquiry.preferredContact === "whatsapp"
-                        ? "bg-emerald-500/20 text-gold"
-                        : "bg-red-500/20 text-gold"
-                    )}
-                  >
-                    {inquiry.preferredContact}
-                  </span>
+                  <p className="text-xs text-gray-400">
+                    {inquiry.car?.title || "General inquiry"}
+                  </p>
+                  <div className="flex items-center gap-3 mt-1 text-xs text-gray-500">
+                    <span>{inquiry.preferredContact}</span>
+                    <span>{new Date(inquiry.createdAt).toLocaleDateString()}</span>
+                  </div>
                 </div>
-                <p className="text-sm text-gray-400 mt-2 line-clamp-1">
-                  &ldquo;{inquiry.message}&rdquo;
-                </p>
-                <p className="text-xs text-gray-500 mt-2 flex items-center gap-1">
-                  <Clock className="h-3 w-3" /> {inquiry.createdAt}
-                </p>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </div>

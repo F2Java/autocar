@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { MessageCircle, X, Send, Car, DollarSign, HelpCircle } from "lucide-react"
+import { MessageCircle, X, Send, Car, DollarSign, HelpCircle, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface WhatsAppFloatProps {
@@ -23,12 +23,38 @@ export function WhatsAppFloat({
 }: WhatsAppFloatProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [customMessage, setCustomMessage] = useState("")
+  const [sending, setSending] = useState(false)
 
-  const handleSend = (msg?: string) => {
+  const handleSend = async (msg?: string) => {
     const finalMsg = msg || customMessage || message
-    const encodedMsg = encodeURIComponent(finalMsg)
-    const phone = phoneNumber.replace(/[^0-9]/g, "")
-    window.open(`https://wa.me/${phone}?text=${encodedMsg}`, "_blank")
+    setSending(true)
+
+    try {
+      // Try API first
+      const res = await fetch("/api/whatsapp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to: phoneNumber,
+          message: finalMsg,
+          type: "customer_inquiry",
+        }),
+      })
+
+      const data = await res.json()
+
+      if (data.clickToChatUrl) {
+        // Always open click-to-chat as primary method
+        window.open(data.clickToChatUrl, "_blank")
+      }
+    } catch {
+      // Fallback to direct click-to-chat
+      const phone = phoneNumber.replace(/[^0-9]/g, "")
+      window.open(`https://wa.me/${phone}?text=${encodeURIComponent(finalMsg)}`, "_blank")
+    }
+
+    setSending(false)
+    setCustomMessage("")
   }
 
   return (
@@ -78,7 +104,8 @@ export function WhatsAppFloat({
                 <button
                   key={qm.label}
                   onClick={() => handleSend(qm.message)}
-                  className="w-full flex items-center gap-3 p-2.5 bg-white rounded-lg shadow-sm hover:bg-gray-50 transition-colors text-left"
+                  disabled={sending}
+                  className="w-full flex items-center gap-3 p-2.5 bg-white rounded-lg shadow-sm hover:bg-gray-50 transition-colors text-left disabled:opacity-50"
                 >
                   <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
                     <qm.icon className="h-4 w-4 text-green-600" />
@@ -99,23 +126,26 @@ export function WhatsAppFloat({
                 placeholder="Ketik pesan..."
                 className="flex-1 px-4 py-2.5 rounded-full bg-gray-100 text-sm text-gray-800 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500"
                 onKeyDown={(e) => {
-                  if (e.key === "Enter" && customMessage.trim()) {
+                  if (e.key === "Enter" && customMessage.trim() && !sending) {
                     handleSend()
-                    setCustomMessage("")
                   }
                 }}
+                disabled={sending}
               />
               <button
                 onClick={() => {
-                  if (customMessage.trim()) {
+                  if (customMessage.trim() && !sending) {
                     handleSend()
-                    setCustomMessage("")
                   }
                 }}
-                disabled={!customMessage.trim()}
+                disabled={!customMessage.trim() || sending}
                 className="w-10 h-10 rounded-full bg-green-600 hover:bg-green-500 flex items-center justify-center text-white transition-colors disabled:opacity-50"
               >
-                <Send className="h-4 w-4" />
+                {sending ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Send className="h-4 w-4" />
+                )}
               </button>
             </div>
           </div>

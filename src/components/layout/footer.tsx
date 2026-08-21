@@ -98,11 +98,11 @@ export function Footer() {
                 <Car className="h-6 w-6 text-white" />
               </div>
               <div>
-                <span className="text-lg font-bold text-white font-heading tracking-widest">
-                  PASAR
+                <span className="text-sm font-bold text-white font-heading tracking-widest">
+                  PASAR MOBIL
                 </span>
-                <span className="text-lg font-bold text-gold font-heading tracking-widest">
-                  MOBIL
+                <span className="text-sm font-bold text-gold font-heading tracking-widest block">
+                  BEKAS
                 </span>
               </div>
             </Link>

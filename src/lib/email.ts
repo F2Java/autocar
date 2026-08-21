@@ -67,7 +67,7 @@ export async function sendInquiryNotification(data: InquiryEmailData) {
         <div style="background:linear-gradient(135deg,#1e293b,#334155);border-radius:16px;padding:32px;border:1px solid rgba(59,130,246,0.2);">
           <!-- Header -->
           <div style="text-align:center;margin-bottom:24px;">
-            <h1 style="color:#DC2626;font-size:24px;margin:0;letter-spacing:2px;">PASAR<span style="color:#D4AF37;"> MOBIL</span></h1>
+            <h1 style="color:#DC2626;font-size:24px;margin:0;letter-spacing:2px;">PASAR MOBIL<span style="color:#D4AF37;"> BEKAS</span></h1>
             <p style="color:#94a3b8;font-size:12px;margin-top:4px;">New Inquiry Notification</p>
           </div>
 
@@ -162,7 +162,7 @@ export async function sendPromotionEmail(data: PromotionEmailData) {
         <div style="background:linear-gradient(135deg,#1e293b,#334155);border-radius:16px;padding:32px;border:1px solid rgba(59,130,246,0.2);">
           <!-- Header -->
           <div style="text-align:center;margin-bottom:24px;">
-            <h1 style="color:#DC2626;font-size:24px;margin:0;letter-spacing:2px;">PASAR<span style="color:#D4AF37;"> MOBIL</span></h1>
+            <h1 style="color:#DC2626;font-size:24px;margin:0;letter-spacing:2px;">PASAR MOBIL<span style="color:#D4AF37;"> BEKAS</span></h1>
           </div>
 
           <!-- Headline -->
@@ -230,7 +230,7 @@ export async function sendWelcomeEmail(data: WelcomeEmailData) {
       <div style="max-width:600px;margin:0 auto;padding:40px 20px;">
         <div style="background:linear-gradient(135deg,#1e293b,#334155);border-radius:16px;padding:32px;border:1px solid rgba(59,130,246,0.2);">
           <div style="text-align:center;margin-bottom:24px;">
-            <h1 style="color:#DC2626;font-size:24px;margin:0;letter-spacing:2px;">PASAR<span style="color:#D4AF37;"> MOBIL</span></h1>
+            <h1 style="color:#DC2626;font-size:24px;margin:0;letter-spacing:2px;">PASAR MOBIL<span style="color:#D4AF37;"> BEKAS</span></h1>
           </div>
 
           <h2 style="color:#f1f5f9;font-size:22px;text-align:center;margin:0 0 16px 0;">Welcome to Pasar Mobil Bekas! 🚗</h2>

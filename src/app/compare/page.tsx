@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import {
@@ -12,9 +12,7 @@ import {
   MapPin,
   Car,
   Zap,
-  Ruler,
   Loader2,
-  X,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -59,6 +57,14 @@ const specs = [
 ]
 
 export default function ComparePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-black flex items-center justify-center pt-20"><Loader2 className="h-8 w-8 text-gold animate-spin" /></div>}>
+      <CompareContent />
+    </Suspense>
+  )
+}
+
+function CompareContent() {
   const searchParams = useSearchParams()
   const ids = searchParams.get("ids")?.split(",") || []
 

@@ -38,7 +38,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id" className="scroll-smooth">
-      <body className="min-h-screen bg-slate-950 text-slate-100 antialiased font-body">
+      <body className="min-h-screen bg-black text-white antialiased font-body">
         <Navbar />
         <main className="pt-16 lg:pt-20">{children}</main>
         <Footer />

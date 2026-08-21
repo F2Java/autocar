@@ -31,7 +31,7 @@ export default function OrdersPage() {
     return map[s] || "pending"
   }
 
-  if (loading) return <div className="max-w-3xl mx-auto px-4 py-20 flex justify-center"><Loader2 className="h-8 w-8 text-blue-500 animate-spin" /></div>
+  if (loading) return <div className="max-w-3xl mx-auto px-4 py-20 flex justify-center"><Loader2 className="h-8 w-8 text-gold animate-spin" /></div>
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">

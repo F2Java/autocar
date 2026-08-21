@@ -229,8 +229,8 @@ export function UploadZone({
         className={cn(
           "relative border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all duration-200",
           isDragging
-            ? "border-blue-500 bg-blue-500/10"
-            : "border-slate-700 hover:border-blue-500/50 hover:bg-slate-800/50"
+            ? "border-gold bg-red-500/10"
+            : "border-slate-700 hover:border-gold/50 hover:bg-slate-800/50"
         )}
         role="button"
         tabIndex={0}
@@ -267,7 +267,7 @@ export function UploadZone({
                 "Drop files here"
               ) : (
                 <>
-                  <span className="text-blue-400 font-medium">Click to upload</span>{" "}
+                  <span className="text-gold font-medium">Click to upload</span>{" "}
                   or drag and drop
                 </>
               )}
@@ -320,7 +320,7 @@ export function UploadZone({
                 {uploadFile.status === "uploading" && (
                   <div className="mt-1.5 w-full h-1.5 bg-slate-700 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-blue-500 rounded-full transition-all duration-300"
+                      className="h-full bg-red-500 rounded-full transition-all duration-300"
                       style={{ width: `${uploadFile.progress}%` }}
                     />
                   </div>
@@ -337,13 +337,13 @@ export function UploadZone({
               {/* Status */}
               <div className="flex items-center gap-2">
                 {uploadFile.status === "uploading" && (
-                  <span className="text-xs text-blue-400">{uploadFile.progress}%</span>
+                  <span className="text-xs text-gold">{uploadFile.progress}%</span>
                 )}
                 {uploadFile.status === "success" && (
                   <CheckCircle className="h-5 w-5 text-emerald-400" />
                 )}
                 {uploadFile.status === "uploading" && (
-                  <Loader2 className="h-4 w-4 text-blue-400 animate-spin" />
+                  <Loader2 className="h-4 w-4 text-gold animate-spin" />
                 )}
                 <button
                   onClick={() => removeFile(uploadFile.id)}

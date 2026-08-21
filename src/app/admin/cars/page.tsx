@@ -213,7 +213,7 @@ export default function AdminCarsPage() {
         </div>
         <Link
           href="/sell"
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-medium transition-colors"
         >
           <Plus className="h-4 w-4" /> Add Car
         </Link>
@@ -228,7 +228,7 @@ export default function AdminCarsPage() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search cars..."
-            className="w-full h-10 pl-10 pr-4 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-blue-500"
+            className="w-full h-10 pl-10 pr-4 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
             aria-label="Search cars"
           />
         </div>
@@ -236,7 +236,7 @@ export default function AdminCarsPage() {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+          className="h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
           aria-label="Filter by status"
         >
           <option value="all">All Status</option>
@@ -249,7 +249,7 @@ export default function AdminCarsPage() {
         <select
           value={conditionFilter}
           onChange={(e) => setConditionFilter(e.target.value)}
-          className="h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+          className="h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
           aria-label="Filter by condition"
         >
           <option value="all">All Conditions</option>
@@ -261,8 +261,8 @@ export default function AdminCarsPage() {
 
       {/* Bulk Actions */}
       {selectedCars.length > 0 && (
-        <div className="flex items-center gap-3 p-3 rounded-xl bg-blue-600/10 border border-blue-500/20">
-          <span className="text-sm text-blue-400">
+        <div className="flex items-center gap-3 p-3 rounded-xl bg-red-600/10 border border-gold/20">
+          <span className="text-sm text-gold">
             {selectedCars.length} selected
           </span>
           <button className="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-medium">
@@ -286,7 +286,7 @@ export default function AdminCarsPage() {
               type="checkbox"
               checked={selectedCars.length === filteredCars.length && filteredCars.length > 0}
               onChange={toggleSelectAll}
-              className="w-4 h-4 rounded bg-slate-800 border-slate-700 text-blue-600 focus:ring-blue-500"
+              className="w-4 h-4 rounded bg-slate-800 border-slate-700 text-gold focus:ring-gold"
               aria-label="Select all"
             />
           </div>
@@ -304,7 +304,7 @@ export default function AdminCarsPage() {
               key={car.id}
               className={cn(
                 "grid grid-cols-1 lg:grid-cols-12 gap-4 p-4 items-center transition-colors",
-                selectedCars.includes(car.id) && "bg-blue-500/5"
+                selectedCars.includes(car.id) && "bg-red-500/5"
               )}
             >
               {/* Checkbox */}
@@ -313,7 +313,7 @@ export default function AdminCarsPage() {
                   type="checkbox"
                   checked={selectedCars.includes(car.id)}
                   onChange={() => toggleSelect(car.id)}
-                  className="w-4 h-4 rounded bg-slate-800 border-slate-700 text-blue-600 focus:ring-blue-500"
+                  className="w-4 h-4 rounded bg-slate-800 border-slate-700 text-gold focus:ring-gold"
                   aria-label={`Select ${car.title}`}
                 />
               </div>
@@ -347,7 +347,7 @@ export default function AdminCarsPage() {
 
               {/* Price */}
               <div className="lg:col-span-2">
-                <p className="text-sm text-blue-400 font-bold">
+                <p className="text-sm text-gold font-bold">
                   {formatPrice(car.price)}
                 </p>
               </div>

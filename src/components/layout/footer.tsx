@@ -75,8 +75,8 @@ export function Footer() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {trustFeatures.map((feature) => (
               <div key={feature.label} className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-blue-600/10 flex items-center justify-center flex-shrink-0">
-                  <feature.icon className="h-5 w-5 text-blue-400" />
+                <div className="w-10 h-10 rounded-xl bg-red-600/10 flex items-center justify-center flex-shrink-0">
+                  <feature.icon className="h-5 w-5 text-gold" />
                 </div>
                 <div>
                   <p className="text-sm font-medium text-white">{feature.label}</p>
@@ -94,14 +94,14 @@ export function Footer() {
           {/* Brand & Newsletter */}
           <div className="lg:col-span-4 space-y-6">
             <Link href="/" className="flex items-center gap-3" aria-label="AutoCar Home">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-600 to-gold flex items-center justify-center">
                 <Car className="h-6 w-6 text-white" />
               </div>
               <div>
                 <span className="text-xl font-bold text-white font-heading tracking-widest">
                   AUTO
                 </span>
-                <span className="text-xl font-bold text-blue-400 font-heading tracking-widest">
+                <span className="text-xl font-bold text-gold font-heading tracking-widest">
                   CAR
                 </span>
               </div>
@@ -124,7 +124,7 @@ export function Footer() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Your email address"
-                    className="w-full h-10 pl-10 pr-4 rounded-xl bg-slate-900 border border-slate-800 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                    className="w-full h-10 pl-10 pr-4 rounded-xl bg-slate-900 border border-slate-800 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold transition-colors"
                     required
                     aria-label="Email for newsletter"
                   />
@@ -135,7 +135,7 @@ export function Footer() {
                     "h-10 px-4 rounded-xl flex items-center justify-center transition-all duration-200",
                     subscribed
                       ? "bg-emerald-600 text-white"
-                      : "bg-blue-600 hover:bg-blue-500 text-white"
+                      : "bg-red-600 hover:bg-red-500 text-white"
                   )}
                   aria-label="Subscribe to newsletter"
                 >
@@ -182,7 +182,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-slate-400 hover:text-blue-400 transition-colors"
+                      className="text-sm text-slate-400 hover:text-gold transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -199,7 +199,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-slate-400 hover:text-blue-400 transition-colors"
+                      className="text-sm text-slate-400 hover:text-gold transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -216,7 +216,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-slate-400 hover:text-blue-400 transition-colors"
+                      className="text-sm text-slate-400 hover:text-gold transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -233,7 +233,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-slate-400 hover:text-blue-400 transition-colors"
+                      className="text-sm text-slate-400 hover:text-gold transition-colors"
                     >
                       {link.label}
                     </Link>

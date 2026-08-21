@@ -114,7 +114,7 @@ export default function InquiriesPage() {
   }
 
   const statusConfig = {
-    new: { label: "New", color: "bg-blue-500/20 text-blue-400", icon: AlertCircle },
+    new: { label: "New", color: "bg-red-500/20 text-gold", icon: AlertCircle },
     contacted: { label: "Contacted", color: "bg-amber-500/20 text-amber-400", icon: Phone },
     converted: { label: "Converted", color: "bg-emerald-500/20 text-emerald-400", icon: CheckCircle },
     closed: { label: "Closed", color: "bg-slate-500/20 text-slate-400", icon: CheckCircle },
@@ -151,7 +151,7 @@ export default function InquiriesPage() {
               className={cn(
                 "p-4 rounded-xl border transition-all text-left",
                 statusFilter === status
-                  ? "bg-slate-800 border-blue-500/50"
+                  ? "bg-slate-800 border-gold/50"
                   : "bg-slate-900 border-slate-800 hover:border-slate-700"
               )}
             >
@@ -173,7 +173,7 @@ export default function InquiriesPage() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search inquiries..."
-          className="w-full h-10 pl-10 pr-4 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-blue-500"
+          className="w-full h-10 pl-10 pr-4 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
           aria-label="Search inquiries"
         />
       </div>
@@ -200,7 +200,7 @@ export default function InquiriesPage() {
                         inquiry.preferredContact === "whatsapp"
                           ? "bg-emerald-500/20 text-emerald-400"
                           : inquiry.preferredContact === "email"
-                            ? "bg-blue-500/20 text-blue-400"
+                            ? "bg-red-500/20 text-gold"
                             : "bg-purple-500/20 text-purple-400"
                       )}
                     >
@@ -208,7 +208,7 @@ export default function InquiriesPage() {
                     </span>
                   </div>
 
-                  <p className="text-sm text-blue-400">{inquiry.carTitle}</p>
+                  <p className="text-sm text-gold">{inquiry.carTitle}</p>
                   <p className="text-sm text-slate-400">{formatPrice(inquiry.carPrice)}</p>
 
                   <div className="bg-slate-800/50 rounded-lg p-3 max-w-2xl">
@@ -245,7 +245,7 @@ export default function InquiriesPage() {
                   )}
                   <a
                     href={`mailto:${inquiry.buyerEmail}?subject=Re: ${inquiry.carTitle}`}
-                    className="p-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white transition-colors"
+                    className="p-2 rounded-lg bg-red-600 hover:bg-red-500 text-white transition-colors"
                     aria-label="Reply via email"
                   >
                     <Mail className="h-4 w-4" />
@@ -253,7 +253,7 @@ export default function InquiriesPage() {
                   <select
                     value={inquiry.status}
                     onChange={(e) => updateStatus(inquiry.id, e.target.value as Inquiry["status"])}
-                    className="h-9 px-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-blue-500"
+                    className="h-9 px-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-xs focus:outline-none focus:border-gold"
                     aria-label="Update status"
                   >
                     <option value="new">New</option>

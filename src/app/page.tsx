@@ -161,7 +161,7 @@ const featuredCars = [
 ]
 
 const categories = [
-  { name: "Sedan", icon: Car, count: 245, color: "from-blue-600 to-blue-800" },
+  { name: "Sedan", icon: Car, count: 245, color: "from-red-600 to-red-800" },
   { name: "SUV", icon: Car, count: 189, color: "from-emerald-600 to-emerald-800" },
   { name: "Electric", icon: Zap, count: 67, color: "from-purple-600 to-purple-800" },
   { name: "Hybrid", icon: Fuel, count: 43, color: "from-amber-600 to-amber-800" },
@@ -208,9 +208,9 @@ export default function HomePage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="max-w-3xl space-y-8">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/20 border border-blue-500/30 backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-              <span className="text-sm text-blue-300 font-medium">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-600/20 border border-gold/30 backdrop-blur-sm">
+              <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
+              <span className="text-sm text-gold-light font-medium">
                 #1 Automotive Marketplace in Indonesia
               </span>
             </div>
@@ -247,7 +247,7 @@ export default function HomePage() {
               {stats.map((stat) => (
                 <div key={stat.label} className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
-                    <stat.icon className="h-5 w-5 text-blue-400" />
+                    <stat.icon className="h-5 w-5 text-gold" />
                   </div>
                   <div>
                     <p className="text-xl font-bold text-white">{stat.value}</p>
@@ -264,7 +264,7 @@ export default function HomePage() {
           <div className="flex flex-col items-center gap-2 text-slate-400">
             <span className="text-xs uppercase tracking-widest">Scroll to explore</span>
             <div className="w-6 h-10 rounded-full border-2 border-slate-400/30 flex justify-center pt-2">
-              <div className="w-1 h-3 rounded-full bg-blue-400 animate-bounce" />
+              <div className="w-1 h-3 rounded-full bg-gold animate-bounce" />
             </div>
           </div>
         </div>
@@ -282,7 +282,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/cars"
-              className="hidden sm:flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition-colors"
+              className="hidden sm:flex items-center gap-2 text-sm text-gold hover:text-gold-light transition-colors"
             >
               View All <ArrowRight className="h-4 w-4" />
             </Link>
@@ -293,14 +293,14 @@ export default function HomePage() {
               <Link
                 key={cat.name}
                 href={`/cars?bodyType=${cat.name.toLowerCase()}`}
-                className="group relative overflow-hidden rounded-2xl bg-slate-800/50 border border-slate-700/50 p-6 hover:border-blue-500/30 transition-all duration-300 hover:-translate-y-1"
+                className="group relative overflow-hidden rounded-2xl bg-slate-800/50 border border-slate-700/50 p-6 hover:border-gold/30 transition-all duration-300 hover:-translate-y-1"
               >
                 <div className={cn("w-12 h-12 rounded-xl bg-gradient-to-br flex items-center justify-center mb-4", cat.color)}>
                   <cat.icon className="h-6 w-6 text-white" />
                 </div>
                 <h3 className="text-lg font-bold text-white mb-1">{cat.name}</h3>
                 <p className="text-sm text-slate-400">{cat.count} listings</p>
-                <ChevronRight className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-600 group-hover:text-blue-400 transition-colors" />
+                <ChevronRight className="absolute right-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-600 group-hover:text-gold transition-colors" />
               </Link>
             ))}
           </div>
@@ -327,7 +327,7 @@ export default function HomePage() {
             </div>
             <Link
               href="/cars?featured=true"
-              className="hidden sm:flex items-center gap-2 text-sm text-blue-400 hover:text-blue-300 transition-colors"
+              className="hidden sm:flex items-center gap-2 text-sm text-gold hover:text-gold-light transition-colors"
             >
               View All <ArrowRight className="h-4 w-4" />
             </Link>
@@ -342,7 +342,7 @@ export default function HomePage() {
           <div className="mt-8 text-center sm:hidden">
             <Link
               href="/cars"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-medium transition-colors"
             >
               View All Cars <ArrowRight className="h-4 w-4" />
             </Link>
@@ -372,7 +372,7 @@ export default function HomePage() {
               overlay={
                 <div className="space-y-1">
                   <p className="text-white font-bold">2024 Toyota GR Supra</p>
-                  <p className="text-blue-300 text-sm">Full Interior & Exterior Tour</p>
+                  <p className="text-gold-light text-sm">Full Interior & Exterior Tour</p>
                 </div>
               }
             />
@@ -384,7 +384,7 @@ export default function HomePage() {
               overlay={
                 <div className="space-y-1">
                   <p className="text-white font-bold">2023 Tesla Model 3</p>
-                  <p className="text-blue-300 text-sm">Autopilot Demo & Features</p>
+                  <p className="text-gold-light text-sm">Autopilot Demo & Features</p>
                 </div>
               }
             />
@@ -393,7 +393,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-900 via-slate-900 to-slate-950 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-br from-red-900 via-black to-black relative overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white font-heading tracking-wide mb-4">
@@ -407,7 +407,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/sell"
-              className="flex items-center gap-2 px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-lg transition-all glow-blue"
+              className="flex items-center gap-2 px-8 py-4 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-lg transition-all glow-red"
             >
               <Play className="h-5 w-5" fill="white" />
               Start Selling Now

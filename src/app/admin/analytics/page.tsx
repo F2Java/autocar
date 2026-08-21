@@ -65,7 +65,7 @@ export default function AnalyticsPage() {
       {/* Stats Row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: "Total Views", value: "64,600", change: "+18.2%", icon: Eye, color: "text-blue-400" },
+          { label: "Total Views", value: "64,600", change: "+18.2%", icon: Eye, color: "text-gold" },
           { label: "Total Inquiries", value: "2,830", change: "+22.5%", icon: MessageCircle, color: "text-emerald-400" },
           { label: "Conversion Rate", value: "4.4%", change: "+0.8%", icon: TrendingUp, color: "text-purple-400" },
           { label: "Avg. Response Time", value: "2.3h", change: "-15%", icon: Calendar, color: "text-amber-400" },

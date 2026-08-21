@@ -106,7 +106,7 @@ export function VideoCard({
       {/* Loading State */}
       {!isLoaded && (
         <div className="absolute inset-0 flex items-center justify-center bg-slate-800">
-          <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-gold border-t-transparent rounded-full animate-spin" />
         </div>
       )}
 
@@ -116,14 +116,14 @@ export function VideoCard({
       {/* Play Button (when paused) */}
       {!isPlaying && isHovered && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-16 h-16 rounded-full bg-blue-600/90 backdrop-blur-sm flex items-center justify-center glow-blue transition-transform hover:scale-110">
+          <div className="w-16 h-16 rounded-full bg-red-600/90 backdrop-blur-sm flex items-center justify-center glow-red transition-transform hover:scale-110">
             <Play className="h-7 w-7 text-white ml-1" fill="white" />
           </div>
         </div>
       )}
 
       {/* Neon Border Glow on Hover */}
-      <div className="absolute inset-0 rounded-xl border border-blue-500/0 group-hover:border-blue-500/30 transition-colors duration-300 pointer-events-none" />
+      <div className="absolute inset-0 rounded-xl border border-gold/0 group-hover:border-gold/30 transition-colors duration-300 pointer-events-none" />
 
       {/* Custom Overlay Content */}
       {overlay && (

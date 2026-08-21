@@ -206,7 +206,7 @@ export default function CarDetailPage() {
                   className={cn(
                     "aspect-video rounded-lg overflow-hidden relative border-2 transition-all",
                     activeImage === 0
-                      ? "border-blue-500"
+                      ? "border-gold"
                       : "border-transparent hover:border-slate-600"
                   )}
                 >
@@ -227,7 +227,7 @@ export default function CarDetailPage() {
                   className={cn(
                     "aspect-video rounded-lg overflow-hidden border-2 transition-all",
                     activeImage === i + 1
-                      ? "border-blue-500"
+                      ? "border-gold"
                       : "border-transparent hover:border-slate-600"
                   )}
                 >
@@ -258,7 +258,7 @@ export default function CarDetailPage() {
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {specs.map((spec) => (
                   <div key={spec.label} className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/50">
-                    <spec.icon className="h-5 w-5 text-blue-400 flex-shrink-0" />
+                    <spec.icon className="h-5 w-5 text-gold flex-shrink-0" />
                     <div>
                       <p className="text-xs text-slate-400">{spec.label}</p>
                       <p className="text-sm font-medium text-white">{spec.value}</p>
@@ -276,7 +276,7 @@ export default function CarDetailPage() {
               <div className="grid grid-cols-2 gap-2">
                 {car.features.map((feature) => (
                   <div key={feature} className="flex items-center gap-2 text-sm text-slate-300">
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-red-500" />
                     {feature}
                   </div>
                 ))}
@@ -310,7 +310,7 @@ export default function CarDetailPage() {
                       {car.condition}
                     </span>
                     {car.isFeatured && (
-                      <span className="px-2 py-0.5 rounded-full bg-blue-500 text-xs font-bold text-white flex items-center gap-1">
+                      <span className="px-2 py-0.5 rounded-full bg-red-500 text-xs font-bold text-white flex items-center gap-1">
                         <Star className="h-3 w-3" fill="currentColor" /> Featured
                       </span>
                     )}
@@ -329,9 +329,9 @@ export default function CarDetailPage() {
                 </div>
 
                 {/* Price */}
-                <div className="p-4 rounded-xl bg-blue-600/10 border border-blue-500/20">
+                <div className="p-4 rounded-xl bg-red-600/10 border border-gold/20">
                   <div className="flex items-baseline gap-3">
-                    <span className="text-3xl font-bold text-blue-400 font-heading">
+                    <span className="text-3xl font-bold text-gold font-heading">
                       {formatPrice(car.price)}
                     </span>
                     {car.originalPrice && (
@@ -361,7 +361,7 @@ export default function CarDetailPage() {
                   </button>
                   <button
                     onClick={handleEmail}
-                    className="w-full flex items-center justify-center gap-2 h-12 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium transition-colors"
+                    className="w-full flex items-center justify-center gap-2 h-12 rounded-xl bg-red-600 hover:bg-red-500 text-white font-medium transition-colors"
                   >
                     <Mail className="h-5 w-5" />
                     Send Email
@@ -394,7 +394,7 @@ export default function CarDetailPage() {
                       placeholder="Your Name"
                       value={inquiryForm.name}
                       onChange={(e) => setInquiryForm({ ...inquiryForm, name: e.target.value })}
-                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                       required
                       aria-label="Your name"
                     />
@@ -403,7 +403,7 @@ export default function CarDetailPage() {
                       placeholder="Email Address"
                       value={inquiryForm.email}
                       onChange={(e) => setInquiryForm({ ...inquiryForm, email: e.target.value })}
-                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                       required
                       aria-label="Email address"
                     />
@@ -412,20 +412,20 @@ export default function CarDetailPage() {
                       placeholder="Phone Number"
                       value={inquiryForm.phone}
                       onChange={(e) => setInquiryForm({ ...inquiryForm, phone: e.target.value })}
-                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                       aria-label="Phone number"
                     />
                     <textarea
                       placeholder="Message (optional)"
                       value={inquiryForm.message}
                       onChange={(e) => setInquiryForm({ ...inquiryForm, message: e.target.value })}
-                      className="w-full h-20 px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500 resize-none"
+                      className="w-full h-20 px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold resize-none"
                       aria-label="Message"
                     />
                     <div className="flex gap-2">
                       <button
                         type="submit"
-                        className="flex-1 h-10 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium flex items-center justify-center gap-2 transition-colors"
+                        className="flex-1 h-10 rounded-lg bg-red-600 hover:bg-red-500 text-white text-sm font-medium flex items-center justify-center gap-2 transition-colors"
                       >
                         <Send className="h-4 w-4" /> Send
                       </button>

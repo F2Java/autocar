@@ -48,7 +48,7 @@ export default function RegisterPage() {
     <div className="min-h-[70vh] flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4"><Store className="h-6 w-6 text-white" /></div>
+          <div className="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center mx-auto mb-4"><Store className="h-6 w-6 text-white" /></div>
           <h1 className="text-2xl font-bold text-gray-900">Daftar Akun B2B</h1>
           <p className="text-sm text-gray-500 mt-1">Daftarkan perusahaan Anda untuk belanja grosir</p>
         </div>
@@ -76,7 +76,7 @@ export default function RegisterPage() {
             {loading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}{loading ? "Mendaftar..." : "Daftar"}
           </Button>
         </form>
-        <p className="text-center text-sm text-gray-500 mt-6">Sudah punya akun? <Link href="/auth/login" className="text-blue-600 hover:text-blue-700 font-medium">Masuk</Link></p>
+        <p className="text-center text-sm text-gray-500 mt-6">Sudah punya akun? <Link href="/auth/login" className="text-gold hover:text-gold-dark font-medium">Masuk</Link></p>
       </div>
     </div>
   )

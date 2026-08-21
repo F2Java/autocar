@@ -43,7 +43,7 @@ export default function ContactPage() {
       label: "Phone",
       value: "+62 21-1234-5678",
       action: () => window.open("tel:+622112345678"),
-      color: "bg-blue-500",
+      color: "bg-red-500",
     },
     {
       icon: Mail,
@@ -87,7 +87,7 @@ export default function ContactPage() {
               <button
                 key={method.label}
                 onClick={method.action}
-                className="w-full flex items-center gap-4 p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-blue-500/30 transition-all text-left group"
+                className="w-full flex items-center gap-4 p-4 rounded-xl bg-slate-900 border border-slate-800 hover:border-gold/30 transition-all text-left group"
               >
                 <div
                   className={cn(
@@ -99,7 +99,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm text-slate-400">{method.label}</p>
-                  <p className="text-white font-medium group-hover:text-blue-400 transition-colors">
+                  <p className="text-white font-medium group-hover:text-gold transition-colors">
                     {method.value}
                   </p>
                 </div>
@@ -109,7 +109,7 @@ export default function ContactPage() {
             {/* Office Location */}
             <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
               <div className="flex items-center gap-3 mb-3">
-                <MapPin className="h-5 w-5 text-blue-400" />
+                <MapPin className="h-5 w-5 text-gold" />
                 <h3 className="text-sm font-bold text-white">OFFICE</h3>
               </div>
               <p className="text-sm text-slate-400">
@@ -147,7 +147,7 @@ export default function ContactPage() {
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
                         required
-                        className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                        className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                         aria-label="Your name"
                       />
                     </div>
@@ -160,7 +160,7 @@ export default function ContactPage() {
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
                         required
-                        className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                        className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                         aria-label="Your email"
                       />
                     </div>
@@ -175,7 +175,7 @@ export default function ContactPage() {
                         type="tel"
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                        className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                         aria-label="Your phone"
                       />
                     </div>
@@ -188,7 +188,7 @@ export default function ContactPage() {
                         value={form.subject}
                         onChange={(e) => setForm({ ...form, subject: e.target.value })}
                         required
-                        className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                        className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                         aria-label="Subject"
                       />
                     </div>
@@ -203,14 +203,14 @@ export default function ContactPage() {
                       onChange={(e) => setForm({ ...form, message: e.target.value })}
                       required
                       rows={5}
-                      className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500 resize-none"
+                      className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold resize-none"
                       aria-label="Your message"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full h-12 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium flex items-center justify-center gap-2 transition-colors"
+                    className="w-full h-12 rounded-xl bg-red-600 hover:bg-red-500 text-white font-medium flex items-center justify-center gap-2 transition-colors"
                   >
                     <Send className="h-4 w-4" /> Send Message
                   </button>

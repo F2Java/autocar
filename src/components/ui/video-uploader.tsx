@@ -143,7 +143,7 @@ export function VideoUploader({
           className={cn(
             "flex-1 flex items-center justify-center gap-2 h-9 rounded-lg text-sm font-medium transition-colors",
             mode === "upload"
-              ? "bg-blue-600 text-white"
+              ? "bg-red-600 text-white"
               : "text-slate-400 hover:text-white"
           )}
         >
@@ -154,7 +154,7 @@ export function VideoUploader({
           className={cn(
             "flex-1 flex items-center justify-center gap-2 h-9 rounded-lg text-sm font-medium transition-colors",
             mode === "url"
-              ? "bg-blue-600 text-white"
+              ? "bg-red-600 text-white"
               : "text-slate-400 hover:text-white"
           )}
         >
@@ -185,7 +185,7 @@ export function VideoUploader({
                 setUrlError("")
               }}
               placeholder="https://youtube.com/watch?v=... or https://vimeo.com/..."
-              className="flex-1 h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-blue-500"
+              className="flex-1 h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm placeholder:text-slate-500 focus:outline-none focus:border-gold"
               onKeyDown={(e) => {
                 if (e.key === "Enter") handleAddExternalUrl()
               }}
@@ -193,7 +193,7 @@ export function VideoUploader({
             />
             <button
               onClick={handleAddExternalUrl}
-              className="h-10 px-4 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors"
+              className="h-10 px-4 rounded-lg bg-red-600 hover:bg-red-500 text-white text-sm font-medium transition-colors"
             >
               Add
             </button>

@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input"
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div className="min-h-[70vh] flex items-center justify-center"><Loader2 className="h-8 w-8 text-blue-500 animate-spin" /></div>}>
+    <Suspense fallback={<div className="min-h-[70vh] flex items-center justify-center"><Loader2 className="h-8 w-8 text-gold animate-spin" /></div>}>
       <LoginForm />
     </Suspense>
   )
@@ -47,7 +47,7 @@ function LoginForm() {
     <div className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4"><Store className="h-6 w-6 text-white" /></div>
+          <div className="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center mx-auto mb-4"><Store className="h-6 w-6 text-white" /></div>
           <h1 className="text-2xl font-bold text-gray-900">Masuk</h1>
           <p className="text-sm text-gray-500 mt-1">Akses akun B2B Anda</p>
         </div>
@@ -73,7 +73,7 @@ function LoginForm() {
           </Button>
         </form>
         <p className="text-center text-sm text-gray-500 mt-6">
-          Belum punya akun? <Link href="/auth/register" className="text-blue-600 hover:text-blue-700 font-medium">Daftar</Link>
+          Belum punya akun? <Link href="/auth/register" className="text-gold hover:text-gold-dark font-medium">Daftar</Link>
         </p>
       </div>
     </div>

@@ -99,7 +99,7 @@ export function CarCard({
   const conditionConfig = {
     NEW: { label: "New", variant: "default" as const, color: "bg-emerald-500" },
     USED: { label: "Used", variant: "outline" as const, color: "bg-amber-500" },
-    CERTIFIED_PRE_OWNED: { label: "CPO", variant: "default" as const, color: "bg-blue-500" },
+    CERTIFIED_PRE_OWNED: { label: "CPO", variant: "default" as const, color: "bg-red-500" },
   }
 
   const conditionInfo = conditionConfig[condition]
@@ -133,7 +133,7 @@ export function CarCard({
       <article
         className={cn(
           "relative bg-slate-900 rounded-2xl overflow-hidden transition-all duration-300",
-          "border border-slate-800 hover:border-blue-500/30",
+          "border border-slate-800 hover:border-gold/30",
           "hover:shadow-[0_20px_40px_rgba(0,0,0,0.3),0_0_30px_rgba(59,130,246,0.1)]",
           "hover:-translate-y-1"
         )}
@@ -180,7 +180,7 @@ export function CarCard({
               {conditionInfo.label}
             </span>
             {isFeatured && (
-              <span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-600 text-white flex items-center gap-1">
+              <span className="px-3 py-1 rounded-full text-xs font-bold bg-red-600 text-white flex items-center gap-1">
                 <Star className="h-3 w-3" fill="currentColor" /> Featured
               </span>
             )}
@@ -235,14 +235,14 @@ export function CarCard({
         <div className="p-5 space-y-4">
           {/* Title & Price */}
           <div>
-            <h3 className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-1 font-heading tracking-wide">
+            <h3 className="text-lg font-bold text-white group-hover:text-gold transition-colors line-clamp-1 font-heading tracking-wide">
               {year} {make} {model}
             </h3>
             {dealerName && (
               <p className="text-sm text-slate-400 mt-1">{dealerName}</p>
             )}
             <div className="flex items-baseline gap-3 mt-2">
-              <span className="text-2xl font-bold text-blue-400 font-heading">
+              <span className="text-2xl font-bold text-gold font-heading">
                 {formatPrice(price)}
               </span>
               {negotiable && (
@@ -254,7 +254,7 @@ export function CarCard({
           {/* Specs Grid */}
           <div className="grid grid-cols-2 gap-3">
             <div className="flex items-center gap-2 text-sm text-slate-300">
-              <Gauge className="h-4 w-4 text-blue-500" />
+              <Gauge className="h-4 w-4 text-gold" />
               <span>{mileage ? `${mileage.toLocaleString()} km` : "N/A"}</span>
             </div>
             <div className="flex items-center gap-2 text-sm text-slate-300">
@@ -338,7 +338,7 @@ export function CarCard({
             )}
             <Link
               href={`/cars/${slug}`}
-              className="flex-1 flex items-center justify-center gap-2 h-10 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors"
+              className="flex-1 flex items-center justify-center gap-2 h-10 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-medium transition-colors"
               onClick={(e) => e.stopPropagation()}
             >
               View Details

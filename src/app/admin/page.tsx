@@ -164,7 +164,7 @@ export default function AdminDashboardPage() {
             value: stats.totalCars.toString(),
             change: stats.carsChange,
             icon: Car,
-            color: "from-blue-600 to-blue-800",
+            color: "from-red-600 to-red-800",
             href: "/admin/cars",
           },
           {
@@ -195,7 +195,7 @@ export default function AdminDashboardPage() {
           <Link
             key={stat.label}
             href={stat.href}
-            className="bg-slate-900 rounded-xl p-5 border border-slate-800 hover:border-blue-500/30 transition-all group"
+            className="bg-slate-900 rounded-xl p-5 border border-slate-800 hover:border-gold/30 transition-all group"
           >
             <div className="flex items-start justify-between">
               <div>
@@ -244,7 +244,7 @@ export default function AdminDashboardPage() {
             </div>
             <div className="flex items-center gap-4 text-sm">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-blue-500" />
+                <div className="w-3 h-3 rounded-full bg-red-500" />
                 <span className="text-slate-400">Views</span>
               </div>
               <div className="flex items-center gap-2">
@@ -352,7 +352,7 @@ export default function AdminDashboardPage() {
               </h2>
               <Link
                 href="/admin/cars"
-                className="text-sm text-blue-400 hover:text-blue-300"
+                className="text-sm text-gold hover:text-gold-light"
               >
                 View All
               </Link>
@@ -369,7 +369,7 @@ export default function AdminDashboardPage() {
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-white font-medium truncate">{car.title}</p>
                   <div className="flex items-center gap-2 mt-1">
-                    <span className="text-sm text-blue-400 font-bold">
+                    <span className="text-sm text-gold font-bold">
                       {formatPrice(car.price)}
                     </span>
                     <span
@@ -405,7 +405,7 @@ export default function AdminDashboardPage() {
               </h2>
               <Link
                 href="/admin/inquiries"
-                className="text-sm text-blue-400 hover:text-blue-300"
+                className="text-sm text-gold hover:text-gold-light"
               >
                 View All
               </Link>
@@ -417,14 +417,14 @@ export default function AdminDashboardPage() {
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="text-sm text-white font-medium">{inquiry.buyerName}</p>
-                    <p className="text-xs text-blue-400 mt-0.5">{inquiry.carTitle}</p>
+                    <p className="text-xs text-gold mt-0.5">{inquiry.carTitle}</p>
                   </div>
                   <span
                     className={cn(
                       "px-2 py-0.5 rounded-full text-xs font-medium",
                       inquiry.preferredContact === "whatsapp"
                         ? "bg-emerald-500/20 text-emerald-400"
-                        : "bg-blue-500/20 text-blue-400"
+                        : "bg-red-500/20 text-gold"
                     )}
                   >
                     {inquiry.preferredContact}

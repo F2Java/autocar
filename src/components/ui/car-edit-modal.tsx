@@ -148,8 +148,8 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-slate-800">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-blue-600/20 flex items-center justify-center">
-              <Car className="h-5 w-5 text-blue-400" />
+            <div className="w-10 h-10 rounded-xl bg-red-600/20 flex items-center justify-center">
+              <Car className="h-5 w-5 text-gold" />
             </div>
             <div>
               <h2 className="text-lg font-bold text-white font-heading tracking-wide">
@@ -178,7 +178,7 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                 <select
                   value={form.make || ""}
                   onChange={(e) => updateField("make", e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                 >
                   <option value="">Select Make</option>
                   {makes.map((m) => (
@@ -192,7 +192,7 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                   type="text"
                   value={form.model || ""}
                   onChange={(e) => updateField("model", e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                 />
               </FormField>
 
@@ -202,14 +202,14 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                     type="number"
                     value={form.year || ""}
                     onChange={(e) => updateField("year", parseInt(e.target.value))}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   />
                 </FormField>
                 <FormField label="Condition">
                   <select
                     value={form.condition || ""}
                     onChange={(e) => updateField("condition", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   >
                     {conditions.map((c) => (
                       <option key={c} value={c}>{c}</option>
@@ -223,7 +223,7 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                   value={form.description || ""}
                   onChange={(e) => updateField("description", e.target.value)}
                   rows={3}
-                  className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500 resize-none"
+                  className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold resize-none"
                 />
               </FormField>
 
@@ -234,7 +234,7 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                   <select
                     value={form.bodyType || ""}
                     onChange={(e) => updateField("bodyType", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   >
                     {bodyTypes.map((b) => (
                       <option key={b} value={b}>{b}</option>
@@ -245,7 +245,7 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                   <select
                     value={form.fuelType || ""}
                     onChange={(e) => updateField("fuelType", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   >
                     {fuelTypes.map((f) => (
                       <option key={f} value={f}>{f}</option>
@@ -259,7 +259,7 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                   <select
                     value={form.transmission || ""}
                     onChange={(e) => updateField("transmission", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   >
                     {transmissions.map((t) => (
                       <option key={t} value={t}>{t}</option>
@@ -271,7 +271,7 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                     type="number"
                     value={form.horsepower || ""}
                     onChange={(e) => updateField("horsepower", parseInt(e.target.value))}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   />
                 </FormField>
               </div>
@@ -287,14 +287,14 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                     type="number"
                     value={form.price || ""}
                     onChange={(e) => updateField("price", parseInt(e.target.value))}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   />
                 </FormField>
                 <FormField label="Status">
                   <select
                     value={form.status || ""}
                     onChange={(e) => updateField("status", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   >
                     {statuses.map((s) => (
                       <option key={s} value={s}>{s}</option>
@@ -309,7 +309,7 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                     type="checkbox"
                     checked={form.negotiable || false}
                     onChange={(e) => updateField("negotiable", e.target.checked)}
-                    className="w-4 h-4 rounded bg-slate-800 border-slate-700 text-blue-600 focus:ring-blue-500"
+                    className="w-4 h-4 rounded bg-slate-800 border-slate-700 text-gold focus:ring-gold"
                   />
                   <span className="text-sm text-white">Negotiable</span>
                 </label>
@@ -318,16 +318,16 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                     type="checkbox"
                     checked={form.isFeatured || false}
                     onChange={(e) => updateField("isFeatured", e.target.checked)}
-                    className="w-4 h-4 rounded bg-slate-800 border-slate-700 text-blue-600 focus:ring-blue-500"
+                    className="w-4 h-4 rounded bg-slate-800 border-slate-700 text-gold focus:ring-gold"
                   />
                   <span className="text-sm text-white">Featured</span>
                 </label>
               </div>
 
               {form.price && form.price > 0 && (
-                <div className="p-3 rounded-lg bg-blue-600/10 border border-blue-500/20">
+                <div className="p-3 rounded-lg bg-red-600/10 border border-gold/20">
                   <p className="text-sm text-slate-400">Preview</p>
-                  <p className="text-xl font-bold text-blue-400 font-heading">
+                  <p className="text-xl font-bold text-gold font-heading">
                     {formatPrice(form.price)}
                   </p>
                 </div>
@@ -341,7 +341,7 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                     type="text"
                     value={form.city || ""}
                     onChange={(e) => updateField("city", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   />
                 </FormField>
                 <FormField label="Province">
@@ -349,7 +349,7 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                     type="text"
                     value={form.province || ""}
                     onChange={(e) => updateField("province", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   />
                 </FormField>
               </div>
@@ -361,7 +361,7 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                   type="text"
                   value={form.dealerName || ""}
                   onChange={(e) => updateField("dealerName", e.target.value)}
-                  className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                 />
               </FormField>
 
@@ -371,7 +371,7 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                     type="tel"
                     value={form.dealerWhatsapp || ""}
                     onChange={(e) => updateField("dealerWhatsapp", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   />
                 </FormField>
                 <FormField label="Phone">
@@ -379,7 +379,7 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
                     type="tel"
                     value={form.dealerPhone || ""}
                     onChange={(e) => updateField("dealerPhone", e.target.value)}
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   />
                 </FormField>
               </div>
@@ -451,7 +451,7 @@ export function CarEditModal({ car, isOpen, onClose, onSave }: CarEditModalProps
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors disabled:opacity-50"
+            className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-medium transition-colors disabled:opacity-50"
           >
             {saving ? (
               <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

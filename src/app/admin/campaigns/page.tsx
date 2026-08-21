@@ -147,7 +147,7 @@ export default function CampaignsPage() {
             </div>
             <button
               onClick={() => setShowCreate(!showCreate)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-medium transition-colors"
             >
               <Plus className="h-4 w-4" /> New Campaign
             </button>
@@ -159,7 +159,7 @@ export default function CampaignsPage() {
         {/* Stats Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {[
-            { label: "Total Sent", value: stats.totalSent, icon: Send, color: "text-blue-400" },
+            { label: "Total Sent", value: stats.totalSent, icon: Send, color: "text-gold" },
             { label: "Opened", value: stats.totalOpened, icon: Eye, color: "text-emerald-400" },
             { label: "Clicked", value: stats.totalClicked, icon: MousePointerClick, color: "text-purple-400" },
             { label: "Failed", value: stats.totalFailed, icon: XCircle, color: "text-red-400" },
@@ -193,7 +193,7 @@ export default function CampaignsPage() {
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="e.g., New Year Car Sale"
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   />
                 </div>
 
@@ -207,7 +207,7 @@ export default function CampaignsPage() {
                         className={cn(
                           "flex-1 h-10 rounded-lg text-sm font-medium capitalize transition-all",
                           form.channel === ch
-                            ? "bg-blue-600 text-white"
+                            ? "bg-red-600 text-white"
                             : "bg-slate-800 text-slate-300 border border-slate-700"
                         )}
                       >
@@ -224,7 +224,7 @@ export default function CampaignsPage() {
                     value={form.subject}
                     onChange={(e) => setForm({ ...form, subject: e.target.value })}
                     placeholder="e.g., Special Deal: 2024 Toyota Supra"
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   />
                 </div>
 
@@ -235,7 +235,7 @@ export default function CampaignsPage() {
                     value={form.headline}
                     onChange={(e) => setForm({ ...form, headline: e.target.value })}
                     placeholder="e.g., Don't Miss Out!"
-                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                    className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   />
                 </div>
 
@@ -246,7 +246,7 @@ export default function CampaignsPage() {
                     onChange={(e) => setForm({ ...form, body: e.target.value })}
                     placeholder="Write your promotional message here..."
                     rows={6}
-                    className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500 resize-none font-mono"
+                    className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold resize-none font-mono"
                   />
                 </div>
               </div>
@@ -262,7 +262,7 @@ export default function CampaignsPage() {
                     onChange={(e) => setForm({ ...form, recipients: e.target.value })}
                     placeholder="buyer1@email.com, John Doe&#10;buyer2@email.com, Jane Smith"
                     rows={8}
-                    className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500 resize-none font-mono"
+                    className="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold resize-none font-mono"
                   />
                   <p className="text-xs text-slate-500 mt-1">
                     One recipient per line: email,name
@@ -277,7 +277,7 @@ export default function CampaignsPage() {
                       value={form.carTitle}
                       onChange={(e) => setForm({ ...form, carTitle: e.target.value })}
                       placeholder="2024 Toyota Supra"
-                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                     />
                   </div>
                   <div>
@@ -287,7 +287,7 @@ export default function CampaignsPage() {
                       value={form.carPrice}
                       onChange={(e) => setForm({ ...form, carPrice: e.target.value })}
                       placeholder="Rp 1.250.000.000"
-                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                     />
                   </div>
                 </div>
@@ -299,7 +299,7 @@ export default function CampaignsPage() {
                       type="text"
                       value={form.ctaText}
                       onChange={(e) => setForm({ ...form, ctaText: e.target.value })}
-                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                     />
                   </div>
                   <div>
@@ -308,7 +308,7 @@ export default function CampaignsPage() {
                       type="url"
                       value={form.ctaUrl}
                       onChange={(e) => setForm({ ...form, ctaUrl: e.target.value })}
-                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                      className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                     />
                   </div>
                 </div>
@@ -317,7 +317,7 @@ export default function CampaignsPage() {
                 <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700">
                   <p className="text-xs text-slate-400 mb-2 uppercase tracking-wider">Preview</p>
                   <div className="bg-slate-900 rounded-lg p-4">
-                    <p className="text-xs text-blue-400 mb-1">From: AutoCar &lt;noreply@autocar.id&gt;</p>
+                    <p className="text-xs text-gold mb-1">From: AutoCar &lt;noreply@autocar.id&gt;</p>
                     <p className="text-sm text-white font-medium mb-1">{form.subject || "Email Subject"}</p>
                     <p className="text-xs text-slate-400 line-clamp-3">
                       {form.body || "Email body preview..."}
@@ -338,7 +338,7 @@ export default function CampaignsPage() {
               <button
                 onClick={handleSend}
                 disabled={sending || !form.name || !form.subject || !form.recipients}
-                className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-red-600 hover:bg-red-500 text-white text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {sending ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
@@ -378,7 +378,7 @@ export default function CampaignsPage() {
                       >
                         {campaign.status}
                       </span>
-                      <span className="px-2 py-0.5 rounded-full text-xs bg-blue-500/20 text-blue-400">
+                      <span className="px-2 py-0.5 rounded-full text-xs bg-red-500/20 text-gold">
                         {campaign.channel}
                       </span>
                     </div>
@@ -435,7 +435,7 @@ export default function CampaignsPage() {
                 <p className="text-slate-400">No campaigns yet</p>
                 <button
                   onClick={() => setShowCreate(true)}
-                  className="mt-4 text-blue-400 hover:text-blue-300 text-sm"
+                  className="mt-4 text-gold hover:text-gold-light text-sm"
                 >
                   Create your first campaign
                 </button>

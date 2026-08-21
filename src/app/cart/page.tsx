@@ -42,7 +42,7 @@ export default function CartPage() {
   const subtotal = cartItems.reduce((s, i) => s + i.price * i.quantity, 0)
   const totalItems = cartItems.reduce((s, i) => s + i.quantity, 0)
 
-  if (loading) return <div className="max-w-3xl mx-auto px-4 py-20 flex justify-center"><Loader2 className="h-8 w-8 text-blue-500 animate-spin" /></div>
+  if (loading) return <div className="max-w-3xl mx-auto px-4 py-20 flex justify-center"><Loader2 className="h-8 w-8 text-gold animate-spin" /></div>
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
@@ -66,7 +66,7 @@ export default function CartPage() {
             <div key={item.id} className="bg-white border border-gray-200 rounded-xl p-4 flex items-center gap-4">
               <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center shrink-0"><Package className="h-8 w-8 text-gray-300" /></div>
               <div className="flex-1 min-w-0">
-                <Link href={`/products/${item.sku}`} className="font-medium text-gray-900 hover:text-blue-600 line-clamp-1">{item.name}</Link>
+                <Link href={`/products/${item.sku}`} className="font-medium text-gray-900 hover:text-gold line-clamp-1">{item.name}</Link>
                 <p className="text-xs text-gray-400 font-mono">{item.sku}</p>
                 <p className="text-sm font-medium text-gray-700 mt-1">{formatCurrency(item.price)} / {item.unit}</p>
               </div>

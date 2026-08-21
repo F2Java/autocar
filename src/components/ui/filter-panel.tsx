@@ -140,7 +140,7 @@ export function FilterPanel({
                   className={cn(
                     "px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200",
                     filters.condition === cond
-                      ? "bg-blue-600 text-white"
+                      ? "bg-red-600 text-white"
                       : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700"
                   )}
                 >
@@ -214,7 +214,7 @@ export function FilterPanel({
                   value={filters.priceMin}
                   onChange={(e) => onFilterChange({ priceMin: e.target.value })}
                   placeholder="0"
-                  className="w-full h-9 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full h-9 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   aria-label="Minimum price"
                 />
               </div>
@@ -225,7 +225,7 @@ export function FilterPanel({
                   value={filters.priceMax}
                   onChange={(e) => onFilterChange({ priceMax: e.target.value })}
                   placeholder="No limit"
-                  className="w-full h-9 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+                  className="w-full h-9 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
                   aria-label="Maximum price"
                 />
               </div>
@@ -249,7 +249,7 @@ export function FilterPanel({
                   className={cn(
                     "px-2 py-1 rounded text-xs font-medium transition-colors",
                     filters.priceMin === range.min && filters.priceMax === range.max
-                      ? "bg-blue-600 text-white"
+                      ? "bg-red-600 text-white"
                       : "bg-slate-800 text-slate-400 hover:bg-slate-700"
                   )}
                 >
@@ -277,7 +277,7 @@ export function FilterPanel({
                   className={cn(
                     "px-3 py-1.5 rounded-lg text-sm transition-all duration-200",
                     filters.fuelType === fuel
-                      ? "bg-blue-600 text-white"
+                      ? "bg-red-600 text-white"
                       : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700"
                   )}
                 >
@@ -305,7 +305,7 @@ export function FilterPanel({
                   className={cn(
                     "px-3 py-1.5 rounded-lg text-sm transition-all duration-200",
                     filters.transmission === trans
-                      ? "bg-blue-600 text-white"
+                      ? "bg-red-600 text-white"
                       : "bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-700"
                   )}
                 >
@@ -323,7 +323,7 @@ export function FilterPanel({
             <select
               value={filters.sortBy}
               onChange={(e) => onFilterChange({ sortBy: e.target.value })}
-              className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+              className="w-full h-10 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
               aria-label="Sort cars by"
             >
               <option value="newest">Newest First</option>
@@ -338,7 +338,7 @@ export function FilterPanel({
           {/* Apply Button (Mobile) */}
           <Button
             onClick={onClose}
-            className="w-full lg:hidden bg-blue-600 hover:bg-blue-500"
+            className="w-full lg:hidden bg-red-600 hover:bg-red-500"
           >
             Show {resultCount || 0} Results
           </Button>
@@ -397,7 +397,7 @@ function SelectFilter({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full h-9 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-blue-500"
+        className="w-full h-9 px-3 rounded-lg bg-slate-800 border border-slate-700 text-white text-sm focus:outline-none focus:border-gold"
         aria-label={`Filter by ${label}`}
       >
         <option value="">{placeholder}</option>

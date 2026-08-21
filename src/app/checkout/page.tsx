@@ -65,7 +65,7 @@ export default function CheckoutPage() {
     finally { setSubmitting(false) }
   }
 
-  if (loading) return <div className="max-w-3xl mx-auto px-4 py-20 flex justify-center"><Loader2 className="h-8 w-8 text-blue-500 animate-spin" /></div>
+  if (loading) return <div className="max-w-3xl mx-auto px-4 py-20 flex justify-center"><Loader2 className="h-8 w-8 text-gold animate-spin" /></div>
 
   if (success) return (
     <div className="max-w-lg mx-auto px-4 py-20 text-center">
@@ -84,7 +84,7 @@ export default function CheckoutPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
-      <Link href="/cart" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-blue-600 mb-6"><ArrowLeft className="h-4 w-4" /> Kembali</Link>
+      <Link href="/cart" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gold mb-6"><ArrowLeft className="h-4 w-4" /> Kembali</Link>
       <h1 className="text-2xl font-bold text-gray-900 mb-8">Checkout</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
@@ -115,12 +115,12 @@ export default function CheckoutPage() {
 
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-700">Alamat Pengiriman</label>
-            <textarea className="flex min-h-20 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            <textarea className="flex min-h-20 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gold"
               value={shippingAddress} onChange={(e) => setShippingAddress(e.target.value)} disabled={!customer} />
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-700">Catatan</label>
-            <textarea className="flex min-h-16 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            <textarea className="flex min-h-16 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gold"
               value={notes} onChange={(e) => setNotes(e.target.value)} disabled={!customer} placeholder="Catatan pesanan (opsional)" />
           </div>
         </div>

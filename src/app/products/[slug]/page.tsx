@@ -32,12 +32,12 @@ export default function ProductDetailPage() {
     setTimeout(() => setAdded(false), 2000)
   }
 
-  if (loading) return <div className="max-w-4xl mx-auto px-4 py-20 flex justify-center"><Loader2 className="h-8 w-8 text-blue-500 animate-spin" /></div>
+  if (loading) return <div className="max-w-4xl mx-auto px-4 py-20 flex justify-center"><Loader2 className="h-8 w-8 text-gold animate-spin" /></div>
   if (!product) return <div className="max-w-4xl mx-auto px-4 py-20 text-center text-gray-500">Produk tidak ditemukan</div>
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
-      <Link href="/" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-blue-600 mb-6"><ArrowLeft className="h-4 w-4" /> Kembali</Link>
+      <Link href="/" className="inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gold mb-6"><ArrowLeft className="h-4 w-4" /> Kembali</Link>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border border-gray-200 flex items-center justify-center">

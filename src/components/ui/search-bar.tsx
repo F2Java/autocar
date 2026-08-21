@@ -69,7 +69,7 @@ export function SearchBar({
           "relative flex-1 flex items-center rounded-xl transition-all duration-300",
           "bg-slate-900/80 backdrop-blur-md border",
           isFocused
-            ? "border-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.15)]"
+            ? "border-gold/50 shadow-[0_0_20px_rgba(59,130,246,0.15)]"
             : "border-slate-700/50 hover:border-slate-600/50"
         )}
       >
@@ -89,7 +89,7 @@ export function SearchBar({
           aria-label="Search cars"
         />
         {loading ? (
-          <Loader2 className="absolute right-4 h-5 w-5 text-blue-400 animate-spin" />
+          <Loader2 className="absolute right-4 h-5 w-5 text-gold animate-spin" />
         ) : value ? (
           <button
             type="button"
@@ -110,7 +110,7 @@ export function SearchBar({
             "h-12 px-4 rounded-xl flex items-center gap-2 transition-all duration-200",
             "bg-slate-800 border border-slate-700/50 text-slate-300",
             "hover:bg-slate-700 hover:border-slate-600 hover:text-white",
-            "focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+            "focus:outline-none focus:ring-2 focus:ring-gold/50"
           )}
           aria-label="Open filters"
         >

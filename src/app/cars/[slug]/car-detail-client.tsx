@@ -146,12 +146,12 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
       {/* Breadcrumb */}
       <div className="bg-red-dark pt-24 pb-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center gap-2 text-sm text-white/60">
-            <Link href="/" className="hover:text-gold transition-colors">Home</Link>
-            <ChevronRight className="h-4 w-4" />
-            <Link href="/cars" className="hover:text-gold transition-colors">Browse Cars</Link>
-            <ChevronRight className="h-4 w-4" />
-            <span className="text-gold">{car.title}</span>
+          <nav className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm text-white/60 overflow-x-auto">
+            <Link href="/" className="hover:text-gold transition-colors whitespace-nowrap">Home</Link>
+            <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+            <Link href="/cars" className="hover:text-gold transition-colors whitespace-nowrap">Cars</Link>
+            <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
+            <span className="text-gold truncate">{car.title}</span>
           </nav>
         </div>
       </div>
@@ -385,7 +385,7 @@ export function CarDetailClient({ car }: CarDetailClientProps) {
               </div>
 
               {/* Quick Contact Buttons */}
-              <div className="space-y-3 mb-6">
+              <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
                 {car.dealerWhatsapp && (
                   <a
                     href={`https://wa.me/${car.dealerWhatsapp}?text=${encodeURIComponent(

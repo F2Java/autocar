@@ -156,12 +156,12 @@ function CarsPageContent() {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2.5 rounded-xl bg-neutral-800 text-white text-sm border border-neutral-700 focus:outline-none focus:border-gold"
+              className="px-3 py-2.5 rounded-xl bg-neutral-800 text-white text-sm border border-neutral-700 focus:outline-none focus:border-gold"
             >
-              <option value="newest">Newest First</option>
-              <option value="oldest">Oldest First</option>
-              <option value="price_asc">Price: Low to High</option>
-              <option value="price_desc">Price: High to Low</option>
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+              <option value="price_asc">Price ↑</option>
+              <option value="price_desc">Price ↓</option>
             </select>
 
             <div className="hidden sm:flex items-center border border-neutral-700 rounded-xl overflow-hidden">
@@ -282,7 +282,7 @@ function CarsPageContent() {
 
         {/* Active Filters */}
         {hasActiveFilters && (
-          <div className="flex items-center gap-2 mb-4 flex-wrap">
+          <div className="flex items-center gap-1.5 sm:gap-2 mb-4 flex-wrap">
             <span className="text-sm text-gray-400">Active:</span>
             {searchValue && (
               <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-red-600/20 text-red-400 text-xs">

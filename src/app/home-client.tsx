@@ -90,7 +90,7 @@ export function HomePageClient({ featuredCars }: HomePageClientProps) {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
           <div className="max-w-3xl space-y-8 text-container">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/70 border border-gold/50 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-black/70 border border-gold/50 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
               <span className="text-sm text-gold font-medium">
                 #1 Automotive Marketplace in Indonesia
@@ -99,11 +99,11 @@ export function HomePageClient({ featuredCars }: HomePageClientProps) {
 
             {/* Heading */}
             <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-heading tracking-wider text-white leading-tight">
+              <h1 className="text-3xl sm:text-5xl lg:text-7xl font-bold font-heading tracking-wider text-white leading-tight">
                 FIND YOUR
                 <span className="block text-gold">DREAM CAR</span>
               </h1>
-              <p className="text-lg sm:text-xl text-white max-w-xl leading-relaxed">
+              <p className="text-base sm:text-xl text-white max-w-xl leading-relaxed">
                 Browse thousands of new and used cars with immersive video
                 listings. Verified sellers, secure transactions.
               </p>
@@ -124,7 +124,7 @@ export function HomePageClient({ featuredCars }: HomePageClientProps) {
             </div>
 
             {/* Quick Stats */}
-            <div className="flex flex-wrap gap-6 sm:gap-8 pt-4">
+            <div className="flex flex-wrap gap-4 sm:gap-8 pt-4">
               {stats.map((stat) => (
                 <div key={stat.label} className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-white/15 flex items-center justify-center">
@@ -249,7 +249,7 @@ export function HomePageClient({ featuredCars }: HomePageClientProps) {
       </section>
 
       {/* Video Showcase - Red background */}
-      <section className="py-16 bg-red-dark">
+      <section className="py-10 sm:py-16 bg-red-dark">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-2xl font-bold text-white font-heading tracking-wide">
@@ -291,7 +291,7 @@ export function HomePageClient({ featuredCars }: HomePageClientProps) {
       </section>
 
       {/* CTA Section - Red background */}
-      <section className="py-20 bg-red-600">
+      <section className="py-12 sm:py-20 bg-red-600">
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-white font-heading tracking-wide mb-4">
             SELL YOUR CAR

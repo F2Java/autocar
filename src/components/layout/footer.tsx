@@ -116,7 +116,7 @@ export function Footer() {
               <h4 className="text-sm font-bold text-white mb-3 font-heading tracking-wide">
                 GET THE LATEST DEALS
               </h4>
-              <form onSubmit={handleSubscribe} className="flex gap-2">
+              <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2">
                 <div className="relative flex-1">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
                   <input
@@ -148,8 +148,7 @@ export function Footer() {
               </form>
             </div>
 
-            {/* Social Links */}
-            <div className="flex items-center gap-3">
+            {/* Social Links */}              <div className="flex items-center gap-2 sm:gap-3">
               {[
                 { icon: Globe, href: "#", label: "Instagram" },
                 { icon: Globe, href: "#", label: "Facebook" },
